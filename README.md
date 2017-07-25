@@ -67,6 +67,6 @@ Inicio SERIO del proyecto barberoExpress
    }
 
 ### GRUPO DE TRABAJO
+    - Santiago R. Alvarez Gomez
     - Cristian Franco Bedoya
     - Jose M. Mira Barrientos
-    - Santiago R. Alvarez Gomez
