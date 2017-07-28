@@ -18,10 +18,11 @@ function Añadir(){
 
 	var nombre = document.getElementById('nombre').value;
 	var precio = document.getElementById("precio").value;
-	
+	var marca = document.getElementById("marca").value;
 
 	firebaseRef.child("PRODUCTOS").push({
 		nombre: nombre,
+    marca: marca,
 		precio: precio,
 		foto: "null",
 		gif:"null",
