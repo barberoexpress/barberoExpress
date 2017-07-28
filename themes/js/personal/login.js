@@ -64,6 +64,20 @@ firebase.auth().onAuthStateChanged(function(user) {
 	
 	
   } else {
-    alert("nadie ha iniciado seccion");
+    console.log("nadie ha iniciado seccion");
   }
 });
+
+
+
+
+// -------------------- FUNCION PARA CERRAR SECCION --------------------
+
+function CerrarSeccion(){
+	firebase.auth().signOut().then(function() {
+		window.alert("seccion cerrada correctamente");
+		window.location.href="index.html";
+	}, function(error) {
+    	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
+	});
+}
