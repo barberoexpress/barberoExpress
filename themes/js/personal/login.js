@@ -10,6 +10,7 @@ firebase.initializeApp(config);
 
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
+var ref;
 
 function IniciarSeccion(){
 	var email = document.getElementById('inputEmail').value;
@@ -48,12 +49,12 @@ function IniciarSeccion(){
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-	var ref = firebase.database().ref("USUARIOS");
+	var SearchRef = firebase.database().ref("USUARIOS");
 
 	var correo = user.email;
 	var nombre;
 
-	ref.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
+	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
 		 key = snapshot.key;
 		 ref = firebase.database().ref("USUARIOS/" + key);
 
@@ -80,4 +81,28 @@ function CerrarSeccion(){
 	}, function(error) {
     	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
 	});
+}
+
+// -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
+
+function AgregarAlCarrito(){
+
+  var user = firebase.auth().currentUser;
+
+  if (user) {
+    var nombre = $("#nombreProducto").text();
+    var precio = $("#precioProducto").text();
+    var id = "AGREGAR UN ID ACA";
+
+    ref.child("carritoCompras").push({
+      nombre: nombre,
+      precio: precio,
+      id: id
+    });
+
+  } else {
+    window.alert("Inicia seccion primero");
+  }
+  
+
 }
