@@ -1,0 +1,69 @@
+var config = {
+    apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
+    authDomain: "barberoexpress-8c13c.firebaseapp.com",
+    databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
+    projectId: "barberoexpress-8c13c",
+    storageBucket: "barberoexpress-8c13c.appspot.com",
+    messagingSenderId: "634083713883"
+};
+firebase.initializeApp(config);
+
+var firebaseRef = firebase.database().ref();
+var firebaseAuth = firebase.auth();
+
+function IniciarSeccion(){
+	var email = document.getElementById('inputEmail').value;
+	var password = document.getElementById("inputPassword").value;
+
+
+	firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+
+	  //MANEJO DE ERRORES
+	  if (errorCode === 'auth/wrong-password') {
+            alert('Contraseña equivocada.');
+            return;
+          } else if (errorCode === 'auth/user-not-found'){
+            alert('Usuario no encontrado.');
+            return;
+
+      	  } else if(errorCode === 'auth/invalid-email'){
+      	  	alert('Email invalido.');
+      	  	return;
+
+      	  } else if(errorCode === 'auth/user-disabled'){
+      	  	alert('Usuario bloqueado.');
+      	  	return;
+
+      	  }else{
+      	  	alert(errorMessage);
+      	  	return;
+      	  }
+	});
+	window.alert(email);
+}
+
+//FUNCION PARA ACTUALIZAR LA PAGINA SEGUN EL USUARIO
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+	var ref = firebase.database().ref("USUARIOS");
+
+	var correo = user.email;
+	var nombre;
+
+	ref.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
+		 key = snapshot.key;
+		 ref = firebase.database().ref("USUARIOS/" + key);
+
+		 nombre = snapshot.val().nombre;
+
+		 document.getElementById("Usuario").innerHTML = '<strong>' + nombre + '<strong>';
+	});
+	
+	
+  } else {
+    alert("nadie ha iniciado seccion");
+  }
+});
