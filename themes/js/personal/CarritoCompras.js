@@ -10,7 +10,6 @@ var config = {
 
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
-var referencia = localStorage.getItem("USERKEY");
 var userkey = localStorage.getItem("USERKEY2");
 var user = firebase.auth().currentUser;
 var actualizar = true;
@@ -31,9 +30,9 @@ if (user) {
 	var precio = [" ", " "];
 	var descuento = [" ", " "];
 	var total = "$10.00";
-	var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button></div>';
-	//var refCarro = referencia.child("carritoCompras");
+	var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button></div>';
 	var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
+	
 	for(var r = 0; r < rows; r++)
 	{
 		refCarro.orderByChild("id").on("child_added", function(snapshot){

@@ -57,14 +57,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
 		 key = snapshot.key;
 		 ref = firebase.database().ref("USUARIOS/" + key);
-     localStorage.setItem("USERKEY", ref);
      localStorage.setItem("USERKEY2", key);
 		 nombre = snapshot.val().nombre;
 
 		 document.getElementById("Usuario").innerHTML = '<strong>' + nombre + '<strong>';
 	});
-	
-	
+	 
+	document.getElementById("numeroProductos").innerHTML = localStorage.getItem("PRODCUTOSCARRO");
   } else {
     console.log("nadie ha iniciado seccion");
   }
@@ -96,6 +95,10 @@ function AgregarAlCarrito(){
     var id = "AGREGAR UN ID ACA";
     var marca = "null";
     var descuento = "0%";
+
+    var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
+    document.getElementById("numeroProductos").innerHTML = labelProductosCarro;
+    localStorage.setItem("PRODCUTOSCARRO", labelProductosCarro);
 
     ref.child("carritoCompras").push({
       nombre: nombre,
