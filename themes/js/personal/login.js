@@ -57,7 +57,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
 		 key = snapshot.key;
 		 ref = firebase.database().ref("USUARIOS/" + key);
-
+     localStorage.setItem("USERKEY", ref);
+     localStorage.setItem("USERKEY2", key);
 		 nombre = snapshot.val().nombre;
 
 		 document.getElementById("Usuario").innerHTML = '<strong>' + nombre + '<strong>';
@@ -93,11 +94,15 @@ function AgregarAlCarrito(){
     var nombre = $("#nombreProducto").text();
     var precio = $("#precioProducto").text();
     var id = "AGREGAR UN ID ACA";
+    var marca = "null";
+    var descuento = "0%";
 
     ref.child("carritoCompras").push({
       nombre: nombre,
       precio: precio,
-      id: id
+      id: id,
+      marca: marca,
+      descuento: descuento
     });
 
   } else {
