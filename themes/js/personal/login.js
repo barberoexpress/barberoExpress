@@ -53,6 +53,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 	var correo = user.email;
 	var nombre;
+  var count = 0;
 
 	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
 		 key = snapshot.key;
@@ -61,9 +62,21 @@ firebase.auth().onAuthStateChanged(function(user) {
 		 nombre = snapshot.val().nombre;
 
 		 document.getElementById("Usuario").innerHTML = '<strong>' + nombre + '<strong>';
+
+    ref.child("carritoCompras").once('value', function(snapshot) {
+    var count = 0;
+    snapshot.forEach(function(childSnapshot) {
+      count++;
+    });
+      console.log(count);
+      document.getElementById("numeroProductos").innerHTML = count;
+    });
+
 	});
-	 
-	document.getElementById("numeroProductos").innerHTML = localStorage.getItem("PRODCUTOSCARRO");
+	
+
+
+	//document.getElementById("numeroProductos").innerHTML = localStorage.getItem("PRODCUTOSCARRO");
   } else {
     console.log("nadie ha iniciado seccion");
   }
@@ -98,7 +111,6 @@ function AgregarAlCarrito(){
 
     var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
     document.getElementById("numeroProductos").innerHTML = labelProductosCarro;
-    localStorage.setItem("PRODCUTOSCARRO", labelProductosCarro);
 
     ref.child("carritoCompras").push({
       nombre: nombre,

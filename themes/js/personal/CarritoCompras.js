@@ -32,15 +32,15 @@ if (user) {
 	var total = "$10.00";
 	var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button></div>';
 	var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
-	
+
 	for(var r = 0; r < rows; r++)
 	{
 		refCarro.orderByChild("id").on("child_added", function(snapshot){
 			//producto.push(snapshot.val().foto);
 			caracteristicas.push(snapshot.val().nombre);
 			precio.push(snapshot.val().precio);
-			marca.push(snapshot.val().marca);   //ESTO DEBO AGREGARLO EN LOGIN.JS A LA HORA DE AGREGAR UN OBJETO
-			descuento.push(snapshot.val().descuento);	//ESTO DEBO AGREGARLO EN LOGIN.JS A LA HORA DE AGREGAR UN OBJETO
+			marca.push(snapshot.val().marca);   
+			descuento.push(snapshot.val().descuento);
 		});
 	}
 	//ACA TOCA ARREGLAR LA IMAGEN PARA QUE SALGA LA DE LA BASE DE DATOS Y NO UNA PRE DEFINIDA
