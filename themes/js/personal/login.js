@@ -6,7 +6,7 @@ var config = {
     storageBucket: "barberoexpress-8c13c.appspot.com",
     messagingSenderId: "634083713883"
 };
-firebase.initializeApp(config);
+//firebase.initializeApp(config);
 
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
@@ -73,7 +73,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
 
 	});
-	
+
 
 
 	//document.getElementById("numeroProductos").innerHTML = localStorage.getItem("PRODCUTOSCARRO");
@@ -123,6 +123,6 @@ function AgregarAlCarrito(){
   } else {
     window.alert("Inicia seccion primero");
   }
-  
+
 
 }
