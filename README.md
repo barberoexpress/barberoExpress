@@ -66,6 +66,25 @@ Inicio SERIO del proyecto barberoExpress
     }
    }
 
+### REUNIONES
+#### PRIMERA REUNIÓN
+    Se elige el modelo de plantilla que se va a desarrollar
+
+#### SEGUNDA REUNIÓN
+    - Click Producto  --> Pantalla producto     [JOSE]
+    - Búsqueda (Final)
+      - Indice invertido
+      - Más buscados
+    - Productos en Home                         [CRISTIAN]
+    - Agregar atributos en Productos            [RAMON]
+      - # ventas
+      - + vendidos
+    - Estructurar BackEnd. (Final)
+    - Arreglar barra de inicio                  [JOSE]
+    - Productos ofertas especiales              [CRISTIAN]
+    - Paginación
+    - Mejorar el Front (Final)
+
 ### GRUPO DE TRABAJO
     - Santiago R. Alvarez Gomez
     - Cristian Franco Bedoya
