@@ -123,6 +123,10 @@ function AgregarAlCarrito(){
   } else {
     window.alert("Inicia seccion primero");
   }
+}
 
-
+// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
+function Ir_producto(prodKey){
+  localStorage.setItem("PROD_KEY", prodKey);
+  window.location.href="product_details.html";
 }
