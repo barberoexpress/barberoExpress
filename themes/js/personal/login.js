@@ -106,20 +106,22 @@ function AgregarAlCarrito(){
     var nombre = $("#nombreProducto").text();
     var precio = $("#precioProducto").text();
     var id = "AGREGAR UN ID ACA";
-    var marca = "null";
+    var marca = $("#marcaProducto").text();
     var descuento = "0%";
-
+    var foto = $('#imagenProducto').attr('src');
     var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
     document.getElementById("numeroProductos").innerHTML = labelProductosCarro;
 
-    ref.child("carritoCompras").push({
+   ref.child("carritoCompras").push({
       nombre: nombre,
       precio: precio,
       id: id,
       marca: marca,
-      descuento: descuento
+      descuento: descuento,
+      foto: foto
     });
-
+    window.alert("Producto Agregado");
+    window.location.href="product_summary.html";
   } else {
     window.alert("Inicia seccion primero");
   }

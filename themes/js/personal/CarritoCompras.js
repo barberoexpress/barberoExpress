@@ -28,6 +28,7 @@ if (user) {
 	var caracteristicas = [" ", " "];
 	var marca = [" ", " "];
 	var precio = [" ", " "];
+	var foto_URL = [" ", " "];
 	var descuento = [" ", " "];
 	var total = "$10.00";
 	var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button></div>';
@@ -41,6 +42,7 @@ if (user) {
 			precio.push(snapshot.val().precio);
 			marca.push(snapshot.val().marca);   
 			descuento.push(snapshot.val().descuento);
+			foto_URL.push(snapshot.val().foto);
 		});
 	}
 	//ACA TOCA ARREGLAR LA IMAGEN PARA QUE SALGA LA DE LA BASE DE DATOS Y NO UNA PRE DEFINIDA
@@ -48,7 +50,7 @@ if (user) {
 	var j = 2;
 		while(j < caracteristicas.length){
 			table += '<tr>';
-			table += '<td>' + '<img src="themes/images/products/4.jpg" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
+			table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
 			table += '<td>' + caracteristicas[j] +'</td>';
 			table += '<td>' + marca[j] + '</td>';
 			table += '<td>' + botonCantidad + '</td>';
