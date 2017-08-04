@@ -12,7 +12,7 @@
 
   for(var r = 0; r < rows; r++)
         {
-          refProductos.orderByChild("id").on("child_added", function(snapshot){
+          refProductos.orderByChild("id").limitToFirst(8).on("child_added", function(snapshot){
             foto_Url.push(snapshot.val().foto);
             nombre.push(snapshot.val().nombre);
             precio.push(snapshot.val().precio);
