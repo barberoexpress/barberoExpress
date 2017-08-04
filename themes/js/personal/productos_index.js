@@ -7,6 +7,7 @@
   var precio = [" ", " "]
   var keyProducto = [" ", " "];
   var descripcion = [" ", " "];
+  var recomendado = [" ", " "];
         //SI QUEREMOS AGREGAR MAS VALORES, PONERLOS ARRIBA
   var refProductos = firebase.database().ref("PRODUCTOS");
 
@@ -17,6 +18,8 @@
             nombre.push(snapshot.val().nombre);
             precio.push(snapshot.val().precio);
             descripcion.push(snapshot.val().descripcion);
+            recomendado.push(snapshot.val().recomendado);
+            console.log(snapshot.val().recomendado);
             keyProducto.push(snapshot.key);
           });
   }
@@ -38,4 +41,49 @@
             j++;
     }
       document.getElementById("fotos_index").innerHTML = imagenes + '</ul>';
-    }, 3000)
+    }, 3000);
+
+
+    setTimeout(function(){
+          var imagenes_referidos = '<div class="item active">' + '<ul class="thumbnails">';
+          var j = 2;
+          var No_productos = 0;
+            while(j < recomendado.length){
+              if(recomendado[j] == true){
+                if(No_productos == 4){
+                  No_productos = 0;
+                  imagenes_referidos += '</ul>' + '</div>';
+                  imagenes_referidos += '<div class="item">' + '<ul class="thumbnails">';
+                }
+                imagenes_referidos += '<li class="span3">';
+                imagenes_referidos += '<div class="thumbnail">';
+                imagenes_referidos += '<i class="tag"></i>';
+                imagenes_referidos += '<img src="'+foto_Url[j]+'" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')" style="width:200px;height:200px;" alt=""/>';
+                imagenes_referidos += '<div class="caption">';                                    
+                imagenes_referidos += '<h5>'+ nombre[j] +'</h5>';
+                imagenes_referidos += '<h4 onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')"><a class="btn"> Ver </a><span class="pull-right">$'+precio[j]+'</span></h4>';
+                imagenes_referidos += '</div>';
+                imagenes_referidos += '</div>';
+                imagenes_referidos += '</li>';
+                j++;
+                No_productos++;
+              }
+            }
+      document.getElementById("imagenes_recomendados").innerHTML = imagenes_referidos;
+    }, 3000);
+
+   /*   <div class="item active">  --> OK
+
+        <ul class="thumbnails">'; --> OK
+        <li class="span3">--> OK
+          <div class="thumbnail">--> OK
+          <i class="tag"></i>--> OK
+          <img src="themes/images/products/b1.jpg" alt="" onclick="Ir_producto('-Kq6QQjm5NMFe8KtP9nI')"> --> OK
+          <div class="caption">--> OK
+            <h5>Product name</h5>--> OK
+            <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>--> OK
+          </div>
+          </div>
+        </li>
+        </ul>
+        </div>    */

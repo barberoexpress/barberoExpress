@@ -36,3 +36,22 @@ function Añadir(){
 	document.getElementById("precio").innerHTML = vacio;
 
 }
+
+
+function Agregar(){
+	var keys = [" ", " "];
+	var recomendado = document.getElementById("recomendado").value;
+	firebaseRef.child("PRODUCTOS").on("child_added", function(snapshot) {
+		keys.push(snapshot.key);
+	});
+	
+	setTimeout(function(){
+		for(j = 2; j < keys.length; j++){
+			firebaseRef.child("PRODUCTOS").child(keys[j]).update({
+				recomendado : false
+			});
+		}
+		console.log(keys);
+    }, 3000)
+	
+}
