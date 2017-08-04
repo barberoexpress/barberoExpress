@@ -31,7 +31,7 @@
             imagenes += '<div class="caption">';                                    
             imagenes += '<h5>'+ nombre[j] +'</h5>';
             imagenes += '<p> Tocamela toda </p>';
-            imagenes += '<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>';
+            imagenes += '<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Añadir <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&dollar;'+precio[j]+'</a></h4>';
             imagenes += '</div>';
             imagenes += '</div>';
             imagenes += '</li>';

@@ -31,6 +31,9 @@ firebase.initializeApp(config);*/
   	var rows = 1;
   	var foto_Url = [" ", " "];
   	var nombre = [" ", " "];
+    var precio = [" ", " "];
+    var descripcion = [" ", " "];
+    var keyProducto = [" ", " "];
     //SI QUEREMOS AGREGAR MAS VALORES, PONERLOS ARRIBA
   	var refProductos = firebase.database().ref("PRODUCTOS");
 
@@ -39,6 +42,9 @@ firebase.initializeApp(config);*/
   		refProductos.orderByChild("id").on("child_added", function(snapshot){
   			foto_Url.push(snapshot.val().foto);
   			nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        keyProducto.push(snapshot.key);
   		});
   	}
 
@@ -51,12 +57,12 @@ firebase.initializeApp(config);*/
                         //var link = foto_Url[j];
                         //console.log(link);
                                 //onclick="Producto('+KeyProducto[j] +')"
-  		imagenes +=	              '<a href="product_details.html"><img src="'+foto_Url[j]+'" style="width:200px;height:200px;" alt=""/></a>';
+  		imagenes +=	              '<img src="'+foto_Url[j]+'" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')" style="width:200px;height:200px;" alt=""/>';
   		imagenes +=	                 '<div class="caption">';                                    
                           //var nombreFoto = nombre[j];
   		imagenes +=	                     '<h5>'+ nombre[j] +'</h5>';
-  		imagenes +=	                     '<p> Tocamela toda </p>';
-  		imagenes +=	                    '<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>';
+  		imagenes +=	                     '<p>'+ descripcion[j] +'</p>';
+  		imagenes +=	                    '<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&dollar;'+precio[j]+'</a></h4>';
   		imagenes +=	                 '</div>';
   		imagenes +=	            '</div>';
   			imagenes +=         '</li>';
