@@ -33,6 +33,17 @@ if (user) {
 	var total = "$10.00";
 	var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button></div>';
 	var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
+	var refUsuario = firebase.database().ref("USUARIOS/" + userkey);
+	//DATOS DE ENVIO
+	var ciudad, direccion, direccion2, info_adicional, telefono
+
+    refUsuario.once("value", function(snapshot){
+    	ciudad = snapshot.val().direccion.ciudad;
+    	direccion = snapshot.val().direccion.direccion;
+    	direccion2 = snapshot.val().direccion.direccion2;
+    	info_adicional = snapshot.val().direccion.informacionAdicional;
+    	telefono = snapshot.val().telefono.telefonoCelular;
+    });
 
 	for(var r = 0; r < rows; r++)
 	{
@@ -61,22 +72,17 @@ if (user) {
 			j++;
 		}
 		document.getElementById("tablaCarritoCompras").innerHTML = '<table class="table table-bordered" id ="tablaCarritoCompras">' + table + '</table>';
+		document.getElementById("ciudad").innerHTML = '<strong>'+ ciudad +'</strong>';
+		document.getElementById("direccion").innerHTML = '<strong>'+ direccion +'</strong>';
+		document.getElementById("direccion2").innerHTML = '<strong>'+ direccion2 +'</strong>';
+		document.getElementById("info_adicional").innerHTML = '<strong>'+ info_adicional +'</strong>';
+		document.getElementById("telefono").innerHTML = '<strong>'+ telefono +'</strong>';
     }, 1000);
 } else {
-   console.log("Inicia seccion primero");
+   window.alert("Inicia seccion primero");
+   window.location.href="register.html";
 }
 });
 
 
-
-/*function CrearImagen() {
-    var x = document.createElement("IMG");
-    x.setAttribute("src", "themes/images/products/4.jpg");
-    x.setAttribute("width", "270");
-    x.setAttribute("height", "110");
-    x.setAttribute("alt", "The Pulpit Rock");
-    var currentDiv = document.getElementById("imagenProducto"); 
-	document.body.insertBefore(x, currentDiv); 
-    //document.body.appendChild(x);
-}*/
 

@@ -12,20 +12,6 @@ firebase.initializeApp(config);*/
 //var firebaseAuth = firebase.auth();
 
 
-// LLAMADAS HTTP
-
-  // GET  --> PETICIÓN
-
-
-
-  //POST  --> INGRESO
-
-
-
-  //UPDATE -->  ACTUALIZACIÓN
-  firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-  	actualizar = false;
   	var imagenes = '<div class="tab-pane  active" id="blockView">'
   		           + '<ul class="thumbnails">';
   	var rows = 1;
@@ -52,46 +38,21 @@ firebase.initializeApp(config);*/
   	var j = 2;
   		while(j < foto_Url.length){
 
-        imagenes += '<li class="span3">';
-  		imagenes +=               '<div class="thumbnail">';
-                        //var link = foto_Url[j];
-                        //console.log(link);
-                                //onclick="Producto('+KeyProducto[j] +')"
-  		imagenes +=	              '<img src="'+foto_Url[j]+'" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')" style="width:200px;height:200px;" alt=""/>';
-  		imagenes +=	                 '<div class="caption">';                                    
-                          //var nombreFoto = nombre[j];
-  		imagenes +=	                     '<h5>'+ nombre[j] +'</h5>';
-  		imagenes +=	                     '<p>'+ descripcion[j] +'</p>';
-  		imagenes +=	                    '<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&dollar;'+precio[j]+'</a></h4>';
-  		imagenes +=	                 '</div>';
-  		imagenes +=	            '</div>';
-  			imagenes +=         '</li>';
+      imagenes += '<li class="span3">';
+  		imagenes += '<div class="thumbnail">';
+  		imagenes +=	'<img src="'+foto_Url[j]+'" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')" style="width:200px;height:200px;" alt=""/>';
+  		imagenes +=	'<div class="caption">';                                    
+  		imagenes +=	'<h5>'+ nombre[j] +'</h5>';
+  		imagenes +=	'<p>'+ descripcion[j] +'</p>';
+  		imagenes +=	'<h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&dollar;'+precio[j]+'</a></h4>';
+  		imagenes +=	'</div>';
+  		imagenes +=	'</div>';
+  		imagenes += '</li>';
 
-  			// table += '<tr>';
-  			// table += '<td>' + '<img src="themes/images/products/4.jpg" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
-  			// table += '<td>' + caracteristicas[j] +'</td>';
-  			// table += '<td>' + marca[j] + '</td>';
-  			// table += '<td>' + botonCantidad + '</td>';
-  			// table += '<td>' + precio[j] + '</td>';
-  			// table += '<td>' + descuento[j] + '</td>';
-  			// table += '<td>' + total + '</td>';
-  			// table += '</tr>';
   			j++;
   		}
       imagenes += '</ul>';
-               + '<hr class="soft"/>';
-               + '</div>';
+               +  '<hr class="soft"/>';
+               +  '</div>';
   		document.getElementById("blockView").innerHTML = imagenes;
     }, 3000);
-
-
-
-
-
-  } else {
-     console.log("Inicia seccion primero");
-  }
-});
-
-
-  //DELETE   --> BORRAR
