@@ -71,19 +71,3 @@
             }
       document.getElementById("imagenes_recomendados").innerHTML = imagenes_referidos;
     }, 3000);
-
-   /*   <div class="item active">  --> OK
-
-        <ul class="thumbnails">'; --> OK
-        <li class="span3">--> OK
-          <div class="thumbnail">--> OK
-          <i class="tag"></i>--> OK
-          <img src="themes/images/products/b1.jpg" alt="" onclick="Ir_producto('-Kq6QQjm5NMFe8KtP9nI')"> --> OK
-          <div class="caption">--> OK
-            <h5>Product name</h5>--> OK
-            <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">$222.00</span></h4>--> OK
-          </div>
-          </div>
-        </li>
-        </ul>
-        </div>    */

@@ -151,6 +151,14 @@ function Buscar(){
         keyProducto.push(snapshot.key);
     });
 
+    firebaseRef.child("PRODUCTOS").orderByChild('marca').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+        foto_Url.push(snapshot.val().foto);
+        nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        keyProducto.push(snapshot.key);
+    });
+
     setTimeout(function(){
       localStorage.setItem("FOTO_URL_BS", JSON.stringify(foto_Url));
       localStorage.setItem("NOMBRE_BS", JSON.stringify(nombre));

@@ -19,17 +19,19 @@ function Añadir(){
 	var nombre = document.getElementById('nombre').value;
 	var precio = document.getElementById("precio").value;
 	var marca = document.getElementById("marca").value;
+	var tipo = document.getElementById("tipo").value;
 
 	firebaseRef.child("PRODUCTOS").push({
 		nombre: nombre,
-    marca: marca,
+    	marca: marca,
 		precio: precio,
 		foto: "null",
 		gif:"null",
 		descripcion:"null",
 		id: i,
 		disponibles: 10,
-		numCompras: 0
+		numCompras: 0,
+		tipo: tipo
 	});
 	i++
 	document.getElementById("nombre").innerHTML = vacio;
