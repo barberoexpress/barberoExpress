@@ -179,12 +179,12 @@
 	<hr class="soft"/>
 	<form class="form-horizontal span6">
 		<div class="control-group">
-		  <label class="control-label alignL">Sort By </label>
+		  <label class="control-label alignL">Ordenar por </label>
 			<select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
+              <option>Nombre Producto Nombre A - Z</option>
+              <option>Precio Min - Max</option>
+              <option>Precio Max - Min</option>
+              <option>Nombre Producto Z - A</option>
             </select>
 		</div>
 	  </form>
@@ -451,17 +451,17 @@
 </div>
 
 	<a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
-	<div class="pagination">
+	<div class="pagination" id="paginas">
 			<ul>
-			<li><a href="#">&lsaquo;</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
+			<li><a href="#" onclick="paginaAnterior()">&lsaquo;</a></li>
+			<li><a href="#" onclick="cambiar_pagina(1)">1</a></li>
+			<li><a href="#" onclick="cambiar_pagina(2)">2</a></li>
+			<li><a href="#" onclick="cambiar_pagina(3)">3</a></li>
+			<li><a href="#" onclick="cambiar_pagina(4)">4</a></li>
 			<li><a href="#">...</a></li>
-			<li><a href="#">&rsaquo;</a></li>
+			<li><a href="#" onclick="paginaSiguiente()">&rsaquo;</a></li>
 			</ul>
-			</div>
+	</div>
 			<br class="clr"/>
 </div>
 </div>
