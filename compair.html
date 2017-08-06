@@ -52,7 +52,7 @@
 </a>
   <div class="navbar-inner">
     <!--logo? -->
-		<form class="form-inline navbar-search" method="post" action="products.html" >
+		<div class="form-inline navbar-search">
 		<input id="srchFld" class="srchTxt" type="text" />
 		  <select class="srchTxt">
 			<option>All</option>
@@ -62,9 +62,9 @@
 			<option>SPORTS & LEISURE </option>
 			<option>BOOKS & ENTERTAINMENTS </option>
 		</select> 
-		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+		  <button type="submit" id="submitButton"  onclick="Buscar()" class="btn btn-primary">Go</button>
 		  <a href="index.html" style="font-size: 20px; color: white">Principal</a>
-    </form>
+    </div>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="special_offer.html">Specials Offer</a></li>
 	 <li class=""><a href="normal.html">Delivery</a></li>

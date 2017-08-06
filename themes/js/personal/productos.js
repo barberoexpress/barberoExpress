@@ -25,24 +25,40 @@ firebase.initializeApp(config);*/
     var precio = [" ", " "];
     var descripcion = [" ", " "];
     var keyProducto = [" ", " "];
+    var busqueda = false;
     //SI QUEREMOS AGREGAR MAS VALORES, PONERLOS ARRIBA
   	var refProductos = firebase.database().ref("PRODUCTOS");
-    // ---------------------------------- DEBERIA DE HACER ESTE QUERING SOLO 1 VEZ Y PASARLO POR LOCALSTORAGE (+ VELCIDAD )--------------------------------------------
-  	for(var r = 0; r < rows; r++)
-  	{
-  		refProductos.orderByChild("id").on("child_added", function(snapshot){
-  			foto_Url.push(snapshot.val().foto);
-  			nombre.push(snapshot.val().nombre);
-        precio.push(snapshot.val().precio);
-        descripcion.push(snapshot.val().descripcion);
-        keyProducto.push(snapshot.key);
-        total_registros++;
-  		});
-  	}
+    // ---------------------------------- BUSQUEDA DE PRODUCTOS--------------------------------------------
+  	var EstamosBuscando = JSON.parse(localStorage.getItem("NOMBRE_BS"));
+    if(EstamosBuscando.length > 2 && EstamosBuscando[3] != " "){
+      foto_Url = JSON.parse(localStorage.getItem("FOTO_URL_BS"));
+      nombre = JSON.parse(localStorage.getItem("NOMBRE_BS"));
+      precio = JSON.parse(localStorage.getItem("PRECIO_BS"));
+      descripcione = JSON.parse(localStorage.getItem("DESCRIPCION_BS"));
+      keyProducto = JSON.parse(localStorage.getItem("KEYPRODUCTO_BS"));
+      total_registros = nombre.length - 2;
+      busqueda = true;
+
+    }else{
+ // ---------------------------------- DEBERIA DE HACER ESTE QUERING SOLO 1 VEZ Y PASARLO POR LOCALSTORAGE (+ VELCIDAD )--------------------------------------------
+      for(var r = 0; r < rows; r++)
+    	{
+    		refProductos.orderByChild("id").on("child_added", function(snapshot){
+    			foto_Url.push(snapshot.val().foto);
+    			nombre.push(snapshot.val().nombre);
+          precio.push(snapshot.val().precio);
+          descripcion.push(snapshot.val().descripcion);
+          keyProducto.push(snapshot.key);
+          total_registros++;
+    		});
+    	}
+  }
 
   	setTimeout(function(){
   	  var j = 2;
-  		while(j < 6){
+      var no_imagenes = 6;
+      if (busqueda){if(total_registros < 6){no_imagenes = total_registros + 2}}
+  		while(j < no_imagenes){
 // ---------------------------------- CAMBIAR HTML DE IMAGENES--------------------------------------------
         imagenes += '<li class="span3">';
     		imagenes += '<div class="thumbnail">';
@@ -73,7 +89,7 @@ firebase.initializeApp(config);*/
 
     }, 4000);
 
-// ---------------------------------- DESDE ACA COMIENZA LAS FUNCIONES DE PAGINACION --------------------------------------------
+// ---------------------------------- DESDE ACA COMIENZA LAS FUNCIONES DE PAGINACION (LA PAGINACION NO DEBE ESTAR CLIENT-SIDE) --------------------------------------------
 function paginaAnterior(){
   if (pagina_actual > 1) {
         pagina_actual--;
