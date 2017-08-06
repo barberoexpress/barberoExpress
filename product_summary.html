@@ -35,7 +35,7 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Bienvenido!<label id="Usuario"></label></div>
+	<div class="span6">Bienvenido!   <label id="Usuario" style="display: initial;"></label></div>
 	<div class="span6">
 	<div class="pull-right">
 		<button type="submit" class="btn btn-success" onclick="CerrarSeccion()">Cerrar seccion</button>
@@ -110,40 +110,27 @@
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
 		<li class="active"> SHOPPING CART</li>
     </ul>
-	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<h3>  PRODUCTOS EN EL CARRO <a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> SEGUIR COMPRANDO </a></h3>	
 	<hr class="soft"/>
 	<table class="table table-bordered">
-		<tr><th> I AM ALREADY REGISTERED  </th></tr>
+		<tr><th style="text-align: center;">METODO DE PAGO </th></tr>
 		 <tr> 
 		 <td>
 			<form class="form-horizontal">
-				<div class="control-group">
-				  <label class="control-label" for="inputUsername">Username</label>
+					<div class="control-group">
+				  <label class="control-label" for="inputUsername">Metodo de pago</label>
 				  <div class="controls">
-					<input type="text" id="inputUsername" placeholder="Username">
+					<input type="radio" name="vehicle" value="Bike"> Contra envio<br>
+  					<input type="radio" name="vehicle" value="Car" checked> Transaccion<br>
+  					<input type="radio" name="vehicle" value="Car" checked> PSE/ Proximamente<br>
 				  </div>
-				</div>
-				<div class="control-group">
-				  <label class="control-label" for="inputPassword1">Password</label>
-				  <div class="controls">
-					<input type="password" id="inputPassword1" placeholder="Password">
-				  </div>
-				</div>
-				<div class="control-group">
-				  <div class="controls">
-					<button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
-				  </div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-					  <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
-					</div>
 				</div>
 			</form>
 		  </td>
 		  </tr>
 	</table>		
-			
+	<br>
+	<br>
 	<table class="table table-bordered" id ="tablaCarritoCompras">
               <thead>
                 <tr>
@@ -287,8 +274,8 @@
 			  </td>
 			  </tr>
             </table>		
-	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> SEGUIR COMPRANDO</a>
+	<a href="login.html" class="btn btn-large pull-right">COMPRAR <i class="icon-arrow-right"></i></a>
 	
 </div>
 </div></div>
