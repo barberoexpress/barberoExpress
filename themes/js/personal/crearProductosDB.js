@@ -14,6 +14,10 @@ var id = 0;
 var vacio = ".";
 var selectedFile;
 
+
+
+
+// -------------------- FUNCION PARA AGREGAR PRODUCTOS --------------------
 function Añadir(){
 
 	firebaseRef.child("PRODUCTOS").on("child_added", function(snapshot) {
@@ -52,7 +56,9 @@ function Añadir(){
 }
 
 
-/*function Agregar(){
+/*
+// -------------------- FUNCION ACTUALIZAR TODOS LOS PRODUCTOS--------------------
+function Agregar(){
 	var keys = [" ", " "];
 	var recomendado = document.getElementById("recomendado").value;
 	firebaseRef.child("PRODUCTOS").on("child_added", function(snapshot) {
@@ -69,11 +75,14 @@ function Añadir(){
     }, 3000)
 	
 }
+
 */
 
+
+
+
+// -------------------- FUNCION PARA CARGAR FOTOS --------------------
 document.getElementById('file').onchange = function() {
-//$("#file").on("change", function(event){
-//$(document).on('change', 'input[type="file"]',function(){
 	selectedFile = event.target.files[0];
 }
 
@@ -118,19 +127,31 @@ function CargarFoto(){
 }
 
 
-function PreviewPhoto(input){
+
+
+// -------------------- FUNCION PARA EL PREVIEW DE LA FOTO A MONTAR --------------------
+function PreviewPhoto(input, cualPreview){
 	if(input.files && input.files[0]){
 		var reader = new FileReader();
 		reader.onload = function (e){
-			$('#preview img').attr('src', e.target.result);
+			if(cualPreview == 1){
+				$('#preview img').attr('src', e.target.result);
+			}else{
+				$('#preview2 img').attr('src', e.target.result);
+
+			}
 		}
 		reader.readAsDataURL(input.files[0]);
 	}
 }
 
 document.getElementById('file').onchange = function() {
-	PreviewPhoto(this);
+	PreviewPhoto(this, 1);
 }
+
+
+
+
 
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
@@ -172,4 +193,20 @@ function Buscar(){
         document.getElementById("fotos_Busqueda").innerHTML = imagenes;
     }, 3000);
 
+}
+
+
+
+
+// -------------------- FUNCION ACTUALIZAR 1 PRODUCTO--------------------
+
+document.getElementById('file2').onchange = function() {
+	selectedFile = event.target.files[0];
+	PreviewPhoto(this, 2);
+}
+function Actualizar(){
+
+	var queryText = document.getElementById("ID_producto").value;
+	id = parseInt(queryText);
+	CargarFoto();
 }

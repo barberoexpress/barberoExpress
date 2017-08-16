@@ -56,7 +56,7 @@
                                 <input type="file" id="file" accept="image/*">
                             </form>
 
-                            <button type="submit" class="btn" onclick="Añadir()">Añadir!</button>
+                            <button type="submit" class="btn" onclick="Añadir()">Montar producto, tarda 15 segundos</button>
 
                         </div>
                     </div>
@@ -66,12 +66,26 @@
     <br>
     <h3>Buscador de productos (Busca por id y por nombre)</h3>
     <input id="srchFld" class="srchTxt" type="text" />
-
-          <button type="submit" id="submitButton"  onclick="Buscar()" class="btn btn-primary">Go</button>
+    <button type="submit" id="submitButton"  onclick="Buscar()" class="btn btn-primary">Go</button>
 
     <ul class="thumbnails" id="fotos_Busqueda">
 
     </ul>
+
+    <br>
+    <br>
+    <h3>Actualizar Imagenes de Productos</h3>
+    <label class="sr-only" for="r-form-first-name">ID del producto a actualizar</label>
+    <br>
+    <input id="ID_producto" class="srchTxt" type="text" />
+    <br>
+    <br>
+    <div id="preview2"><img src="" alt="Preview2"/> </div>
+    <form action="/action_page.php">
+        <input type="file" id="file2" accept="image/*">
+    </form>
+
+    <button type="submit" id="submitButton"  onclick="Actualizar()" class="btn btn-primary">Actualizar Producto</button>
 
 
 
