@@ -108,7 +108,6 @@ function CargarFoto(){
 		});
 
   		setTimeout(function(){
-	  		console.log(firebaseRef.child(key_Producto));
 	  		firebaseRef.child(key_Producto).update({
 	  			foto: downloadURL
 	  		});
@@ -129,10 +128,7 @@ function PreviewPhoto(input){
 	}
 }
 
-/*document.getElementById('input[type="file"]').onchange = function() {
+document.getElementById('file').onchange = function() {
 	PreviewPhoto(this);
-}*/
-/*$(document).on('change', 'input[type="file"]',function(){
-	PreviewPhoto(this);
-})*/
+}
 
