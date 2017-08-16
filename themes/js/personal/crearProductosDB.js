@@ -132,3 +132,44 @@ document.getElementById('file').onchange = function() {
 	PreviewPhoto(this);
 }
 
+
+// -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
+function Buscar(){
+  var imagenes;
+  var queryText = document.getElementById("srchFld").value;
+  var foto_Url = [" ", " "];
+  var nombre = [" ", " "];
+  var precio = [" ", " "];
+  var descripcion = [" ", " "];
+  var id = [" ", " "];
+
+    firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+        foto_Url.push(snapshot.val().foto);
+        nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        id.push(snapshot.val().id);
+    });
+     queryText = parseInt(queryText);
+    firebaseRef.child("PRODUCTOS").orderByChild('id').equalTo(queryText).on('child_added', function(snapshot) {
+        foto_Url.push(snapshot.val().foto);
+        nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        id.push(snapshot.val().id);
+    });
+
+    setTimeout(function(){
+    	var j = 2;
+        while(j < foto_Url.length){
+	    	imagenes += '<li>';
+	        imagenes += '<img src="'+foto_Url[j]+'" style="width:200px;height:200px;" alt=""/>';                                
+	        imagenes += '<p><span> Nombre del producto: </span>' + nombre[j] +'</p>';
+	        imagenes += '<p><span> id del producto: </span>' + id[j] + '</p>';
+	        imagenes += '</li>';
+	        j++;
+        }
+        document.getElementById("fotos_Busqueda").innerHTML = imagenes;
+    }, 3000);
+
+}
