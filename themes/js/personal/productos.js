@@ -78,7 +78,7 @@ firebase.initializeApp(config);*/
   		document.getElementById("blockView").innerHTML = imagenes;
 // ---------------------------------- CAMBIAR HTML DE PAGINAS--------------------------------------------
       var k = 1;
-      while(k < total_registros/registros_por_pagina){
+      while(k <= total_registros/registros_por_pagina){
         paginas += '<li><a href="#" onclick="cambiar_pagina(' + k + ')">' + k + '</a></li>';
         k++;
       }
@@ -95,7 +95,6 @@ function paginaAnterior(){
         pagina_actual--;
         cambiar_pagina(pagina_actual);
     }
-    console.log("pagina actual: " + pagina_actual);
 }
 
 function paginaSiguiente(){
@@ -103,8 +102,6 @@ function paginaSiguiente(){
         pagina_actual++;
         cambiar_pagina(pagina_actual);
     }
-    console.log("pagina actual: " + pagina_actual);
-
 }
 
 function numPags()
