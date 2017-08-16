@@ -110,7 +110,7 @@ function CargarFoto(){
   		setTimeout(function(){
 	  		console.log(firebaseRef.child(key_Producto));
 	  		firebaseRef.child(key_Producto).update({
-	  			imagen: downloadURL
+	  			foto: downloadURL
 	  		});
   		}, 4000);
    		//console.log(downloadURL);
