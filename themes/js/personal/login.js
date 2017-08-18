@@ -68,7 +68,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     snapshot.forEach(function(childSnapshot) {
       count++;
     });
-      console.log(count);
       document.getElementById("numeroProductos").innerHTML = count;
     });
 
