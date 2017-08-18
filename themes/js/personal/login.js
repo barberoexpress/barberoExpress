@@ -104,10 +104,12 @@ function AgregarAlCarrito(){
 
   if (user) {
     var nombre = $("#nombreProducto").text();
-    var precio = $("#precioProducto").text();
-    var id = "AGREGAR UN ID ACA";
+    var precioHTML = $("#precioProducto").text();
+    var precio = precioHTML.substring(1);
+    var id = parseInt($("#id_Producto").text());
+
     var marca = $("#marcaProducto").text();
-    var descuento = "0%";
+    var descuento = "0";
     var foto = $('#imagenProducto').attr('src');
     var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
     document.getElementById("numeroProductos").innerHTML = labelProductosCarro;
