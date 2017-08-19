@@ -22,7 +22,7 @@ SearchRef.on("value", function(snapshot) {
   //nota: añadir separadores para el precio (1 000.000)
 	document.getElementById("precioProducto").innerHTML = "<span>" + "$ " + snapshot.val().precio + "</span>";
   //id del producto NOTA : hay que esconderlo mejor
-  document.getElementById("id_producto").innerHTML = snapshot.val().id;
+  document.getElementById("id_Producto").innerHTML = snapshot.val().id;
 
   //solo con esta linea de codigo mal ya no podia obtener mas elementos by id
   //document.getElementById().innerHTML ("idProducto").innerHTML = snapshot.val().id;
