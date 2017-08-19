@@ -105,7 +105,7 @@ function AgregarAlCarrito(){
   if (user) {
     var nombre = $("#nombreProducto").text();
     var precio = $("#precioProducto").text();
-    var id = "AGREGAR UN ID ACA";
+    var id = $("#idProducto").text();
     var marca = $("#marcaProducto").text();
     var descuento = "0%";
     var foto = $('#imagenProducto').attr('src');
@@ -130,7 +130,12 @@ function AgregarAlCarrito(){
 // -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
-  window.location.href="product_details.html";
+  /* es preferible abrir una pestaña nueva con el producto para que el ususario
+   no pierda su busqueda y pueda seguir viendo productos
+  */
+  //window.location.href="product_details.html";
+  window.open("product_details.html");
+
 }
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
