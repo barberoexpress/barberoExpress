@@ -32,7 +32,7 @@ var botonCantidad = '<div class="input-append"><input class="span1" style="max-w
 firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
-	
+
 	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
 	var refUsuario = firebase.database().ref("USUARIOS/" + userkey);
 	//DATOS DE ENVIO
@@ -46,10 +46,10 @@ if (user) {
     	telefono = snapshot.val().telefono.telefonoCelular;
     });
 
-	
+
 	ActualizarCarrito();
 	setTimeout(function(){
-	
+
 		document.getElementById("ciudad").innerHTML = '<strong>'+ ciudad +'</strong>';
 		document.getElementById("direccion").innerHTML = '<strong>'+ direccion +'</strong>';
 		document.getElementById("direccion2").innerHTML = '<strong>'+ direccion2 +'</strong>';
@@ -84,7 +84,7 @@ function ActualizarCarrito(){
 			//producto.push(snapshot.val().foto);
 			nombre.push(snapshot.val().nombre);
 			precio.push(snapshot.val().precio);
-			marca.push(snapshot.val().marca);   
+			marca.push(snapshot.val().marca);
 			descuento.push(snapshot.val().descuento);
 			foto_URL.push(snapshot.val().foto);
 			id_producto.push(snapshot.val().id);
@@ -124,7 +124,7 @@ function ActualizarCarrito(){
 			table += '<tr>';
             table += '<td colspan="6" style="text-align:right"><strong>TOTAL ($'+Precio_total+' - '+descuento_total+') =</strong></td>';
             table += '<td class="label label-important" style="display:block"> <strong> $'+ (Precio_total - descuento_total) +' </strong></td>';
-            table += '</tr>';   
+            table += '</tr>';
 
 
 		document.getElementById("tablaCarritoCompras").innerHTML = '<table class="table table-bordered" id ="tablaCarritoCompras">' + table + '</table>';
@@ -142,9 +142,6 @@ function ActualizarCarrito(){
 
 	}, 1500);
 
-	
+
 
 }
-
-
-

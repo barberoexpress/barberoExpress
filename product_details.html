@@ -213,8 +213,22 @@
 				  <div class="control-group">
 					<label class="control-label" id="precioProducto"><span>$222.00</span></label>
 					<div class="controls">
-					<input type="number" class="span1" placeholder="Qty."/>
-					<button type="submit" class="btn btn-large btn-primary pull-right" onclick="AgregarAlCarrito()">
+          <!--
+          <input type="number" class="span1" placeholder="Cantidad."/>
+
+          <input type="text" id="cantidad" placeholder="Cantidad." />
+
+          <h2 id="cantidad" value="1">1</h2>
+          -->
+          <h3>Cantidad</h3>
+          <input type="text" id="cantidad" value=1>
+
+
+          <input type="button" value="+" onClick="sumarUno();">
+          <input type="button" value="-" onClick="restarUnoCompras();">
+
+          <button type="submit" class="btn btn-large btn-primary pull-right"
+          onclick="AgregarAlCarrito()">
              Agregar al carrito
              <i class=" icon-shopping-cart"></i>
           </button>
