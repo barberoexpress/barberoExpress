@@ -144,7 +144,7 @@ function Ir_producto(prodKey){
 }
 
 //--------------------- Funcion Para sumar uno -----------//
-function sumarUno(idProducto){
+function sumarUno(){
   var valor = document.getElementById( "cantidad" ).value;
   var num = parseInt( valor );
     console.log("valor: "+valor+" num: "+num);

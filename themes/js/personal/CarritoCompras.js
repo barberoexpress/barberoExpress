@@ -24,11 +24,13 @@ var marca = [" ", " "];
 var precio = [" ", " "];
 var foto_URL = [" ", " "];
 var descuento = [" ", " "];
+var cantidad = [" ", " "];
 var total = 0;
 var id_producto = [" ", " "];
+
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 
-// -------------------- CODIGO PARA ACTUALIZAR EL CARRITO DE COMPRAS DEL USUARIO --------------------
+// -------------------- CODIGO PARA ACTUALIZAR EL CARRITO DE COMPRAS DEL USUARIO --------------------//
 firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
@@ -72,15 +74,45 @@ function EliminarArticulo(id){
 	ActualizarCarrito();
 }
 
-function BotonCantidad(id){
-	return botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" id="'+id+'" onclick="EliminarArticulo('+id+')"><i class="icon-remove icon-white"></button></div>';
+function BotonCantidad(id,cantidad){
+	//return botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="'+cantidad+'" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" id="'+id+'" onclick="EliminarArticulo('+id+')"><i class="icon-remove icon-white"></button></div>';
+  return botonCantidad = '<input type="text" id="'+id+'" value='+cantidad+'> <input type="button" value="+" onClick="sumarUnoCarrito('+id+');"> <input type="button" value="-" onClick="restarUnoCarrito('+id+');"> ';
+  // FALTA POR HACER: que se actualize la tabla cada vez que se cambia una cantidad y
+}
+
+function sumarUnoCarrito(id){
+  var valor = document.getElementById( id ).value;
+  var num = parseInt( valor );
+    console.log("valor: "+valor+" num: "+num);
+    num++;
+    console.log("cantidad[0]: "+cantidad[0]+" cantidad[1]: "+cantidad[1]);
+  document.getElementById( id ).value = num ;
+}
+function restarUnoCarrito(id){
+  var valor = document.getElementById( id ).value;
+  var num = parseInt( valor );
+    console.log("valor: "+valor+" num: "+num);
+    if(num <= 1){
+      num = 1;
+    }else{
+      num--;
+    }
+    console.log("cantidad[0]: "+cantidad[0]+" cantidad[1]: "+cantidad[1]);
+    document.getElementById( id ).value = num ;
 }
 
 function ActualizarCarrito(){
 
 	for(var r = 0; r < rows; r++)
 	{
-		refCarro.orderByChild("id").on("child_added", function(snapshot){
+    /*
+    var nuevaCantidad = document.getElementById( "id" ).value;
+    var numUno = parseInt( nuevaCantidad );
+    if(numUno != cantidad){
+    }
+    lo que quiero es agregar las nuevas cantidades
+    */
+    refCarro.orderByChild("id").on("child_added", function(snapshot){
 			//producto.push(snapshot.val().foto);
 			nombre.push(snapshot.val().nombre);
 			precio.push(snapshot.val().precio);
@@ -88,6 +120,7 @@ function ActualizarCarrito(){
 			descuento.push(snapshot.val().descuento);
 			foto_URL.push(snapshot.val().foto);
 			id_producto.push(snapshot.val().id);
+      cantidad.push(snapshot.val().cantidad);
 		});
 	}
 
@@ -96,20 +129,39 @@ function ActualizarCarrito(){
 	var Precio_total = 0;
 	var descuento_total = 0;
 		while(j < nombre.length){
-			table += '<tr>';
-			table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
-			table += '<td>' + nombre[j] +'</td>';
-			table += '<td>' + marca[j] + '</td>';
-			table += '<td>' + BotonCantidad(id_producto[j]) + '</td>';
-			table += '<td>$ ' + precio[j] + '</td>';
-			table += '<td>' + descuento[j] + ' %</td>';
-			total = parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100);
-			table += '<td>' + total + '</td>';
-			table += '</tr>';
-			Precio_total += parseInt(precio[j]);
-			descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
-			total = 0;
-			j++;
+      if(parseInt(cantidad[j]) > 1){
+        table += '<tr>';
+  			table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
+  			table += '<td>' + nombre[j] +'</td>';
+  			table += '<td>' + marca[j] + '</td>';
+
+  			table += '<td>' + BotonCantidad(id_producto[j],cantidad[j]) + '</td>';
+  			table += '<td>$ ' + parseInt(precio[j]) * parseInt(cantidad[j]) + '</td>';
+  			table += '<td>' + descuento[j] + ' %</td>';
+  			total = parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100);
+  			table += '<td>' + total + '</td>';
+  			table += '</tr>';
+  			Precio_total += parseInt(precio[j]);
+  			descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
+  			total = 0;
+  			j++;
+      }else{
+  			table += '<tr>';
+  			table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
+  			table += '<td>' + nombre[j] +'</td>';
+  			table += '<td>' + marca[j] + '</td>';
+  			table += '<td>' + BotonCantidad(id_producto[j]) + '</td>';
+  			table += '<td>$ ' + precio[j] + '</td>';
+  			table += '<td>' + descuento[j] + ' %</td>';
+        //¿por que está restando precio con precio? intento cambiar algo de seta liena y todo se ve a la mierda
+  			total = parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100);
+  			table += '<td>' + total + '</td>';
+  			table += '</tr>';
+  			Precio_total += parseInt(precio[j]);
+  			descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
+  			total = 0;
+  			j++;
+      }
 		}
 
 
