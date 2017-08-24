@@ -27,6 +27,7 @@ var descuento = [" ", " "];
 var cantidad = [" ", " "];
 var total = 0;
 var id_producto = [" ", " "];
+var keyArreglo = [" ", " "];
 
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 
@@ -83,10 +84,9 @@ function BotonCantidad(id,cantidad){
 function sumarUnoCarrito(id){
   var valor = document.getElementById( id ).value;
   var num = parseInt( valor );
-    console.log("valor: "+valor+" num: "+num);
-    num++;
-    console.log("cantidad[0]: "+cantidad[0]+" cantidad[1]: "+cantidad[1]);
+  num++;
   document.getElementById( id ).value = num ;
+  actualizarCantidad();
 }
 function restarUnoCarrito(id){
   var valor = document.getElementById( id ).value;
@@ -99,33 +99,34 @@ function restarUnoCarrito(id){
     }
     console.log("cantidad[0]: "+cantidad[0]+" cantidad[1]: "+cantidad[1]);
     document.getElementById( id ).value = num ;
+    actualizarCantidad();
 }
 
 function ActualizarCarrito(){
 
 	for(var r = 0; r < rows; r++)
 	{
-    /*
-    var nuevaCantidad = document.getElementById( "id" ).value;
-    var numUno = parseInt( nuevaCantidad );
-    if(numUno != cantidad){
-    }
-    lo que quiero es agregar las nuevas cantidades
-    */
-    refCarro.orderByChild("id").on("child_added", function(snapshot){
+
+
+
+      refCarro.orderByChild("id").on("child_added", function(snapshot){
 			//producto.push(snapshot.val().foto);
 			nombre.push(snapshot.val().nombre);
 			precio.push(snapshot.val().precio);
+      keyArreglo.push(snapshot.key);
 			marca.push(snapshot.val().marca);
 			descuento.push(snapshot.val().descuento);
 			foto_URL.push(snapshot.val().foto);
 			id_producto.push(snapshot.val().id);
       cantidad.push(snapshot.val().cantidad);
 		});
+
+
 	}
 
 	setTimeout(function(){
-	var j = 2;
+
+  var j = 2;
 	var Precio_total = 0;
 	var descuento_total = 0;
 		while(j < nombre.length){
@@ -136,12 +137,12 @@ function ActualizarCarrito(){
   			table += '<td>' + marca[j] + '</td>';
 
   			table += '<td>' + BotonCantidad(id_producto[j],cantidad[j]) + '</td>';
-  			table += '<td>$ ' + parseInt(precio[j]) * parseInt(cantidad[j]) + '</td>';
+  			table += '<td>$ ' + parseInt(precio[j]) + '</td>';
   			table += '<td>' + descuento[j] + ' %</td>';
-  			total = parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100);
-  			table += '<td>' + total + '</td>';
+  			total = (parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100))* parseInt(cantidad[j]);
+  			table += '<td>' + total  + '</td>';
   			table += '</tr>';
-  			Precio_total += parseInt(precio[j]);
+  			Precio_total += total;
   			descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
   			total = 0;
   			j++;
@@ -154,10 +155,10 @@ function ActualizarCarrito(){
   			table += '<td>$ ' + precio[j] + '</td>';
   			table += '<td>' + descuento[j] + ' %</td>';
         //¿por que está restando precio con precio? intento cambiar algo de seta liena y todo se ve a la mierda
-  			total = parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100);
+  			total = (parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100))* parseInt(cantidad[j]);
   			table += '<td>' + total + '</td>';
   			table += '</tr>';
-  			Precio_total += parseInt(precio[j]);
+  			Precio_total += total;
   			descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
   			total = 0;
   			j++;
@@ -196,4 +197,28 @@ function ActualizarCarrito(){
 
 
 
+}
+
+function actualizarCantidad() {
+
+    var i=2;
+    while (i < cantidad.length) {
+      /**/
+      var idCantiad = i.toString();
+      var nuevaCantidad = document.getElementById( idCantiad ).value;
+
+      var numUno = parseInt( nuevaCantidad );
+
+
+      if(numUno != parseInt(cantidad[i]) && parseInt(cantidad[i]) > 1){
+        var keyP = keyArreglo[i].toString();
+        var numUno_string= numUno.toString();
+        refCarro.child(keyP).update({
+          cantidad: numUno_string
+        });
+      }
+      i++;
+      //lo que quiero es agregar las nuevas cantidades
+
+    }
 }
