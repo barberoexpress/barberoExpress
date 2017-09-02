@@ -272,7 +272,46 @@
 			  <h4>Informacion del producto</h4>
 
           <!-- este es el que hay que esconder -->
-          <p id="id_Producto">561254546</p>
+          <p id="id_Producto"></p>
+
+          <!--
+          <a href="#id" onclick="switchDiv(id1, id2);">Change Payment Method</a>
+          <div id="id1" style="display: none"><p>test 1</p></div>
+          <div id="id2"><p>test 2</p></div>
+
+
+          <form>
+            <input type="submit"  value="Uno" onclick="MostrarUno();"><br>
+            <input type="submit"  value="Dos"onclick="OcultarUno();">
+          </form>
+          -->
+          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr();"><br>
+
+          <input type="button" value="Mostrar Uno" onClick="switchDivS('Uno','Dos');">
+          <input type="button" value="Ocultar Uno" onClick="switchDivS('Dos','Uno');">
+
+          <div  id="Uno">
+            <div>
+            <h3>Cantidad</h3>
+            <input type="text" id="cantidad" value=1>
+
+
+            <input type="button" value="+" onClick="sumarUno();">
+            <input type="button" value="-" onClick="restarUnoCompras();">
+
+            <button type="submit" class="btn btn-large btn-primary pull-right"
+            onclick="AgregarAlCarrito()">
+               Agregar al carrito
+               <i class=" icon-shopping-cart"></i>
+            </button>
+  					</div>
+          </div>
+
+          <div  id="Dos" >
+            Dos
+            ya tienes el producto
+          </div>
+
           <p id="id_Producto" style="visibility:hidden">5414214286245</p>
 
                 <table class="table table-bordered">
@@ -610,6 +649,8 @@
  <!--PERSONAL -->
  <script src="themes/js/personal/login.js" type="text/javascript"></script>
  <script src="themes/js/personal/detallesProducto.js" type="text/javascript"></script>
+
+ <script src="themes/js/personal/CarritoCompras.js" type="text/javascript"></script>
 
 	<!-- Themes switcher section ============================================================================================= -->
 <div id="secectionBox">

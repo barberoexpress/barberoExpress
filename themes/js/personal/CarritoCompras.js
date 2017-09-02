@@ -52,7 +52,7 @@ if (user) {
 
 	ActualizarCarrito();
 	setTimeout(function(){
-
+    //esto pone error
 		document.getElementById("ciudad").innerHTML = '<strong>'+ ciudad +'</strong>';
 		document.getElementById("direccion").innerHTML = '<strong>'+ direccion +'</strong>';
 		document.getElementById("direccion2").innerHTML = '<strong>'+ direccion2 +'</strong>';
@@ -75,10 +75,64 @@ function EliminarArticulo(id){
 	ActualizarCarrito();
 }
 
+function BuscarEnCarrito(id){
+  console.log("entro");
+  console.log(id);
+  refCarro.orderByChild("id").equalTo(id).on("child_added",function(snapshot){
+    console.log("encontro");
+    return true;
+  });
+}
+
+function CambiarAPorIr() {
+//lo de los intentos deberia de estar cada vez que se conecte a Firebase, con valores por defecto
+
+var noMasIntentos = false;
+var intentos = 4;
+  var valor = document.getElementById( "id_Producto" ).innerText;
+  console.log(valor);
+  var esta = BuscarEnCarrito(valor);
+
+  console.log(esta);
+
+  if (esta == true) {
+    noMasIntentos = true;
+    switchDivS("Dos","Uno");
+  }else {
+    switchDivS("Uno","Dos");
+  }
+
+}
+
+function switchDivS(id1, id2) {
+//este solo mustra el primero y oculta el segundo
+//facta organizar la posicion, quizas superponer uno ensima de otro
+
+  console.log(id1);
+  console.log(id2);
+
+  document.getElementById(id1).style.opacity ="1";
+  document.getElementById(id2).style.opacity ="0";
+
+}
+
+function MostrarUno() {
+  document.getElementById("Uno").style.opacity ="1";
+}
+
+function OcultarUno() {
+  document.getElementById("Uno").style.opacity ="0";
+}
+
+
 function BotonCantidad(id,cantidad){
 	//return botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="'+cantidad+'" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" id="'+id+'" onclick="EliminarArticulo('+id+')"><i class="icon-remove icon-white"></button></div>';
   return botonCantidad = '<input type="text" id="'+id+'" value='+cantidad+'> <input type="button" value="+" onClick="sumarUnoCarrito('+id+');"> <input type="button" value="-" onClick="restarUnoCarrito('+id+');"> ';
   // FALTA POR HACER: que se actualize la tabla cada vez que se cambia una cantidad y
+}
+
+function BotonSwitch(idA,idB) {
+  return botonOCultar = ' <input type="submit"  value="Uno" onclick="switchDivS( '+idA+' , '+idB+' );">';
 }
 
 function sumarUnoCarrito(id){
