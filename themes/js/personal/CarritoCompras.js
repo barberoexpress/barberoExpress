@@ -77,29 +77,51 @@ function EliminarArticulo(id){
 
 function BuscarEnCarrito(id){
   console.log("entro");
-  console.log(id);
+  var Encontrado = false;
+  console.log("id: " + id);
   refCarro.orderByChild("id").equalTo(id).on("child_added",function(snapshot){
     console.log("encontro");
-    return true;
+    Encontrado = true;
+    console.log("Encontrado = "+Encontrado);
+    return Encontrado;
   });
+  console.log("Encontrado = "+Encontrado);
+  return Encontrado;
+  /*
+  setTimeout(function () {
+
+    if(Encontrado==true){
+      respuesta = true;
+      return respuesta;
+    }else{
+      respuesta = false;
+      return respuesta;
+    }
+
+    console.log("Encontrado = "+Encontrado);
+    return Encontrado;
+  }, 3000);
+  */
 }
 
-function CambiarAPorIr() {
+function CambiarAPorIr(uno,dos) {
 //lo de los intentos deberia de estar cada vez que se conecte a Firebase, con valores por defecto
 
 var noMasIntentos = false;
 var intentos = 4;
+var respuesta;
   var valor = document.getElementById( "id_Producto" ).innerText;
   console.log(valor);
-  var esta = BuscarEnCarrito(valor);
+
+  var esta = BuscarEnCarrito(parseInt(valor));
 
   console.log(esta);
 
   if (esta == true) {
     noMasIntentos = true;
-    switchDivS("Dos","Uno");
+    switchDivS(dos,uno);
   }else {
-    switchDivS("Uno","Dos");
+    switchDivS(uno,dos);
   }
 
 }

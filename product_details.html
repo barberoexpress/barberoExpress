@@ -212,14 +212,11 @@
 				<div class="form-horizontal qtyFrm">
 				  <div class="control-group">
 					<label class="control-label" id="precioProducto"><span>$222.00</span></label>
-					<div class="controls">
-          <!--
-          <input type="number" class="span1" placeholder="Cantidad."/>
 
-          <input type="text" id="cantidad" placeholder="Cantidad." />
 
-          <h2 id="cantidad" value="1">1</h2>
-          -->
+          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr('NoLoTiene','yaLoTiene');">
+
+          <div class="controls" id="NoLoTiene">
           <h3>Cantidad</h3>
           <input type="text" id="cantidad" value=1>
 
@@ -232,8 +229,13 @@
              Agregar al carrito
              <i class=" icon-shopping-cart"></i>
           </button>
-					</div>
-				  </div>
+        </div><br>
+
+          <div id="yaLoTiene">
+            <a href="product_summary.html"><img src="themes/images/Carrito.png" alt=""></a>
+          </div>
+
+          </div>
 				</div>
 
 				<hr class="soft"/>
@@ -285,7 +287,7 @@
             <input type="submit"  value="Dos"onclick="OcultarUno();">
           </form>
           -->
-          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr();"><br>
+          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr('Uno','Dos');"><br>
 
           <input type="button" value="Mostrar Uno" onClick="switchDivS('Uno','Dos');">
           <input type="button" value="Ocultar Uno" onClick="switchDivS('Dos','Uno');">
