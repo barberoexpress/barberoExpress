@@ -1,4 +1,4 @@
-  
+
 
   var imagenes = '<ul class="thumbnails" id= "fotos_index">';
   var rows = 1;
@@ -22,7 +22,7 @@
           });
   
 
-
+          //lala
     setTimeout(function(){
             //var j = 2;
             var j = Math.floor((Math.random() * 10) + 2);
@@ -60,7 +60,7 @@
                 imagenes_referidos += '<div class="thumbnail">';
                 imagenes_referidos += '<i class="tag"></i>';
                 imagenes_referidos += '<img src="'+foto_Url[j]+'" onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')" style="width:200px;height:200px;" alt=""/>';
-                imagenes_referidos += '<div class="caption">';                                    
+                imagenes_referidos += '<div class="caption">';
                 imagenes_referidos += '<h5>'+ nombre[j] +'</h5>';
                 imagenes_referidos += '<h4 onclick="Ir_producto('+"'"+ keyProducto[j]+"'"+')"><a class="btn"> Ver </a><span class="pull-right">$'+precio[j]+'</span></h4>';
                 imagenes_referidos += '</div>';
