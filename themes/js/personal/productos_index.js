@@ -22,7 +22,7 @@
           });
   
 
-          //lala
+          
     setTimeout(function(){
             //var j = 2;
             var j = Math.floor((Math.random() * 10) + 2);
