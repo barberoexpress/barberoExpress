@@ -106,6 +106,7 @@ function AgregarAlCarrito(){
     var precioHTML = $("#precioProducto").text();
     var precio = precioHTML.substring(1);
     var id = parseInt($("#id_Producto").text());
+    var cantidad = document.getElementById( "cantidad" ).value;
 
     var marca = $("#marcaProducto").text();
     var descuento = "0";
@@ -116,13 +117,15 @@ function AgregarAlCarrito(){
    ref.child("carritoCompras").push({
       nombre: nombre,
       precio: precio,
+      cantidad: cantidad,
       id: id,
       marca: marca,
       descuento: descuento,
       foto: foto
     });
     window.alert("Producto Agregado");
-    window.location.href="product_summary.html";
+    //window.location.href="product_summary.html";
+    window.open("product_summary.html");
   } else {
     window.alert("Inicia seccion primero");
   }
@@ -131,7 +134,36 @@ function AgregarAlCarrito(){
 // -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
-  window.location.href="product_details.html";
+  /* es preferible abrir una pestaña nueva con el producto para que el ususario
+   no pierda su busqueda y pueda seguir viendo productos
+  */
+  //window.location.href="product_details.html";
+  window.open("product_details.html");
+
+}
+
+//--------------------- Funcion Para sumar uno -----------//
+function sumarUno(){
+  var valor = document.getElementById( "cantidad" ).value;
+  var num = parseInt( valor );
+    console.log("valor: "+valor+" num: "+num);
+    num++;
+    console.log("valor: "+valor+" num: "+num);
+  //document.getElementById( "cantidad" ).innerHTML = num ;
+  document.getElementById("cantidad").value = num ;
+}
+//---------------- Funcion Para restar sin pasarse de 0---//
+function restarUnoCompras(){
+  var valor = document.getElementById( "cantidad" ).value;
+  var num = parseInt( valor );
+    console.log("valor: "+valor+" num: "+num);
+    if(num <= 1){
+      num = 1;
+    }else{
+      num--;
+    }
+    console.log("valor: "+valor+" num: "+num);
+    document.getElementById("cantidad").value = num ;
 }
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
