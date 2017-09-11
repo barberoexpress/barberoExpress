@@ -20,8 +20,6 @@
             recomendado.push(snapshot.val().recomendado);
             keyProducto.push(snapshot.key);
           });
-  
-
 
     setTimeout(function(){
             //var j = 2;

@@ -36,3 +36,60 @@ SearchRef.on("value", function(snapshot) {
 
 
 });
+
+
+function BuscarEnCarrito(id){
+  console.log("entro");
+  var Encontrado = false;
+  console.log("id: " + id);
+  refCarro.orderByChild("id").equalTo(id).on("child_added",function(snapshot){
+    console.log("encontro");
+    Encontrado = true;
+    console.log("Encontrado = "+Encontrado);
+    return Encontrado;
+  });
+  console.log("Encontrado = "+Encontrado);
+  return Encontrado; 
+}
+
+function CambiarAPorIr(uno,dos) {
+//lo de los intentos deberia de estar cada vez que se conecte a Firebase, con valores por defecto
+
+var noMasIntentos = false;
+var intentos = 4;
+var respuesta;
+  var valor = document.getElementById( "id_Producto" ).innerText;
+  console.log(valor);
+
+  var esta = BuscarEnCarrito(parseInt(valor));
+
+  console.log(esta);
+
+  if (esta == true) {
+    noMasIntentos = true;
+    switchDivS(dos,uno);
+  }else {
+    switchDivS(uno,dos);
+  }
+
+}
+
+function switchDivS(id1, id2) {
+//este solo mustra el primero y oculta el segundo
+//facta organizar la posicion, quizas superponer uno ensima de otro
+
+  console.log(id1);
+  console.log(id2);
+
+  document.getElementById(id1).style.opacity ="1";
+  document.getElementById(id2).style.opacity ="0";
+
+}
+
+function MostrarUno() {
+  document.getElementById("Uno").style.opacity ="1";
+}
+
+function OcultarUno() {
+  document.getElementById("Uno").style.opacity ="0";
+}
