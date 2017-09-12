@@ -37,7 +37,7 @@ function Registrarse(){
 		var errorCode = error.code;
 		var errorMessage = error.message;
 
-		if (errorCode === 'auth/wrong-password') {		
+		if (errorCode === 'auth/wrong-password') {
 	        alert('Contraseña equivocada.');
 	        errores = true;
 	        return;
@@ -50,7 +50,7 @@ function Registrarse(){
 	setTimeout(function(){
                 !errores ? InformacionBaseDatos(nombre, apellido, email, direccion, direccion2, ciudad, informacionAdicional, telefonoFijo, telefonoCelular) : console.log("problemas");
             }, 1000);
-	
+
 }
 
 
@@ -63,7 +63,7 @@ function InformacionBaseDatos(nombre, apellido, correo, direccion, direccion2, c
 		apellido: apellido,
 		telefono: {telefonoCelular: telefonoCelular, telefonoFijo: telefonoFijo},
 		direccion: {direccion: direccion, direccion2: direccion2, ciudad:ciudad, informacionAdicional: informacionAdicional},
-		carritoCompras: "null",
+		carritoCompras: {vaciar:"false"},
 		foto: "null",
 		historialCompras: "null"
 	});
