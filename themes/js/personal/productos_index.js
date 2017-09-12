@@ -8,7 +8,11 @@
   var keyProducto = [" ", " "];
   var descripcion = [" ", " "];
   var recomendado = [" ", " "];
-        //SI QUEREMOS AGREGAR MAS VALORES, PONERLOS ARRIBA
+
+  //CONTROL DE CALLBACK DE FIREBASE
+  var end = false;
+  var time = 0;
+
   var refProductos = firebase.database().ref("PRODUCTOS");
 
 
@@ -20,8 +24,23 @@
             recomendado.push(snapshot.val().recomendado);
             keyProducto.push(snapshot.key);
           });
-
     setTimeout(function(){
+    while (end == false && time < 500000){
+      if(nombre[24] != null){
+        end = true;
+      }
+      time +=0.1;
+      if (time >= 500000){
+        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
+        time = 500001;
+      }
+
+    }
+    Fotos_Index();
+    Imegenes_Recomendadas();
+  }, 700);
+    function Fotos_Index(){
+    //setTimeout(function(){
             //var j = 2;
             var j = Math.floor((Math.random() * 10) + 2);
             var estatica = j + 8;
@@ -37,12 +56,13 @@
               imagenes += '</div>';
               imagenes += '</li>';
               j++;
-    }
+            }
       document.getElementById("fotos_index").innerHTML = imagenes + '</ul>';
-    }, 3000);
+    //}, 3000);
+    }
 
-
-   setTimeout(function(){
+    function Imegenes_Recomendadas(){
+   //setTimeout(function(){
           var imagenes_referidos = '<div class="item active">' + '<ul class="thumbnails">';
           var j = 2;
           var No_productos = 0;
@@ -70,4 +90,10 @@
               j++;
             }
       document.getElementById("imagenes_recomendados").innerHTML = imagenes_referidos;
-    }, 3000);
+    //}, 3000);
+    }
+
+
+    function Delete_search_icon(){
+       $("#srchFld").toggleClass("move");
+    }
