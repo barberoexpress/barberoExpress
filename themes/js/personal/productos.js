@@ -26,6 +26,11 @@ firebase.initializeApp(config);*/
     var descripcion = [" ", " "];
     var keyProducto = [" ", " "];
     var busqueda = false;
+
+    //CONTROL DE CALLBACK DE FIREBASE
+    var end = false;
+    var time = 0;
+
     //SI QUEREMOS AGREGAR MAS VALORES, PONERLOS ARRIBA
   	var refProductos = firebase.database().ref("PRODUCTOS");
     // ---------------------------------- BUSQUEDA DE PRODUCTOS--------------------------------------------
@@ -54,7 +59,24 @@ firebase.initializeApp(config);*/
     	}
   }
 
-  	setTimeout(function(){
+    setTimeout(function(){
+      while (end == false && time < 500000){
+        if(nombre[2] != null){
+          end = true;
+        }
+        time +=0.1;
+        if (time >= 500000){
+          alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
+          time = 500001;
+        }
+
+      }
+      ActualizarBuscador();
+  }, 700);
+
+  	//setTimeout(function(){
+
+      function ActualizarBuscador(){
   	  var j = 2;
       var no_imagenes = 6;
       if (busqueda){if(total_registros < 6){no_imagenes = total_registros + 2}}
@@ -86,8 +108,9 @@ firebase.initializeApp(config);*/
       paginas += '<li><a href="#" onclick="paginaSiguiente()">&rsaquo;</a></li>';
       paginas += '</ul>'
       document.getElementById("paginas").innerHTML = paginas;
+      }
 
-    }, 4000);
+    //}, 4000);
 
 // ---------------------------------- DESDE ACA COMIENZA LAS FUNCIONES DE PAGINACION (LA PAGINACION NO DEBE ESTAR CLIENT-SIDE) --------------------------------------------
 function paginaAnterior(){
