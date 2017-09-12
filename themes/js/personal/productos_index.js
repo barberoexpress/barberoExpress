@@ -92,3 +92,8 @@
       document.getElementById("imagenes_recomendados").innerHTML = imagenes_referidos;
     //}, 3000);
     }
+
+
+    function Delete_search_icon(){
+       $("#srchFld").toggleClass("move");
+    }
