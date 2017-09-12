@@ -179,29 +179,40 @@ function restarUnoCarrito(id){
 }
 
 function ActualizarCarrito(){
-
-	for(var r = 0; r < rows; r++)
-	{
-
-
+  var end = false;
+  var time = 0;
 
       refCarro.orderByChild("id").on("child_added", function(snapshot){
-			//producto.push(snapshot.val().foto);
-			nombre.push(snapshot.val().nombre);
-			precio.push(snapshot.val().precio);
-      keyArreglo.push(snapshot.key);
-			marca.push(snapshot.val().marca);
-			descuento.push(snapshot.val().descuento);
-			foto_URL.push(snapshot.val().foto);
-			id_producto.push(snapshot.val().id);
-      cantidad.push(snapshot.val().cantidad);
-		});
+  			//producto.push(snapshot.val().foto);
+  			nombre.push(snapshot.val().nombre);
+  			precio.push(snapshot.val().precio);
+        keyArreglo.push(snapshot.key);
+  			marca.push(snapshot.val().marca);
+  			descuento.push(snapshot.val().descuento);
+  			foto_URL.push(snapshot.val().foto);
+  			id_producto.push(snapshot.val().id);
+        cantidad.push(snapshot.val().cantidad);
+		  });
 
 
-	}
+  setTimeout(function(){
+   while (end == false && time < 500000){
+      if(nombre[2] != null){
+        end = true;
+      }
+      time +=0.1;
+      if (time >= 500000){
+        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
+        time = 500001;
+      }
 
-	setTimeout(function(){
+    }
+    Actualizar_HTML_carrito();
+  }, 700);
 
+
+	//setTimeout(function(){
+  /*function Actualizar_HTML_carrito(){
   var j = 2;
 	var Precio_total = 0;
 	var descuento_total = 0;
@@ -268,8 +279,9 @@ function ActualizarCarrito(){
 		descuento = [" ", " "];
 		total = 0;
 		id_producto = [" ", " "];
+  }*/
 
-	}, 1500);
+	//}, 1500);
 
 
 
@@ -298,3 +310,73 @@ function actualizarCantidad() {
 
     }
 }
+
+
+function Actualizar_HTML_carrito(){
+  var j = 2;
+  var Precio_total = 0;
+  var descuento_total = 0;
+    while(j < nombre.length){
+      if(parseInt(cantidad[j]) > 1){
+        table += '<tr>';
+        table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
+        table += '<td>' + nombre[j] +'</td>';
+        table += '<td>' + marca[j] + '</td>';
+
+        table += '<td>' + BotonCantidad(id_producto[j],cantidad[j]) + '</td>';
+        table += '<td>$ ' + parseInt(precio[j]) + '</td>';
+        table += '<td>' + descuento[j] + ' %</td>';
+        total = (parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100))* parseInt(cantidad[j]);
+        table += '<td>' + total  + '</td>';
+        table += '</tr>';
+        Precio_total += total;
+        descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
+        total = 0;
+        j++;
+      }else{
+        table += '<tr>';
+        table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
+        table += '<td>' + nombre[j] +'</td>';
+        table += '<td>' + marca[j] + '</td>';
+        table += '<td>' + BotonCantidad(id_producto[j]) + '</td>';
+        table += '<td>$ ' + precio[j] + '</td>';
+        table += '<td>' + descuento[j] + ' %</td>';
+        //¿por que está restando precio con precio? intento cambiar algo de seta liena y todo se ve a la mierda
+        total = (parseInt(precio[j]) - (parseInt(precio[j]) * parseInt(descuento[j])/100))* parseInt(cantidad[j]);
+        table += '<td>' + total + '</td>';
+        table += '</tr>';
+        Precio_total += total;
+        descuento_total += parseInt(precio[j]) * parseInt(descuento[j])/100;
+        total = 0;
+        j++;
+      }
+    }
+
+
+      table += '<tr>';
+            table += '<td colspan="6" style="text-align:right">Precio total:  </td>';
+            table += '<td> $ '+Precio_total+'</td>';
+            table += '</tr>';
+      table += '<tr>';
+            table += '<td colspan="6" style="text-align:right">Descuento total: </td>';
+            table += '<td> $ '+descuento_total+'</td>';
+            table += '</tr>';
+      table += '<tr>';
+            table += '<td colspan="6" style="text-align:right"><strong>TOTAL ($'+Precio_total+' - '+descuento_total+') =</strong></td>';
+            table += '<td class="label label-important" style="display:block"> <strong> $'+ (Precio_total - descuento_total) +' </strong></td>';
+            table += '</tr>';
+
+
+    document.getElementById("tablaCarritoCompras").innerHTML = '<table class="table table-bordered" id ="tablaCarritoCompras">' + table + '</table>';
+
+    table = '<thead>' + '<tr>' + '<th>Producto</th>' + '<th>Caracteristicas</th>' + '<th>Marca</th>' + '<th>Cantidad/Actualizar</th>' + '<th>Precio</th>' + '<th>Descuento</th>' + '<th>Total</th>' + '</tr>' + '</thead>' + '<tbody>';
+    rows = 1;
+    producto = 'themes/images/products/4.jpg';
+    nombre = [" ", " "];
+    marca = [" ", " "];
+    precio = [" ", " "];
+    foto_URL = [" ", " "];
+    descuento = [" ", " "];
+    total = 0;
+    id_producto = [" ", " "];
+  }
