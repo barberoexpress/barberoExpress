@@ -167,20 +167,29 @@ function sumarUnoCarrito(id){
 function restarUnoCarrito(id){
   var valor = document.getElementById( id ).value;
   var num = parseInt( valor );
-    console.log("valor: "+valor+" num: "+num);
     if(num <= 1){
       num = 1;
     }else{
       num--;
     }
-    console.log("cantidad[0]: "+cantidad[0]+" cantidad[1]: "+cantidad[1]);
     document.getElementById( id ).value = num ;
     actualizarCantidad();
 }
 
 function ActualizarCarrito(){
-  var end = false;
-  var time = 0;
+    var end = false;
+    var time = 0;
+    
+    //LIMPIAR EL ARREGLO
+    nombre = [" ", " "];
+    marca = [" ", " "];
+    precio = [" ", " "];
+    foto_URL = [" ", " "];
+    descuento = [" ", " "];
+    total = 0;
+    id_producto = [" ", " "];
+    cantidad = [" ", " "];
+    keyArreglo = [" ", " "];
 
       refCarro.orderByChild("id").on("child_added", function(snapshot){
   			//producto.push(snapshot.val().foto);
@@ -290,15 +299,15 @@ function ActualizarCarrito(){
 function actualizarCantidad() {
 
     var i=2;
+    var j = 0;
     while (i < cantidad.length) {
       /**/
-      var idCantiad = i.toString();
+      
+      var idCantiad = id_producto[i].toString();
       var nuevaCantidad = document.getElementById( idCantiad ).value;
-
       var numUno = parseInt( nuevaCantidad );
 
-
-      if(numUno != parseInt(cantidad[i]) && parseInt(cantidad[i]) > 1){
+      if(numUno != parseInt(cantidad[i]) && parseInt(cantidad[i]) >= 1){
         var keyP = keyArreglo[i].toString();
         var numUno_string= numUno.toString();
         refCarro.child(keyP).update({
@@ -306,6 +315,7 @@ function actualizarCantidad() {
         });
       }
       i++;
+      j++;
       //lo que quiero es agregar las nuevas cantidades
 
     }
@@ -317,7 +327,7 @@ function Actualizar_HTML_carrito(){
   var Precio_total = 0;
   var descuento_total = 0;
     while(j < nombre.length){
-      if(parseInt(cantidad[j]) > 1){
+      if(parseInt(cantidad[j]) >= 1){
         table += '<tr>';
         table += '<td>' + '<img src="' + foto_URL[j] + '" alt="Mountain View" style="width:60px;height:auto;">' + '</td>';
         table += '<td>' + nombre[j] +'</td>';
@@ -372,11 +382,4 @@ function Actualizar_HTML_carrito(){
     table = '<thead>' + '<tr>' + '<th>Producto</th>' + '<th>Caracteristicas</th>' + '<th>Marca</th>' + '<th>Cantidad/Actualizar</th>' + '<th>Precio</th>' + '<th>Descuento</th>' + '<th>Total</th>' + '</tr>' + '</thead>' + '<tbody>';
     rows = 1;
     producto = 'themes/images/products/4.jpg';
-    nombre = [" ", " "];
-    marca = [" ", " "];
-    precio = [" ", " "];
-    foto_URL = [" ", " "];
-    descuento = [" ", " "];
-    total = 0;
-    id_producto = [" ", " "];
   }
