@@ -24,6 +24,27 @@
             recomendado.push(snapshot.val().recomendado);
             keyProducto.push(snapshot.key);
           });
+
+    if(navigator.userAgent.indexOf("Chrome") != -1 )
+    {
+       setTimeout(function(){
+    while (end == false && time < 500000){
+      if(nombre[24] != null){
+        end = true;
+      }
+      time +=0.1;
+      if (time >= 500000){
+        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
+        time = 500001;
+      }
+
+    }
+    Fotos_Index();
+    Imegenes_Recomendadas();
+  }, 2000);
+
+
+    }else{      
     setTimeout(function(){
     while (end == false && time < 500000){
       if(nombre[24] != null){
@@ -39,6 +60,9 @@
     Fotos_Index();
     Imegenes_Recomendadas();
   }, 700);
+
+  }
+
     function Fotos_Index(){
     //setTimeout(function(){
             //var j = 2;
@@ -94,6 +118,4 @@
     }
 
 
-    function Delete_search_icon(){
-       $("#srchFld").toggleClass("move");
-    }
+
