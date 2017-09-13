@@ -210,3 +210,8 @@ function Buscar(){
     window.location.href="products.html";
   }
 }
+
+
+function Delete_search_icon(){
+  $("#srchFld").toggleClass("move");
+}
