@@ -213,9 +213,6 @@
 				  <div class="control-group">
 					<label class="control-label" id="precioProducto"><span>$222.00</span></label>
 
-
-          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr('NoLoTiene','yaLoTiene');">
-
           <div class="controls" id="NoLoTiene">
           <h3>Cantidad</h3>
           <input type="text" id="cantidad" value=1>
@@ -239,8 +236,8 @@
 				</div>
 
 				<hr class="soft"/>
-				<h4>100 items in stock</h4>
-				<form class="form-horizontal qtyFrm pull-right">
+				<h4><p< id = "Bodega">500</p>En la bodega</h4>
+		<!--		<form class="form-horizontal qtyFrm pull-right">
 				  <div class="control-group">
 					<label class="control-label"><span>Colores</span></label>
 					<div class="controls">
@@ -254,27 +251,27 @@
 				  </div>
 				</form>
 				<hr class="soft clr"/>
-				<p id="descripcion_producto">
+				--><p id="descripcion_producto">
 				lalalalalalala
 
-				</p>
+				</p><!--
 				<a class="btn btn-small pull-right" href="#detail">Mas detalles</a>
 				<br class="clr"/>
 			<a href="#" name="detail"></a>
-			<hr class="soft"/>
+			<hr class="soft"/> -->
 			</div>
 
 			<div class="span9">
             <ul id="productDetail" class="nav nav-tabs">
               <li class="active"><a href="#home" data-toggle="tab">Detalles del producto</a></li>
-              <li><a href="#profile" data-toggle="tab">Productos similares</a></li>
+             <!-- <li><a href="#profile" data-toggle="tab">Productos similares</a></li> -->
             </ul>
             <div id="myTabContent" class="tab-content">
               <div class="tab-pane fade active in" id="home">
 			  <h4>Informacion del producto</h4>
 
           <!-- este es el que hay que esconder -->
-          <p id="id_Producto"></p>
+         <!-- <p id="id_Producto"></p> -->
 
           <!--
           <a href="#id" onclick="switchDiv(id1, id2);">Change Payment Method</a>
@@ -287,7 +284,7 @@
             <input type="submit"  value="Dos"onclick="OcultarUno();">
           </form>
           -->
-          <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr('Uno','Dos');"><br>
+        <!--  <input type="button" value="cambiar si ya lo tiene" onClick="CambiarAPorIr('Uno','Dos');"><br>
 
           <input type="button" value="Mostrar Uno" onClick="switchDivS('Uno','Dos');">
           <input type="button" value="Ocultar Uno" onClick="switchDivS('Dos','Uno');">
@@ -314,7 +311,7 @@
             ya tienes el producto
           </div>
 
-          <p id="id_Producto" style="visibility:hidden">5414214286245</p>
+          <p id="id_Producto" style="visibility:hidden">5414214286245</p> -->
 
                 <table class="table table-bordered">
 				<tbody>
@@ -324,7 +321,7 @@
 				</tbody>
 				</table>
               </div>
-              <p id="id_Producto"></p>
+            <p id="id_Producto" style="opacity: 0;"></p>
 
 		<div class="tab-pane fade" id="profile">
 		<div id="myTab" class="pull-right">

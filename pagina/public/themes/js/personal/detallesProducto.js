@@ -11,6 +11,8 @@ var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 var prodKey = localStorage.getItem("PROD_KEY");
 var SearchRef = firebase.database().ref("PRODUCTOS/" + prodKey);
+var userkey = localStorage.getItem("USERKEY2");
+var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
 
 SearchRef.on("value", function(snapshot) {
 	//BASICO
@@ -58,7 +60,7 @@ function CambiarAPorIr(uno,dos) {
 var noMasIntentos = false;
 var intentos = 4;
 var respuesta;
-  var valor = document.getElementById( "id_Producto" ).innerText;
+  var valor = document.getElementById("id_Producto").innerText;
   console.log(valor);
 
   var esta = BuscarEnCarrito(parseInt(valor));
@@ -81,8 +83,9 @@ function switchDivS(id1, id2) {
   console.log(id1);
   console.log(id2);
 
-  document.getElementById(id1).style.opacity ="1";
-  document.getElementById(id2).style.opacity ="0";
+  document.getElementById(id1).style.visibility ="visible";
+  document.getElementById("yaLoTiene").style.marginTop ="-80px";
+  document.getElementById(id2).style.visibility ="hidden";
 
 }
 
@@ -93,3 +96,7 @@ function MostrarUno() {
 function OcultarUno() {
   document.getElementById("Uno").style.opacity ="0";
 }
+
+  setTimeout(function(){
+        CambiarAPorIr('NoLoTiene','yaLoTiene');
+  }, 1000);
