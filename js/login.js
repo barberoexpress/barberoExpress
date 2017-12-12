@@ -106,12 +106,14 @@ function AgregarAlCarrito(){
     var foto = $('#imagenProducto').attr('src');
     /*var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
     document.getElementById("numeroProductos").innerHTML = labelProductosCarro;*/ //ESTO ES PARA MODIFICAR EL LABEL DEL CARRO
+    var keyP = localStorage.getItem("PROD_KEY")
 
-   ref.child("carritoCompras").push({
+   ref.child("carritoCompras/productos").push({
       nombre: nombre,
       precio: precio,
       cantidad: cantidad,
       id: id,
+      key: keyP,
       marca: marca,
       descuento: descuento,
       foto: foto
