@@ -60,7 +60,7 @@ function BuscarEnCarrito(id){
   return Encontrado; 
 }
 
-function CambiarAPorIr(uno,dos) {
+/*function CambiarAPorIr(uno,dos) {
 
   var noMasIntentos = false;
   var intentos = 4;
@@ -104,4 +104,4 @@ function OcultarUno() {
 
   setTimeout(function(){
     CambiarAPorIr('NoLoTiene','yaLoTiene');
-  }, 1000);
+  }, 1000);*/

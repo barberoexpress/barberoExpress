@@ -28,3 +28,4 @@ function CerrarSeccionIndex(){
     	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
 	});
 }
+

@@ -38,7 +38,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
 
-	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
+	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras" + "/" + "productos");
 	var refUsuario = firebase.database().ref("USUARIOS/" + userkey);
 	//DATOS DE ENVIO
 	
