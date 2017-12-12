@@ -1,0 +1,156 @@
+0000000000000000000000000000000000000000 9826351eaa486cbaa613afe622dcf70a53c4dcb7 josewweee <josemariamira@hotmail.com> 1501047928 -0500	clone: from https://github.com/barberoexpress/barberoExpress
+9826351eaa486cbaa613afe622dcf70a53c4dcb7 9826351eaa486cbaa613afe622dcf70a53c4dcb7 josewweee <josemariamira@hotmail.com> 1501047985 -0500	checkout: moving from master to Jose
+9826351eaa486cbaa613afe622dcf70a53c4dcb7 737740b40eb9afad4aab52e5156bca9e9a275420 josewweee <josemariamira@hotmail.com> 1501048022 -0500	commit: Template inicial de la barberia (Condicionado a cambios)
+737740b40eb9afad4aab52e5156bca9e9a275420 9826351eaa486cbaa613afe622dcf70a53c4dcb7 josewweee <josemariamira@hotmail.com> 1501048157 -0500	checkout: moving from Jose to master
+9826351eaa486cbaa613afe622dcf70a53c4dcb7 065db9cf279747f36186bd1f6e05a39466c2d8b1 josewweee <josemariamira@hotmail.com> 1501135228 -0500	commit: Comenzando la conexion con firebase y la creacion de usuarios (50%)
+065db9cf279747f36186bd1f6e05a39466c2d8b1 737740b40eb9afad4aab52e5156bca9e9a275420 josewweee <josemariamira@hotmail.com> 1501135246 -0500	checkout: moving from master to Jose
+737740b40eb9afad4aab52e5156bca9e9a275420 065db9cf279747f36186bd1f6e05a39466c2d8b1 josewweee <josemariamira@hotmail.com> 1501135252 -0500	checkout: moving from Jose to master
+065db9cf279747f36186bd1f6e05a39466c2d8b1 4e32a1a0f4b8a7b0576d7a5df725040f999007aa josewweee <josemariamira@hotmail.com> 1501171524 -0500	commit: El registro ahora esta al 80% ( ya los usuarios van directo a el AUTH de firebase y una vez se crean la cuenta inician seccion), aun hay un bug a la hora de crear la cuenta, se crea pero con un pequeño delay que impide que el usuario pase al index automaticamente
+4e32a1a0f4b8a7b0576d7a5df725040f999007aa 737740b40eb9afad4aab52e5156bca9e9a275420 josewweee <josemariamira@hotmail.com> 1501171560 -0500	checkout: moving from master to Jose
+737740b40eb9afad4aab52e5156bca9e9a275420 07a9cc9fe6098db35821cc28f26d54dda897e983 josewweee <josemariamira@hotmail.com> 1501202575 -0500	commit: Creacion de usuarios al 95%, ya nonhay bugs ni problemas y se crean los usuarios en el AUTH y el DB-REALTIME, falta agregar lo de googleMaps y la fecha de nacimiento a el DB-REALTIME
+07a9cc9fe6098db35821cc28f26d54dda897e983 4d67f1d53053aab3d0ee44e899f9a91aafd67e2f josewweee <josemariamira@hotmail.com> 1501214609 -0500	commit: Plataforma para que ramon añada productos a la base de datos
+4d67f1d53053aab3d0ee44e899f9a91aafd67e2f 87bc1a7fcc8596a37879b41deb725ece7500017f josewweee <josemariamira@hotmail.com> 1501215254 -0500	commit: ya podemos cerrar seccion
+87bc1a7fcc8596a37879b41deb725ece7500017f 8e24cf403dfa96a01c93749cf4ebd55588d3b5dc josewweee <josemariamira@hotmail.com> 1501217090 -0500	commit: ahora podemos iniciar y salir de la seccion en cualquier vista HTML, ademas nuestra informacion (NOMBRE) se actualizara en cualquier vista
+8e24cf403dfa96a01c93749cf4ebd55588d3b5dc bfcafc7f83925e82ce9e1f317b92034a4c243bce josewweee <josemariamira@hotmail.com> 1501219785 -0500	pull origin Jose: Fast-forward
+bfcafc7f83925e82ce9e1f317b92034a4c243bce 0e5ab55546396fc91c7a6b587e0945c079ebd020 josewweee <josemariamira@hotmail.com> 1501219847 -0500	commit: ahora podemos agregar productos a el carrito de compras (DB-REALTIME) en la vista HTML de "product_detail.html" HTML, solo si estamos loggeados
+0e5ab55546396fc91c7a6b587e0945c079ebd020 a99d61d6d63bd9ebe251f965eb92cea020cb4e76 josewweee <josemariamira@hotmail.com> 1501350247 -0500	commit: arreglos menores en la actualizacion, ahora se muestra una foto del producto en el carrito de compras
+a99d61d6d63bd9ebe251f965eb92cea020cb4e76 4e32a1a0f4b8a7b0576d7a5df725040f999007aa josewweee <josemariamira@hotmail.com> 1501350278 -0500	checkout: moving from Jose to master
+4e32a1a0f4b8a7b0576d7a5df725040f999007aa a99d61d6d63bd9ebe251f965eb92cea020cb4e76 josewweee <josemariamira@hotmail.com> 1501350281 -0500	checkout: moving from master to Jose
+a99d61d6d63bd9ebe251f965eb92cea020cb4e76 f4e97266fc7407a056895260e978e76e7be9ae69 josewweee <josemariamira@hotmail.com> 1501353812 -0500	commit: ahora se podra ver el numero de productos que tenemos en el carrito de compras en la UI
+f4e97266fc7407a056895260e978e76e7be9ae69 d8c65b405763b740498e0d68daf505391172c310 josewweee <josemariamira@hotmail.com> 1501355315 -0500	commit: pequeño arreglo, ahora el carrito de compras nos dira exactamente cuantos productos tenemos, (CONEXION CON DB MEJORADA)
+d8c65b405763b740498e0d68daf505391172c310 ff5ed4f885eeced64fed49e4ff6cb1fbb82106f1 josewweee <josemariamira@hotmail.com> 1501430883 -0500	commit: cambios de imagenes
+ff5ed4f885eeced64fed49e4ff6cb1fbb82106f1 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501592119 -0500	commit: borrando el loco del la barra de busqueda
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501592481 -0500	checkout: moving from Jose to Jose
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501592517 -0500	checkout: moving from Jose to Jose
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501592582 -0500	reset: moving to 950f95c63db9c94d080f401c6cc8d9eab0ab72cf
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501593119 -0500	checkout: moving from Jose to Jose
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 950f95c63db9c94d080f401c6cc8d9eab0ab72cf josewweee <josemariamira@hotmail.com> 1501650461 -0500	reset: moving to 950f95c63db9c94d080f401c6cc8d9eab0ab72cf
+950f95c63db9c94d080f401c6cc8d9eab0ab72cf 9a3aedb5b2f2e5ac1318e90f3f5fb082efdb2223 josewweee <josemariamira@hotmail.com> 1501731024 -0500	pull origin Jose: Fast-forward
+9a3aedb5b2f2e5ac1318e90f3f5fb082efdb2223 4e32a1a0f4b8a7b0576d7a5df725040f999007aa josewweee <josemariamira@hotmail.com> 1501731052 -0500	checkout: moving from Jose to master
+4e32a1a0f4b8a7b0576d7a5df725040f999007aa a813e360917b24a7e0ccc2973bdbe0c091993b34 josewweee <josemariamira@hotmail.com> 1501731057 -0500	pull origin master: Fast-forward
+a813e360917b24a7e0ccc2973bdbe0c091993b34 9a3aedb5b2f2e5ac1318e90f3f5fb082efdb2223 josewweee <josemariamira@hotmail.com> 1501731060 -0500	checkout: moving from master to Jose
+9a3aedb5b2f2e5ac1318e90f3f5fb082efdb2223 5ba437d43be74d0f969097233e2f237080b82258 josewweee <josemariamira@hotmail.com> 1501739134 -0500	commit: Los productos seleccionados en el index ahora nos llevaran directamente a su propia pagina (AUN FALTA QUE CRISTIAN PONGA LA FUNCION QUE LLAMA CADA PRODUCTO).
+5ba437d43be74d0f969097233e2f237080b82258 56603277874bc518785115250a80211ff75da29c josewweee <josemariamira@hotmail.com> 1501822178 -0500	commit: nada
+56603277874bc518785115250a80211ff75da29c 06a9e31d47e0e67ad99982919070d7514e0e2786 josewweee <josemariamira@hotmail.com> 1501822183 -0500	pull origin Jose: Merge made by the 'recursive' strategy.
+06a9e31d47e0e67ad99982919070d7514e0e2786 a813e360917b24a7e0ccc2973bdbe0c091993b34 josewweee <josemariamira@hotmail.com> 1501822379 -0500	checkout: moving from Jose to master
+a813e360917b24a7e0ccc2973bdbe0c091993b34 06a9e31d47e0e67ad99982919070d7514e0e2786 josewweee <josemariamira@hotmail.com> 1501822393 -0500	checkout: moving from master to Jose
+06a9e31d47e0e67ad99982919070d7514e0e2786 1deecadcb4444b3375287cf69b574c11d9054edc josewweee <josemariamira@hotmail.com> 1501822610 -0500	commit: ordenando carpetas
+1deecadcb4444b3375287cf69b574c11d9054edc 25cea5701a6358a5b617f4a6c5955416ff398c82 josewweee <josemariamira@hotmail.com> 1501826194 -0500	commit: -> Ahora mostramos todos los productos en la seccion "ULTIMOS PRODUCTOS"
+25cea5701a6358a5b617f4a6c5955416ff398c82 a813e360917b24a7e0ccc2973bdbe0c091993b34 josewweee <josemariamira@hotmail.com> 1501826213 -0500	checkout: moving from Jose to master
+a813e360917b24a7e0ccc2973bdbe0c091993b34 a813e360917b24a7e0ccc2973bdbe0c091993b34 josewweee <josemariamira@hotmail.com> 1501826259 -0500	reset: moving to HEAD
+a813e360917b24a7e0ccc2973bdbe0c091993b34 25cea5701a6358a5b617f4a6c5955416ff398c82 josewweee <josemariamira@hotmail.com> 1501826259 -0500	checkout: moving from master to Jose
+25cea5701a6358a5b617f4a6c5955416ff398c82 45e076e7cfc9088a29021117fa93333cc3c62661 josewweee <josemariamira@hotmail.com> 1501827496 -0500	commit: Arreglando precios en index y en "ALL", en el buscador
+45e076e7cfc9088a29021117fa93333cc3c62661 d7abe815d15769d99b6ad39eb17644a51437c34c josewweee <josemariamira@hotmail.com> 1501828416 -0500	commit: Limitando la cantidad de productos que se muestran en index y en "ALL", a 8 y 12 en su respectivo orden
+d7abe815d15769d99b6ad39eb17644a51437c34c 453c1105b91e4431ce1e10f79e370c6fe9dd37f3 josewweee <josemariamira@hotmail.com> 1501860048 -0500	commit: -> Mejoramos la pantalla de administradores para poder agregar atributos nuevos a todos los productos
+453c1105b91e4431ce1e10f79e370c6fe9dd37f3 5f8fc2bf3a34f50d15f5c9201cee699ab1ced239 josewweee <josemariamira@hotmail.com> 1501863221 -0500	commit: ->Arreglos en "ALL"
+5f8fc2bf3a34f50d15f5c9201cee699ab1ced239 c29ed565320240b98fc81a3e4fd3c8b668927e62 josewweee <josemariamira@hotmail.com> 1502039774 -0500	commit: -> Agregando paginacion a la ventana de "ALL", en "productos.html"
+c29ed565320240b98fc81a3e4fd3c8b668927e62 37032606c14e54b8906f7eb5ef84a1998e702fbd josewweee <josemariamira@hotmail.com> 1502039992 -0500	commit: Cambiando textos a español
+37032606c14e54b8906f7eb5ef84a1998e702fbd fb411575aade78e7d585106ec9cb7a2a244ea9c7 josewweee <josemariamira@hotmail.com> 1502056059 -0500	commit: -> Implementando el buscador V1
+fb411575aade78e7d585106ec9cb7a2a244ea9c7 d20dad7b2ab0ddb5513af59495c5eb0dd9a39192 josewweee <josemariamira@hotmail.com> 1502057195 -0500	commit: -> los productos nuevos tendran el atributo "TIPO" (Que tipo de producto son)
+d20dad7b2ab0ddb5513af59495c5eb0dd9a39192 3d43a58b9d4b599b3263db5b50a99cfd2393056d josewweee <josemariamira@hotmail.com> 1502058750 -0500	commit: -> Agregando metodo de pago en el "CARRITO DE COMPRAS" (PRODUCT_SUMMARY.HTML)
+3d43a58b9d4b599b3263db5b50a99cfd2393056d e7cd20dccf5f962f9eabf69ebe80259d7017c925 josewweee <josemariamira@hotmail.com> 1502843973 -0500	commit: Mejorando la pagina de crearProductos para poder agregar fotos
+e7cd20dccf5f962f9eabf69ebe80259d7017c925 b55bd480cc69ae9c07386175aa5e672669bb3d5c josewweee <josemariamira@hotmail.com> 1502844136 -0500	commit: Arreglando bugs del commit anterior
+b55bd480cc69ae9c07386175aa5e672669bb3d5c efc5da69cbb21635e5e7f66d2aa39d08a671a868 josewweee <josemariamira@hotmail.com> 1502844411 -0500	commit: Agregando preview de imagen a la hora de agregar productos
+efc5da69cbb21635e5e7f66d2aa39d08a671a868 a813e360917b24a7e0ccc2973bdbe0c091993b34 josewweee <josemariamira@hotmail.com> 1502846516 -0500	checkout: moving from Jose to master
+a813e360917b24a7e0ccc2973bdbe0c091993b34 910e1047688cd7da18e685e2722144e1f3a78260 josewweee <josemariamira@hotmail.com> 1502846540 -0500	pull origin master: Fast-forward
+910e1047688cd7da18e685e2722144e1f3a78260 efc5da69cbb21635e5e7f66d2aa39d08a671a868 josewweee <josemariamira@hotmail.com> 1502846610 -0500	checkout: moving from master to Jose
+efc5da69cbb21635e5e7f66d2aa39d08a671a868 910e1047688cd7da18e685e2722144e1f3a78260 josewweee <josemariamira@hotmail.com> 1502846674 -0500	checkout: moving from Jose to master
+910e1047688cd7da18e685e2722144e1f3a78260 efc5da69cbb21635e5e7f66d2aa39d08a671a868 josewweee <josemariamira@hotmail.com> 1502846685 -0500	checkout: moving from master to Jose
+efc5da69cbb21635e5e7f66d2aa39d08a671a868 5dafee738b22d35c7c67c92472c8d4ee27c8c842 josewweee <josemariamira@hotmail.com> 1502846712 -0500	merge master: Merge made by the 'recursive' strategy.
+5dafee738b22d35c7c67c92472c8d4ee27c8c842 a353fc5d4be0d984d05fa0ed1a55621693965fab josewweee <josemariamira@hotmail.com> 1502853614 -0500	commit: Agregando buscador funcional a crearProductos, (Pagina de administradores)
+a353fc5d4be0d984d05fa0ed1a55621693965fab 3f990787805015a1538f4e8620d48c2ce423ecde josewweee <josemariamira@hotmail.com> 1502854735 -0500	commit: Agregando el actualizar fotos, por ID de cada producto en la pagina del administrador
+3f990787805015a1538f4e8620d48c2ce423ecde 910e1047688cd7da18e685e2722144e1f3a78260 josewweee <josemariamira@hotmail.com> 1502854874 -0500	checkout: moving from Jose to master
+910e1047688cd7da18e685e2722144e1f3a78260 3f990787805015a1538f4e8620d48c2ce423ecde josewweee <josemariamira@hotmail.com> 1502854886 -0500	checkout: moving from master to Jose
+3f990787805015a1538f4e8620d48c2ce423ecde 910e1047688cd7da18e685e2722144e1f3a78260 josewweee <josemariamira@hotmail.com> 1502854900 -0500	checkout: moving from Jose to master
+910e1047688cd7da18e685e2722144e1f3a78260 3f990787805015a1538f4e8620d48c2ce423ecde josewweee <josemariamira@hotmail.com> 1502854933 -0500	merge Jose: Fast-forward
+3f990787805015a1538f4e8620d48c2ce423ecde 3f990787805015a1538f4e8620d48c2ce423ecde josewweee <josemariamira@hotmail.com> 1502854951 -0500	checkout: moving from master to Jose
+3f990787805015a1538f4e8620d48c2ce423ecde 1fd3cc70f360017dab46aeeac5659dc1e4a90303 josewweee <josemariamira@hotmail.com> 1502855943 -0500	commit: Arreglo en la paginacion
+1fd3cc70f360017dab46aeeac5659dc1e4a90303 3f990787805015a1538f4e8620d48c2ce423ecde josewweee <josemariamira@hotmail.com> 1502855949 -0500	checkout: moving from Jose to master
+3f990787805015a1538f4e8620d48c2ce423ecde 1fd3cc70f360017dab46aeeac5659dc1e4a90303 josewweee <josemariamira@hotmail.com> 1502855955 -0500	merge Jose: Fast-forward
+1fd3cc70f360017dab46aeeac5659dc1e4a90303 1fd3cc70f360017dab46aeeac5659dc1e4a90303 josewweee <josemariamira@hotmail.com> 1502855963 -0500	checkout: moving from master to Jose
+1fd3cc70f360017dab46aeeac5659dc1e4a90303 dd250e608cab8de52656048885f0fefcf3413333 josewweee <josemariamira@hotmail.com> 1502856342 -0500	commit: ->Agregando "REGISTRARSE", feo pero funcional
+dd250e608cab8de52656048885f0fefcf3413333 91c764de58e5cdeeac6fa1c7a3f37db82dafbd44 josewweee <josemariamira@hotmail.com> 1502856452 -0500	commit: ->Arreglando bug commit anterior
+91c764de58e5cdeeac6fa1c7a3f37db82dafbd44 9e6f719c4f413182ee1fd08f0edbd3d1183012cd josewweee <josemariamira@hotmail.com> 1503030398 -0500	commit: ->Ahora se pueden borrar los productos del carrito de compras
+9e6f719c4f413182ee1fd08f0edbd3d1183012cd 1fd3cc70f360017dab46aeeac5659dc1e4a90303 josewweee <josemariamira@hotmail.com> 1503030406 -0500	checkout: moving from Jose to master
+1fd3cc70f360017dab46aeeac5659dc1e4a90303 9e6f719c4f413182ee1fd08f0edbd3d1183012cd josewweee <josemariamira@hotmail.com> 1503030415 -0500	merge Jose: Fast-forward
+9e6f719c4f413182ee1fd08f0edbd3d1183012cd 9e6f719c4f413182ee1fd08f0edbd3d1183012cd josewweee <josemariamira@hotmail.com> 1503030423 -0500	checkout: moving from master to Jose
+9e6f719c4f413182ee1fd08f0edbd3d1183012cd 32ace05228fd865b3000d618b1bc738bd2f68e37 josewweee <josemariamira@hotmail.com> 1503032719 -0500	commit: ->Productos aleatorios en el index
+32ace05228fd865b3000d618b1bc738bd2f68e37 9e6f719c4f413182ee1fd08f0edbd3d1183012cd josewweee <josemariamira@hotmail.com> 1504711833 -0500	checkout: moving from Jose to master
+9e6f719c4f413182ee1fd08f0edbd3d1183012cd 37c169372a42614e45e10db2ac318c9cf3f57bc0 josewweee <josemariamira@hotmail.com> 1504711847 -0500	pull origin master: Fast-forward
+37c169372a42614e45e10db2ac318c9cf3f57bc0 32ace05228fd865b3000d618b1bc738bd2f68e37 josewweee <josemariamira@hotmail.com> 1504733570 -0500	checkout: moving from master to Jose
+32ace05228fd865b3000d618b1bc738bd2f68e37 37c169372a42614e45e10db2ac318c9cf3f57bc0 josewweee <josemariamira@hotmail.com> 1504733645 -0500	checkout: moving from Jose to master
+37c169372a42614e45e10db2ac318c9cf3f57bc0 32ace05228fd865b3000d618b1bc738bd2f68e37 josewweee <josemariamira@hotmail.com> 1504733905 -0500	checkout: moving from master to Jose
+32ace05228fd865b3000d618b1bc738bd2f68e37 1af2d9c36c93c3936b586f202024a22a71501803 josewweee <josemariamira@hotmail.com> 1504734513 -0500	commit (merge): Arreglando Problemas de merge themes/js/personal/productos_index.js
+1af2d9c36c93c3936b586f202024a22a71501803 37c169372a42614e45e10db2ac318c9cf3f57bc0 josewweee <josemariamira@hotmail.com> 1504734852 -0500	checkout: moving from Jose to master
+37c169372a42614e45e10db2ac318c9cf3f57bc0 1af2d9c36c93c3936b586f202024a22a71501803 josewweee <josemariamira@hotmail.com> 1504734854 -0500	checkout: moving from master to Jose
+1af2d9c36c93c3936b586f202024a22a71501803 1af2d9c36c93c3936b586f202024a22a71501803 josewweee <josemariamira@hotmail.com> 1504735213 -0500	checkout: moving from Jose to Jose
+1af2d9c36c93c3936b586f202024a22a71501803 1af2d9c36c93c3936b586f202024a22a71501803 josewweee <josemariamira@hotmail.com> 1504735239 -0500	reset: moving to HEAD
+1af2d9c36c93c3936b586f202024a22a71501803 1af2d9c36c93c3936b586f202024a22a71501803 josewweee <josemariamira@hotmail.com> 1504735239 -0500	checkout: moving from Jose to Jose
+1af2d9c36c93c3936b586f202024a22a71501803 1640e82f26669b6c5f387c8756b136ef15562de0 josewweee <josemariamira@hotmail.com> 1504735339 -0500	commit: nada
+1640e82f26669b6c5f387c8756b136ef15562de0 d29391ace18a7f55a99ecc60e7a7481c99e1ffa0 josewweee <josemariamira@hotmail.com> 1504735361 -0500	commit: no message
+d29391ace18a7f55a99ecc60e7a7481c99e1ffa0 80d1147dfec72c61a1a52f1e1d0b8f12f32af173 josewweee <josemariamira@hotmail.com> 1504736112 -0500	commit (merge): Merge branch 'Jose' of https://github.com/barberoexpress/barberoExpress into Jose
+80d1147dfec72c61a1a52f1e1d0b8f12f32af173 65d3abec900313f19324f8827980c80ff363237a josewweee <josemariamira@hotmail.com> 1504736377 -0500	commit: eliminando la basura del commit anterior y salvando el dia
+65d3abec900313f19324f8827980c80ff363237a 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1504736786 -0500	commit: mas arreglos del merge
+38105feb04953d1dfe0ce4454b26b7716607934b 37c169372a42614e45e10db2ac318c9cf3f57bc0 josewweee <josemariamira@hotmail.com> 1504737065 -0500	checkout: moving from Jose to master
+37c169372a42614e45e10db2ac318c9cf3f57bc0 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1504737078 -0500	merge Jose: Fast-forward
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1504737185 -0500	checkout: moving from master to Jose
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505165491 -0500	checkout: moving from Jose to master
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505165496 -0500	checkout: moving from master to Jose
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505166054 -0500	checkout: moving from Jose to master
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505166075 -0500	checkout: moving from master to Jose
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505166084 -0500	checkout: moving from Jose to master
+38105feb04953d1dfe0ce4454b26b7716607934b 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505166101 -0500	checkout: moving from master to Jose
+38105feb04953d1dfe0ce4454b26b7716607934b 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505167646 -0500	commit: Moviendo el codigo de productos repetidos de carrito.js a detallesProducto.js
+1fcb482aa2463dc6014c6f963021c427c85e695c 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505167692 -0500	checkout: moving from Jose to master
+38105feb04953d1dfe0ce4454b26b7716607934b 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505167706 -0500	checkout: moving from master to Jose
+1fcb482aa2463dc6014c6f963021c427c85e695c 38105feb04953d1dfe0ce4454b26b7716607934b josewweee <josemariamira@hotmail.com> 1505167715 -0500	checkout: moving from Jose to master
+38105feb04953d1dfe0ce4454b26b7716607934b 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505167731 -0500	merge Jose: Fast-forward
+1fcb482aa2463dc6014c6f963021c427c85e695c 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505167765 -0500	checkout: moving from master to Jose
+1fcb482aa2463dc6014c6f963021c427c85e695c 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505169467 -0500	checkout: moving from Jose to master
+1fcb482aa2463dc6014c6f963021c427c85e695c 1aeb590fce6184e46bfa5252c4a69c8374e46d52 josewweee <josemariamira@hotmail.com> 1505169558 -0500	pull origin master: Fast-forward
+1aeb590fce6184e46bfa5252c4a69c8374e46d52 1fcb482aa2463dc6014c6f963021c427c85e695c josewweee <josemariamira@hotmail.com> 1505169562 -0500	checkout: moving from master to Jose
+1fcb482aa2463dc6014c6f963021c427c85e695c 9c953dcac8d4a3b4ef57813c9d2e8e2c2504961f josewweee <josemariamira@hotmail.com> 1505169583 -0500	merge c1b99196ad7e3267351b0ff8c3854c476669a7bf: Merge made by the 'recursive' strategy.
+9c953dcac8d4a3b4ef57813c9d2e8e2c2504961f 593c6af909ef1f04b21f5b83f4e7bf4c482244ac josewweee <josemariamira@hotmail.com> 1505174759 -0500	commit: Se Optimizo el tiempo de carga de el index, ahora carga mucho mas rapido
+593c6af909ef1f04b21f5b83f4e7bf4c482244ac 77fdd7850e59f16e306dcbf7aa9970b7898b5474 josewweee <josemariamira@hotmail.com> 1505176998 -0500	commit: Se optimizo el carrito de compras y el buscador (AHORA SON MAS RAPIDOS). 500 ms y 700ms
+77fdd7850e59f16e306dcbf7aa9970b7898b5474 1aeb590fce6184e46bfa5252c4a69c8374e46d52 josewweee <josemariamira@hotmail.com> 1505177178 -0500	checkout: moving from Jose to master
+1aeb590fce6184e46bfa5252c4a69c8374e46d52 39fc3265202653ad3b49c1f5fb8b385054ea7a9e josewweee <josemariamira@hotmail.com> 1505177187 -0500	merge Jose: Merge made by the 'recursive' strategy.
+39fc3265202653ad3b49c1f5fb8b385054ea7a9e 77fdd7850e59f16e306dcbf7aa9970b7898b5474 josewweee <josemariamira@hotmail.com> 1505177209 -0500	checkout: moving from master to Jose
+77fdd7850e59f16e306dcbf7aa9970b7898b5474 39fc3265202653ad3b49c1f5fb8b385054ea7a9e josewweee <josemariamira@hotmail.com> 1505177210 -0500	checkout: moving from Jose to master
+39fc3265202653ad3b49c1f5fb8b385054ea7a9e 77fdd7850e59f16e306dcbf7aa9970b7898b5474 josewweee <josemariamira@hotmail.com> 1505177211 -0500	checkout: moving from master to Jose
+77fdd7850e59f16e306dcbf7aa9970b7898b5474 9771f7a4e7e96ea457b537603a6fb067aedd12ae josewweee <josemariamira@hotmail.com> 1505191444 -0500	commit: Arreglado el Bug del carrito de compras, donde no podiamos agregar mas productos y sincronizarlo con la DB
+9771f7a4e7e96ea457b537603a6fb067aedd12ae 39fc3265202653ad3b49c1f5fb8b385054ea7a9e josewweee <josemariamira@hotmail.com> 1505191469 -0500	checkout: moving from Jose to master
+39fc3265202653ad3b49c1f5fb8b385054ea7a9e 9771f7a4e7e96ea457b537603a6fb067aedd12ae josewweee <josemariamira@hotmail.com> 1505191472 -0500	checkout: moving from master to Jose
+9771f7a4e7e96ea457b537603a6fb067aedd12ae 39fc3265202653ad3b49c1f5fb8b385054ea7a9e josewweee <josemariamira@hotmail.com> 1505191473 -0500	checkout: moving from Jose to master
+39fc3265202653ad3b49c1f5fb8b385054ea7a9e d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 josewweee <josemariamira@hotmail.com> 1505191482 -0500	merge Jose: Merge made by the 'recursive' strategy.
+d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 9771f7a4e7e96ea457b537603a6fb067aedd12ae josewweee <josemariamira@hotmail.com> 1505191512 -0500	checkout: moving from master to Jose
+9771f7a4e7e96ea457b537603a6fb067aedd12ae d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 josewweee <josemariamira@hotmail.com> 1505191513 -0500	checkout: moving from Jose to master
+d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 9771f7a4e7e96ea457b537603a6fb067aedd12ae josewweee <josemariamira@hotmail.com> 1505191515 -0500	checkout: moving from master to Jose
+9771f7a4e7e96ea457b537603a6fb067aedd12ae a3488261f5be468ca4a2ea0f85851c3dbdac0224 josewweee <josemariamira@hotmail.com> 1505194245 -0500	commit: Eliminando el icono de buscar a la hora de escribir en el texto de search
+a3488261f5be468ca4a2ea0f85851c3dbdac0224 d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 josewweee <josemariamira@hotmail.com> 1505194262 -0500	checkout: moving from Jose to master
+d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 a3488261f5be468ca4a2ea0f85851c3dbdac0224 josewweee <josemariamira@hotmail.com> 1505194264 -0500	checkout: moving from master to Jose
+a3488261f5be468ca4a2ea0f85851c3dbdac0224 d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 josewweee <josemariamira@hotmail.com> 1505194265 -0500	checkout: moving from Jose to master
+d8ca14779ac99e55200b4cbd04bfdf0ced3468e0 4b1a884c59b849c1397eda631275681272b9a353 josewweee <josemariamira@hotmail.com> 1505194270 -0500	merge Jose: Merge made by the 'recursive' strategy.
+4b1a884c59b849c1397eda631275681272b9a353 a3488261f5be468ca4a2ea0f85851c3dbdac0224 josewweee <josemariamira@hotmail.com> 1505194288 -0500	checkout: moving from master to Jose
+a3488261f5be468ca4a2ea0f85851c3dbdac0224 4b1a884c59b849c1397eda631275681272b9a353 josewweee <josemariamira@hotmail.com> 1505194288 -0500	checkout: moving from Jose to master
+4b1a884c59b849c1397eda631275681272b9a353 a3488261f5be468ca4a2ea0f85851c3dbdac0224 josewweee <josemariamira@hotmail.com> 1505194291 -0500	checkout: moving from master to Jose
+a3488261f5be468ca4a2ea0f85851c3dbdac0224 cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505334680 -0500	commit: Arreglando bug donde no cargaba la pagina en google chrome, ahora en chrome esperamos 2 segundos y en los demas navegadores 0,7 segundos
+cf91350d3c6b59189be3e42b602a27acb364bb57 4b1a884c59b849c1397eda631275681272b9a353 josewweee <josemariamira@hotmail.com> 1505335165 -0500	checkout: moving from Jose to master
+4b1a884c59b849c1397eda631275681272b9a353 cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505335167 -0500	checkout: moving from master to Jose
+cf91350d3c6b59189be3e42b602a27acb364bb57 4b1a884c59b849c1397eda631275681272b9a353 josewweee <josemariamira@hotmail.com> 1505346180 -0500	checkout: moving from Jose to master
+4b1a884c59b849c1397eda631275681272b9a353 6ce8e7f279c1c4d6802c2035c2ec779c2f47cd97 josewweee <josemariamira@hotmail.com> 1505346209 -0500	pull origin master: Fast-forward
+6ce8e7f279c1c4d6802c2035c2ec779c2f47cd97 c943874f0bee112b8b3595af95dcd0f92e80def9 josewweee <josemariamira@hotmail.com> 1505346233 -0500	merge Jose: Merge made by the 'recursive' strategy.
+c943874f0bee112b8b3595af95dcd0f92e80def9 cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505346255 -0500	checkout: moving from master to Jose
+cf91350d3c6b59189be3e42b602a27acb364bb57 c943874f0bee112b8b3595af95dcd0f92e80def9 josewweee <josemariamira@hotmail.com> 1505346258 -0500	checkout: moving from Jose to master
+c943874f0bee112b8b3595af95dcd0f92e80def9 cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505851392 -0500	checkout: moving from master to Jose
+cf91350d3c6b59189be3e42b602a27acb364bb57 c943874f0bee112b8b3595af95dcd0f92e80def9 josewweee <josemariamira@hotmail.com> 1505851396 -0500	checkout: moving from Jose to master
+c943874f0bee112b8b3595af95dcd0f92e80def9 55579a533fd6d68b68df1a17b71d9065fc703062 josewweee <josemariamira@hotmail.com> 1505852558 -0500	pull origin master: Fast-forward
+55579a533fd6d68b68df1a17b71d9065fc703062 436edd2254ae670127c9cdd35ac93c231d66b1ea josewweee <josemariamira@hotmail.com> 1505860926 -0500	commit: 1. ahora los divs de "ya tienes el producto" y "botones de cantidad y compra" se intercambian despues de 1 segundo de cargar la pagina en "Product_details".
+436edd2254ae670127c9cdd35ac93c231d66b1ea cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505860967 -0500	checkout: moving from master to Jose
+cf91350d3c6b59189be3e42b602a27acb364bb57 436edd2254ae670127c9cdd35ac93c231d66b1ea josewweee <josemariamira@hotmail.com> 1505860969 -0500	checkout: moving from Jose to master
+436edd2254ae670127c9cdd35ac93c231d66b1ea 0c4e48aed2cfb3f22a60db229115feb7e85c6741 josewweee <josemariamira@hotmail.com> 1505864869 -0500	commit: 1.Se agrego la funcion de correr el icono del buscador en todos los views (HTML).
+0c4e48aed2cfb3f22a60db229115feb7e85c6741 cf91350d3c6b59189be3e42b602a27acb364bb57 josewweee <josemariamira@hotmail.com> 1505865170 -0500	checkout: moving from master to Jose
+cf91350d3c6b59189be3e42b602a27acb364bb57 0c4e48aed2cfb3f22a60db229115feb7e85c6741 josewweee <josemariamira@hotmail.com> 1505865172 -0500	checkout: moving from Jose to master
+0c4e48aed2cfb3f22a60db229115feb7e85c6741 9ed9a7e495270d61b1953f9b1575dcc48a8fe185 josewweee <josemariamira@hotmail.com> 1513017278 -0500	commit: Nuevas vistas y hay muchos bugs nuevos
+9ed9a7e495270d61b1953f9b1575dcc48a8fe185 a7f4460d9694abcc48d545e47f9e527f195bac5b josewweee <josemariamira@hotmail.com> 1513017534 -0500	commit (merge): descargando y borrando proyecto viejo, tengo un backup
+a7f4460d9694abcc48d545e47f9e527f195bac5b 5b15b1570b6febee3c0a698f1d463315f9eaaa9b josewweee <josemariamira@hotmail.com> 1513018008 -0500	commit: nuevas vistas, y bugs menores
+5b15b1570b6febee3c0a698f1d463315f9eaaa9b 9cfa3be5051570633d211f675e8a87f2bfc6fda7 josewweee <josemariamira@hotmail.com> 1513026950 -0500	commit: Arreglando el logo y cortando algo de codigo basura
