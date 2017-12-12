@@ -7,6 +7,8 @@ var keyProducto = [" ", " "];
 var descripcion = [" ", " "];
 var recomendado = [" ", " "];
 
+
+
 //CONTROL DE CALLBACK DE FIREBASE
 var end = false;
 var time = 0;
@@ -20,9 +22,13 @@ var time = 0;
 ** recomendado: boolean
 ** keyProducto: string
 */
-var refProductos = firebase.database().ref("PRODUCTOS");
 
+//BASE DE datos
+var firebaseDB = firebase.database().ref();
+var refProductos = firebaseDB.child("PRODUCTOS");
+var refTelefonos = firebaseDB.child("TELEFONOS");
 
+// ORDENAR PRODUCTOS
 refProductos.orderByChild("id").on("child_added", function(snapshot) {
   foto_Url.push(snapshot.val().foto);
   nombre.push(snapshot.val().nombre);
@@ -31,6 +37,8 @@ refProductos.orderByChild("id").on("child_added", function(snapshot) {
   recomendado.push(snapshot.val().recomendado);
   keyProducto.push(snapshot.key);
 });
+
+//
 
 // CICLO QUE ESPERA PARA CARGAR
 if (navigator.userAgent.indexOf("Chrome") != -1) {
@@ -70,6 +78,15 @@ if (navigator.userAgent.indexOf("Chrome") != -1) {
 
 }
 
+
+function ingresarTelefono(){
+  var telefonoIngresado = document.getElementById("telefonoUsuario").value;
+  refTelefonos.push({
+    celular: telefonoIngresado
+  });
+  console.log("Teléfono agregado a la BD");
+  alert("Teléfono agregado");
+}
 
 
 
