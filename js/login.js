@@ -170,7 +170,7 @@ function Buscar(){
   var descripcion = [" ", " "];
   var keyProducto = [" ", " "];
 
-  if(queryText.length > 2){
+  if(queryText.length >= 2){
     firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
         foto_Url.push(snapshot.val().foto);
         nombre.push(snapshot.val().nombre);

@@ -141,7 +141,7 @@ function imagenesTipos(){
   var noProductos = 5; // 5 - 2 = 3
   var completo = false;
   while(j < noProductos){
-    var aleatorio = Math.floor((Math.random() * 18) + 2);
+    var aleatorio = Math.floor((Math.random() * 23) + 2);
     imagenesTipo +='<li class="work-item mix general">'
                     + '<a href="portfolio-single-1.html" class="work-ext-link">'
                       + '<div class="work-img">'
@@ -189,8 +189,10 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">BARBERAS/CUCHILLAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (Lightbox) -->'
+
                         + '<li class="work-item mix general">'
                         + '<a href="images/portafolio/maquina.jpg" class="work-lightbox-link mfp-image">'
                         + '<div class="work-img">'
@@ -208,8 +210,10 @@ function imagenesPortafolioGeneral(){
                         + '<!-- <p class="text-center">TÓNICO <br> $2.500</p> -->'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
                         + '<a href="portfolio-single-1.html" class="work-ext-link">'
                         + '<div class="work-img">'
@@ -226,8 +230,10 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">TIJERAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
                         + '<a href="portfolio-single-1.html" class="work-ext-link">'
                         + '<div class="work-img">'
@@ -244,8 +250,10 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">SACUDIDORES/OTROS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
                         + '<a href="portfolio-single-1.html" class="work-ext-link">'
                         + '<div class="work-img">'
@@ -262,8 +270,10 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">CERAS/GEL</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
                         + '<a href="portfolio-single-1.html" class="work-ext-link">'
                         + '<div class="work-img">'
@@ -280,6 +290,7 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">TÓNICOS/ESPUMAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         ;
 
