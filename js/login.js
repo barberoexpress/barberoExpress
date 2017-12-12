@@ -126,7 +126,7 @@ function AgregarAlCarrito(){
   }
 }
 
-// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
+// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
   /* es preferible abrir una pestaña nueva con el producto para que el ususario

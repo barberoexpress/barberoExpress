@@ -101,7 +101,7 @@ function BuscarINDEX(prod1, prod2){
 	        descripcion.push(snapshot.val().descripcion);
 	        keyProducto.push(snapshot.key);
 	    });
-	    
+
 	}else{
 	    localStorage.setItem("FOTO_URL_BS", JSON.stringify(foto_Url));
 	    localStorage.setItem("NOMBRE_BS", JSON.stringify(nombre));
@@ -122,3 +122,14 @@ function BuscarINDEX(prod1, prod2){
     }, 2000);
 }
 
+
+// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
+function Ir_productoINDEX(prodKey){
+  localStorage.setItem("PROD_KEY", prodKey);
+  /* es preferible abrir una pestaña nueva con el producto para que el ususario
+   no pierda su busqueda y pueda seguir viendo productos
+  */
+  //window.location.href="product_details.html";
+  window.open("vistas/productoSimple.html");
+
+}

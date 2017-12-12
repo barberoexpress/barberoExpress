@@ -148,6 +148,7 @@ function imagenesTipos(prod1, prod2){
   var noProductos = 5; // 5 - 2 = 3
   var posiciones = [" ", " "];
   var completo = false;
+  var verMas = "";
 
   for(i; i < tipos.length && lleno == false; i++){
     if(prod1.toString() == tipos[i] || prod2.toString() == tipos[i]){
@@ -157,12 +158,12 @@ function imagenesTipos(prod1, prod2){
     if(cont >= 3){
       lleno = true;
     }
-  }
+  } 
 
   while(j < noProductos){
     var ubicacion = posiciones[j];
     imagenesTipo +='<li class="work-item mix general">'
-                    + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                    + '<a class="work-ext-link" onclick="Ir_productoINDEX('+ "'" + keyProducto[ubicacion] + "'"+ ')">'
                       + '<div class="work-img">'
                         + '<img class="work-img" src="'+ foto_Url[ubicacion] + '" alt="Work" />'
                       + '</div>'
@@ -179,7 +180,11 @@ function imagenesTipos(prod1, prod2){
                   + '</li>';
     j++;
   }
+  verMas += '<div class="align-center" style="padding-bottom: 10px;">'
+               +    '<button class="submit_btn btn btn-mod btn-medium btn-round" onclick="BuscarINDEX('+ "'" + prod1 + "'" + ',' +  "'" + prod2 + "'" + ')" id="submit_btn">Ver mas</button>'
+               +  '</div>';
   document.getElementById("work-grid").innerHTML = imagenesTipo;
+  document.getElementById("VerMas").innerHTML = verMas;
 }
 
 
