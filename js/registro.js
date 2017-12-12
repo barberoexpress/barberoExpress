@@ -1,4 +1,4 @@
-var config = {
+/*var config = {
     apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
     authDomain: "barberoexpress-8c13c.firebaseapp.com",
     databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
@@ -6,7 +6,7 @@ var config = {
     storageBucket: "barberoexpress-8c13c.appspot.com",
     messagingSenderId: "634083713883"
 };
-//firebase.initializeApp(config);
+//firebase.initializeApp(config);*/
 
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
@@ -25,6 +25,8 @@ function Registrarse(){
 		window.alert("Las contraseñas son distintas, asegurate de escribirlas bien");
 		return;
 	}
+
+	
 	/*var nombre = document.getElementById('inputFname1').value;
 	var apellido = document.getElementById("inputLnam").value;
 	//carlos azaustre
@@ -56,7 +58,7 @@ function Registrarse(){
 	});
 	console.log("funcion1 " +  email);
 	if(errores == false){
-		setTimeout(function(){ RREGLAR ESTO AQUI
+		setTimeout(function(){ //ARREGLAR ESTO AQUI
 			console.log("funcion2" +  email);
 	        InformacionBaseDatos(email);
 	    }, 2000);
