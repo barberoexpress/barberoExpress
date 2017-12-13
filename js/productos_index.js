@@ -87,8 +87,8 @@ function ingresarTelefono(){
   refTelefonos.push({
     celular: telefonoIngresado
   });
-  console.log("Teléfono agregado a la BD");
-  alert("Teléfono agregado");
+  window.alert("Teléfono agregado");
+  document.getElementById("telefonoUsuario").value = " ";
 }
 
 
