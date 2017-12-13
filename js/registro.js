@@ -79,11 +79,11 @@ function InformacionBaseDatos(correo){
 		apellido: "null",
 		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
 		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
-		carritoCompras: {vaciar:"false"},
+		carritoCompras: {vaciar:"false",keyUsuario:"null"},
 		foto: "null",
 		historialCompras: "null"
 	});
-	console.log("Agregado");
+	window.alert("Registro Exitoso");
 	/*ref.push({
 		correo: correo,
 		nombre: nombre,

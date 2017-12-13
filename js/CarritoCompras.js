@@ -33,13 +33,14 @@ var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional;
 
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 
+var refUsuario;
 // -------------------- CODIGO PARA ACTUALIZAR EL CARRITO DE COMPRAS DEL USUARIO --------------------//
 firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
 
 	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras" + "/" + "productos");
-	var refUsuario = firebase.database().ref("USUARIOS/" + userkey);
+	refUsuario = firebase.database().ref("USUARIOS/" + userkey);
 	//DATOS DE ENVIO
 	
 
@@ -414,7 +415,10 @@ function Actualizar_HTML_carrito(){
         telefonoCelular: telefono
       });
 
+      refUsuario.child("carritoCompras").update({
+        keyUsuario: localStorage.getItem("USERKEY2")
+      });
       /*FALTA BODEGERO*/
-
+     window.alert("Compra exitosa") ;
     }
   }

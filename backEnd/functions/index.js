@@ -45,21 +45,21 @@ exports.totalizarCarrito = functions.database
 				};
 		*/
 	//var rootRef = functions.database.ref('/USUARIOS/{USUARIOSID}/carritoCompras')
-	const referencia = event.data.ref.parent;
-	var hola = referencia.parent; 
-	console.log("padre: " + hola )
-	var coso = hola.data.val()
+	//const referencia = event.data.ref.parent;
+	//var hola = referencia.parent; 
+	//console.log("padre: " + hola )
+	//var coso = referencia.data.val()
 
-	console.log("nombre Usuario: " + coso.nombre)
+	//console.log("nombre Usuario: " + coso.nombre)
 
     itemsSnapshot.forEach(function(itemSnapshot) { // For each item
         //var itemKey = itemSnapshot.key; // Get item key
         var itemData = itemSnapshot.val(); // Get item data
         console.log("id: "+ itemData.id)
         console.log("precio: "+ itemData.precio)
-        var yave = itemData.key;
+        var llave = itemData.key;
 
-        console.log("yave: " + yave)
+        console.log("llave: " + llave)
         /* //pasar de "," a "." en float
         var values = itemData.precio.split(",")
 		var v1 = parseFloat(values[0])
