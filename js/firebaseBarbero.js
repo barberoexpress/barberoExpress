@@ -11,11 +11,46 @@ firebase.initializeApp(config);
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 
+
+// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO Y SU NOMBRE --------------------
+var userL = localStorage.getItem("USERKEY2");
+var userN = localStorage.getItem("USERNAME2");
+if (userL != "false") {
+
+	//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
+	var url = window.location.pathname;
+	var currentLocation = url.substring(url.lastIndexOf('/')+1);
+	if(currentLocation == "index.html"){
+		var infoUsuario = "";
+		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+
+	}else{
+		var infoUsuario = "";
+		infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+	}
+
+	document.getElementById("infoUsuario").innerHTML = infoUsuario;
+}else{
+
+	var url = window.location.pathname;
+	var currentLocation = url.substring(url.lastIndexOf('/')+1);
+	if(currentLocation == "index.html"){
+		var infoUsuario = "";
+		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+	}else{
+		var infoUsuario = "";
+		infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+	}
+}
+
 // -------------------- FUNCION PARA CERRAR SECCION --------------------
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
 function CerrarSeccion(){
 	firebase.auth().signOut().then(function() {
 		window.alert("seccion cerrada correctamente");
+		localStorage.setItem("USERKEY2", "false");
 		window.location.href="../index.html";
 	}, function(error) {
     	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
@@ -25,6 +60,7 @@ function CerrarSeccion(){
 function CerrarSeccionIndex(){
 	firebase.auth().signOut().then(function() {
 		window.alert("seccion cerrada correctamente");
+		localStorage.setItem("USERKEY2", "false");
 		window.location.href="index.html";
 	}, function(error) {
     	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
