@@ -157,12 +157,12 @@
           <a href="#design" class="filter" data-filter=".design">Tijeras</a>
           <a href="#photography" class="filter" data-filter=".photography">Photography</a> -->
           <a href="#general" class="filter active" data-filter=".general" onclick="imagenesPortafolioGeneral()">Resumen</a>
-          <a href="#barberasCuchillas" class="filter" data-filter=".barberasCuchillas" onclick="imagenesTipos()">Barberas/Cuchillas</a>
-          <a href="#maquinas" class="filter" data-filter=".maquinas" onclick="imagenesTipos()">Máquinas</a>
-          <a href="#tijeras" class="filter" data-filter=".tijeras">Tijeras</a>
-          <a href="#sacudidoresOtros" class="filter" data-filter=".sacudidoresOtros">Sacudidores/Otros</a>
-          <a href="#cerasGel" class="filter" data-filter=".cerasGel">Ceras/Gel</a>
-          <a href="#tonicosEspumas" class="filter" data-filter=".tonicosEspumas">Tónicos/Espumas</a>
+          <a href="#barberasCuchillas" class="filter" data-filter=".barberasCuchillas" onclick="imagenesTipos('barberas','cuchillas')">Barberas/Cuchillas</a>
+          <a href="#maquinas" class="filter" data-filter=".maquinas" onclick="imagenesTipos('maquinas','*')">Máquinas</a>
+          <a href="#tijeras" class="filter" data-filter=".tijeras" onclick="imagenesTipos('tijeras','*')">Tijeras</a>
+          <a href="#sacudidoresOtros" class="filter" data-filter=".sacudidoresOtros" onclick="imagenesTipos('sacudidores','otros')">Sacudidores/Otros</a>
+          <a href="#cerasGel" class="filter" data-filter=".cerasGel" onclick="imagenesTipos('ceras','gel')">Ceras/Gel</a>
+          <a href="#tonicosEspumas" class="filter" data-filter=".tonicosEspumas" onclick="imagenesTipos('tonicos','espumas')">Tónicos/Espumas</a>
 
         </div>
         <!-- End Works Filter -->
@@ -173,7 +173,7 @@
 
             <!-- Work Item (External Page) -->
             <li class="work-item mix general barberasCuchillas">
-              <a href="portfolio-single-1.html" class="work-ext-link">
+              <a class="work-ext-link" onclick="BuscarINDEX('barbera','cuchilla')">
                 <div class="work-img">
                   <img class="work-img" src="images/portAfolio/barbera.jpg" alt="Work" />
                 </div>
@@ -192,7 +192,7 @@
 
             <!-- Work Item (Lightbox) -->
             <li class="work-item mix general">
-              <a href="images/portafolio/maquina.jpg" class="work-lightbox-link mfp-image">
+              <a class="work-ext-link" onclick="BuscarINDEX('maquina','*')">
                 <div class="work-img">
                   <img src="images/portafolio/maquina.jpg" alt="Work" />
                 </div>
@@ -212,7 +212,7 @@
 
             <!-- Work Item (External Page) -->
             <li class="work-item mix general">
-              <a href="portfolio-single-1.html" class="work-ext-link">
+              <a class="work-ext-link" onclick="BuscarINDEX('tijera','*')">
                 <div class="work-img">
                   <img class="work-img" src="images/portafolio/tijeras.jpg" alt="Work" />
                 </div>
@@ -231,7 +231,7 @@
 
             <!-- Work Item (External Page) -->
             <li class="work-item mix general">
-              <a href="portfolio-single-1.html" class="work-ext-link">
+              <a class="work-ext-link" onclick="BuscarINDEX('sacudidor','otros')">
                 <div class="work-img">
                   <img class="work-img" src="images/portafolio/brush.jpg" alt="Work" />
                 </div>
@@ -250,7 +250,7 @@
 
             <!-- Work Item (External Page) -->
             <li class="work-item mix general">
-              <a href="portfolio-single-1.html" class="work-ext-link">
+              <a class="work-ext-link"  onclick="BuscarINDEX('cera','gel')">
                 <div class="work-img">
                   <img class="work-img" src="images/portafolio/crazyGel.jpg" alt="Work" />
                 </div>
@@ -269,7 +269,7 @@
 
             <!-- Work Item (External Page) -->
             <li class="work-item mix general">
-              <a href="portfolio-single-1.html" class="work-ext-link">
+              <a class="work-ext-link"  onclick="BuscarINDEX('tonico','espuma')">
                 <div class="work-img">
                   <img class="work-img" src="images/portafolio/espuma.jpg" alt="Work" />
                 </div>
@@ -294,6 +294,7 @@
 
       </div>
     </section>
+    <div id="VerMas"></div>
     <!-- End Portfolio Section -->
 
 

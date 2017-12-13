@@ -6,6 +6,7 @@ var precio = [" ", " "]
 var keyProducto = [" ", " "];
 var descripcion = [" ", " "];
 var recomendado = [" ", " "];
+var tipos = [" ", " "];
 
 
 
@@ -35,8 +36,10 @@ refProductos.orderByChild("id").on("child_added", function(snapshot) {
   precio.push(snapshot.val().precio);
   descripcion.push(snapshot.val().descripcion);
   recomendado.push(snapshot.val().recomendado);
+  tipos.push(snapshot.val().tipo);
   keyProducto.push(snapshot.key);
 });
+
 
 //
 
@@ -135,32 +138,53 @@ function Imegenes_Recomendadas() {
 
 
 // CARGA IMAGENES POR TIPOS (PORTAFOLIO)
-function imagenesTipos(){
+function imagenesTipos(prod1, prod2){
   var imagenesTipo = '';
+  if (prod2 == '*'){prod2 = "";}
   var j = 2;
+  var i = 2;
+  var lleno = false;
+  var cont = 0;
   var noProductos = 5; // 5 - 2 = 3
+  var posiciones = [" ", " "];
   var completo = false;
+  var verMas = "";
+
+  for(i; i < tipos.length && lleno == false; i++){
+    if(prod1.toString() == tipos[i] || prod2.toString() == tipos[i]){
+      cont++;
+      posiciones.push(i);
+    }
+    if(cont >= 3){
+      lleno = true;
+    }
+  } 
+
   while(j < noProductos){
-    var aleatorio = Math.floor((Math.random() * 18) + 2);
+    var ubicacion = posiciones[j];
     imagenesTipo +='<li class="work-item mix general">'
-                    + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                    + '<a class="work-ext-link" onclick="Ir_productoINDEX('+ "'" + keyProducto[ubicacion] + "'"+ ')">'
                       + '<div class="work-img">'
-                        + '<img class="work-img" src="'+ foto_Url[aleatorio] + '" alt="Work" />'
+                        + '<img class="work-img" src="'+ foto_Url[ubicacion] + '" alt="Work" />'
                       + '</div>'
                       + '<div class="work-intro">'
-                        + '<h3 class="work-title">' + nombre[aleatorio] + '</h3>'
+                        + '<h3 class="work-title">' + nombre[ubicacion] + '</h3>'
                         + '<div class="work-descr">'
                           + 'Barbero Express'
                         + '</div>'
                       + '</div>'
                     + '</a>'
                     + '<div class="">'
-                      + '<p class="text-center">' + nombre[aleatorio] + ' </br> $' + precio[aleatorio] + '</p>'
+                      + '<p class="text-center">' + nombre[ubicacion] + ' </br> $' + precio[ubicacion] + '</p>'
                     + '</div>'
                   + '</li>';
     j++;
   }
+  verMas += '<div class="align-center" style="padding-bottom: 10px;">'
+               +    '<button class="submit_btn btn btn-mod btn-medium btn-round" onclick="BuscarINDEX('+ "'" + prod1 + "'" + ',' +  "'" + prod2 + "'" + ')" id="submit_btn">Ver mas</button>'
+               +  '</div>';
   document.getElementById("work-grid").innerHTML = imagenesTipo;
+  document.getElementById("VerMas").innerHTML = verMas;
 }
 
 
@@ -174,7 +198,7 @@ function imagenesPortafolioGeneral(){
   var contador = 0;
     imagenesPortafolio += '<!-- Work Item (External Page) -->'
                         + '<li class="work-item mix general barberasCuchillas">'
-                        + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                        + '<a class="work-ext-link"  onclick="BuscarINDEX('+ "'" + 'barbera' + "'" + ',' +  "'" + 'cuchilla' + "'" + ')")">'
                         + '<div class="work-img">'
                         + '<img class="work-img" src="images/portAfolio/barbera.jpg" alt="Work" />'
                         + '</div>'
@@ -189,10 +213,12 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">BARBERAS/CUCHILLAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (Lightbox) -->'
+
                         + '<li class="work-item mix general">'
-                        + '<a href="images/portafolio/maquina.jpg" class="work-lightbox-link mfp-image">'
+                        + '<a class="work-ext-link" onclick="BuscarINDEX('+ "'" + 'maquina' + "'" + ',' +  "'" + '*' + "'" + ')")">'
                         + '<div class="work-img">'
                         + '<img src="images/portafolio/maquina.jpg" alt="Work" />'
                         + '</div>'
@@ -208,10 +234,12 @@ function imagenesPortafolioGeneral(){
                         + '<!-- <p class="text-center">TÓNICO <br> $2.500</p> -->'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
-                        + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                        + '<a class="work-ext-link" onclick="BuscarINDEX('+ "'" + 'tijera' + "'" + ',' +  "'" + '*' + "'" + ')")">'
                         + '<div class="work-img">'
                         + '<img class="work-img" src="images/portafolio/tijeras.jpg" alt="Work" />'
                         + '</div>'
@@ -226,10 +254,12 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">TIJERAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
-                        + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                        + '<a class="work-ext-link" onclick="BuscarINDEX('+ "'" + 'sacudidor' + "'" + ',' +  "'" + 'otro' + "'" + ')">'
                         + '<div class="work-img">'
                         + '<img class="work-img" src="images/portafolio/brush.jpg" alt="Work" />'
                         + '</div>'
@@ -244,10 +274,12 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">SACUDIDORES/OTROS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
-                        + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                        + '<a class="work-ext-link" onclick="BuscarINDEX('+ "'" + 'cera' + "'" + ',' +  "'" + 'gel' + "'" + ')")">'
                         + '<div class="work-img">'
                         + '<img class="work-img" src="images/portafolio/crazyGel.jpg" alt="Work" />'
                         + '</div>'
@@ -262,10 +294,12 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">CERAS/GEL</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         + '<!-- Work Item (External Page) -->'
+
                         + '<li class="work-item mix general">'
-                        + '<a href="portfolio-single-1.html" class="work-ext-link">'
+                        + '<a class="work-ext-link" onclick="BuscarINDEX('+ "'" + 'tonico' + "'" + ',' +  "'" + 'espuma' + "'" + ')")">'
                         + '<div class="work-img">'
                         + '<img class="work-img" src="images/portafolio/espuma.jpg" alt="Work" />'
                         + '</div>'
@@ -280,6 +314,7 @@ function imagenesPortafolioGeneral(){
                         + '<p class="text-center">TÓNICOS/ESPUMAS</p>'
                         + '</div>'
                         + '</li>'
+
                         + '<!-- End Work Item -->'
                         ;
 

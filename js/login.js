@@ -126,7 +126,7 @@ function AgregarAlCarrito(){
   }
 }
 
-// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO --------------------
+// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
   /* es preferible abrir una pestaña nueva con el producto para que el ususario
@@ -170,7 +170,7 @@ function Buscar(){
   var descripcion = [" ", " "];
   var keyProducto = [" ", " "];
 
-  if(queryText.length > 2){
+  if(queryText.length >= 2){
     firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
         foto_Url.push(snapshot.val().foto);
         nombre.push(snapshot.val().nombre);
