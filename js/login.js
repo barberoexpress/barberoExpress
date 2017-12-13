@@ -42,7 +42,13 @@ function IniciarSeccion(){
       	  	return;
       	  }
 	});
-	window.alert(email);
+	window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
+
+  setTimeout(function(){
+    window.location.href="login.html";
+  }, 1000);
+  
+
 }
 
 //FUNCION PARA ACTUALIZAR LA PAGINA SEGUN EL USUARIO
@@ -59,6 +65,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		 key = snapshot.key;
 		 ref = firebase.database().ref("USUARIOS/" + key);
      localStorage.setItem("USERKEY2", key);
+     localStorage.setItem("USERNAME2", snapshot.val().nombre);
      //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAS PARA AÑADIR ESTO
 		 /*nombre = snapshot.val().nombre;
      if(nombre.toString() == "null"){

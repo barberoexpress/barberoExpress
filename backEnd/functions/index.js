@@ -31,17 +31,35 @@ exports.totalizarCarrito = functions.database
 
     // --- Pedido ----
 
-		var pedido ={productos:[],total:0};
-		var listaP =[];
+		//var pedido ={productos:[],total:0};
+		//var listaP =[];
+		var productos =[];
+		/*
+		var info ={
+				id:0,
+				nombreUsuario: " ",
+				totalPesos: 0,
+				direccionEntrega:"", 
+				telefonoContacto: "",
+				comoLlegar:""
+				};
+		*/
+	//var rootRef = functions.database.ref('/USUARIOS/{USUARIOSID}/carritoCompras')
+	//const referencia = event.data.ref.parent;
+	//var hola = referencia.parent; 
+	//console.log("padre: " + hola )
+	//var coso = referencia.data.val()
+
+	//console.log("nombre Usuario: " + coso.nombre)
 
     itemsSnapshot.forEach(function(itemSnapshot) { // For each item
         //var itemKey = itemSnapshot.key; // Get item key
         var itemData = itemSnapshot.val(); // Get item data
         console.log("id: "+ itemData.id)
         console.log("precio: "+ itemData.precio)
-        var yave = itemData.key;
+        var llave = itemData.key;
 
-        console.log("yave: " + yave)
+        console.log("llave: " + llave)
         /* //pasar de "," a "." en float
         var values = itemData.precio.split(",")
 		var v1 = parseFloat(values[0])
@@ -74,7 +92,7 @@ exports.totalizarCarrito = functions.database
 			precio: value
 		};
 		
-		pedido.productos.push(producto);
+		productos.push(producto);
 
 		/*
 		pedido.child("productos").push({
@@ -96,8 +114,19 @@ exports.totalizarCarrito = functions.database
 	
 	carritoCompra.total = totalSD
 
-	//pedido.productos = listaP;
-	pedido.total = totalSD;
+	/*
+	const algo = event.data.ref.parent.once("value").then(snap => {
+      const post = snap.val();
+      // do stuff with post here
+      info.nombreUsuario = post.nombre +" "+ post.apellido;
+      info.telefonoContacto = post.telefono.telefonoCelular;
+      info.direccionEntrega = post.direccion.direccion;
+      info.comoLlegar = post.direccion.informacionAdicional;
+    });
+	*/
+	
+	//info.totalPesos = totalSD;
+	
 
 	const promise = event.data.ref.set(carritoCompra)
 
@@ -105,12 +134,34 @@ exports.totalizarCarrito = functions.database
 	//admin.database().ref('FACTURAS').set(pedido)
 	//return ref.child("FACTURAS").set(pedido);
 	//firebaseRef.child("events").push(data);
-	
+	var info = getDatosPadre(event);
+	info.totalPesos = totalSD;
 	var ref = event.data.ref.root;
-  	return ref.child("PEDIDOS").push(pedido);
-
+  	return ref.child("PEDIDOS").push({productos:productos,info:info});
+  	//return ref.child("PEDIDOS").push(info);
 	return promise
 })
+
+function getDatosPadre(event) {
+	return event.data.ref.parent.once("value").then(snap => {
+      const post = snap.val();
+      // do stuff with post here
+      informacion ={
+				id:0,
+				nombreUsuario: " ",
+				totalPesos: 0,
+				direccionEntrega:"", 
+				telefonoContacto: "",
+				comoLlegar:""
+				};
+
+      informacion.nombreUsuario = post.nombre +" "+ post.apellido;
+      informacion.telefonoContacto = post.telefono.telefonoCelular;
+      informacion.direccionEntrega = post.direccion.direccion;
+      informacion.comoLlegar = post.direccion.informacionAdicional;
+      return informacion;
+    });
+}
 /*
 exports.productosMin = functions.database
 .ref('/PRODUCTOS')
