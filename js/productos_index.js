@@ -158,7 +158,7 @@ function imagenesTipos(prod1, prod2){
     if(cont >= 3){
       lleno = true;
     }
-  } 
+  }
 
   while(j < noProductos){
     var ubicacion = posiciones[j];
