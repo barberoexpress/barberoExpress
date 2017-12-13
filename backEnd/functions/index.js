@@ -8,7 +8,7 @@ admin.initializeApp(functions.config().firebase);
 //  response.send("Hello from Firebase, inetnto chorromil");
 //  console.log("A la verga todo :v");
 // });
-
+/*
 exports.totalizarCarrito = functions.database
 .ref('/USUARIOS/{USUARIOSID}/carritoCompras')
 .onWrite(event =>{ 
@@ -34,7 +34,6 @@ exports.totalizarCarrito = functions.database
 		//var pedido ={productos:[],total:0};
 		//var listaP =[];
 		var productos =[];
-		/*
 		var info ={
 				id:0,
 				nombreUsuario: " ",
@@ -43,23 +42,123 @@ exports.totalizarCarrito = functions.database
 				telefonoContacto: "",
 				comoLlegar:""
 				};
-		*/
-	//var rootRef = functions.database.ref('/USUARIOS/{USUARIOSID}/carritoCompras')
-	//const referencia = event.data.ref.parent;
-	//var hola = referencia.parent; 
-	//console.log("padre: " + hola )
-	//var coso = referencia.data.val()
-
-	//console.log("nombre Usuario: " + coso.nombre)
 
     itemsSnapshot.forEach(function(itemSnapshot) { // For each item
         //var itemKey = itemSnapshot.key; // Get item key
         var itemData = itemSnapshot.val(); // Get item data
         console.log("id: "+ itemData.id)
         console.log("precio: "+ itemData.precio)
-        var llave = itemData.key;
+        var yave = itemData.key;
 
-        console.log("llave: " + llave)
+        console.log("yave: " + yave)
+
+		var value = parseFloat(itemData.precio);
+		
+
+		
+		// ---- DATOS INSEGUROS -------
+		var cantidad = parseInt(itemData.cantidad);
+		var nombre = itemData.nombre;
+		var marca = itemData.marca;
+		
+		var producto ={
+			nombre: nombre,
+			marca: marca,
+			cantidad: cantidad,
+			precio: value
+		};
+		
+		productos.push(producto);
+
+		totalSD += (value * cantidad);
+		
+
+
+		//aqui mas adelante hacer descuento
+
+    });
+    console.log("Total: " + totalSD)
+	// cambiamos la informacion del DataBase por el nuevo carritoCompras
+	
+	carritoCompra.total = totalSD
+
+
+	info.totalPesos = totalSD;
+	
+
+	const promise = event.data.ref.set(carritoCompra)
+
+	var refUsuario = carritoCompra.keyUsuario
+	console.log("refUsuario: "+refUsuario);
+
+	var ref = event.data.ref.root;
+  	return ref.child("PEDIDOS").push({productos:productos,info:info});
+  	//return ref.child("PEDIDOS").push(info);
+	return promise
+})
+
+function getDatosPadre(event) {
+	coevent.data.ref.parent.once("value").then(snap => {
+      const post = snap.val();
+      // do stuff with post here
+      info.nombreUsuario = post.nombre +" "+ post.apellido;
+      info.telefonoContacto = post.telefono.telefonoCelular;
+      info.direccionEntrega = post.direccion.direccion;
+      info.comoLlegar = post.direccion.informacionAdicional;
+    });
+}
+
+*/
+
+exports.totalizarCarrito = functions.database
+.ref('/USUARIOS/{USUARIOSID}')
+.onWrite(event =>{ 
+	// esto es para coger la infurmacion de todo el carrito de compras
+	const usuario = event.data.val()
+	//console.log(carritoCompra.vaciar.isVerified)
+	// preguntamos por vaciar, para que no entre 2 veces
+	/*
+	if (carritoCompra.vaciar.isVerified == 'true') {
+		console.log("se fue")
+		return
+	}
+	*/
+	// aqui modificamos el valor vaciar
+	//carritoCompra.vaciar.isVerified = true
+	console.log("entro  >:v")
+
+
+	var eventSnapshot = event.data; // Get usuario data
+    var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
+    var totalSD = 0 ;
+    var adressSnapshot = eventSnapshot.child('direccion');
+    var phoneSnapshot = eventSnapshot.child('telefono');
+    var shoppingCar = eventSnapshot.child('carritoCompras'); // Get items data
+
+    // --- Pedido ----
+
+		//var pedido ={productos:[],total:0};
+		//var listaP =[];
+		var productos =[];
+		var info ={
+				id:0,
+				nombreUsuario: "",
+				totalPesos: 0,
+				direccionEntrega: adressSnapshot.val().direccion, 
+				telefonoContacto: phoneSnapshot.val().telefonoCelular,
+				comoLlegar: adressSnapshot.val().informacionAdicional
+				};
+			info.nombreUsuario = usuario.nombre + " " + usuario.apellido;
+
+
+    itemsSnapshot.forEach(function(itemSnapshot) { // For each item
+        //var itemKey = itemSnapshot.key; // Get item key
+        var itemData = itemSnapshot.val(); // Get item data
+        console.log("id: "+ itemData.id)
+        console.log("precio: "+ itemData.precio)
+        var yave = itemData.key;
+
+        console.log("llave: " + yave)
         /* //pasar de "," a "." en float
         var values = itemData.precio.split(",")
 		var v1 = parseFloat(values[0])
@@ -112,10 +211,26 @@ exports.totalizarCarrito = functions.database
     console.log("Total: " + totalSD)
 	// cambiamos la informacion del DataBase por el nuevo carritoCompras
 	
-	carritoCompra.total = totalSD
+	shoppingCar.total = totalSD;
 
-	/*
-	const algo = event.data.ref.parent.once("value").then(snap => {
+	info.totalPesos = totalSD;
+	
+	console.log("nombreU: " + info.nombreUsuario)
+	const promise = event.data.ref.set(usuario)
+	console.log("promise Enviado")
+	//var refUsuario = shoppingCar.keyUsuario
+	//console.log("refUsuario: "+refUsuario);
+
+	var ref = event.data.ref.root;
+	console.log("ref "+ ref)
+  	return ref.child("PEDIDOS").push({productos:productos,info:info});
+  	console.log("enviado")
+  	//return ref.child("PEDIDOS").push(info);
+	return promise
+})
+/*
+function getDatosPadre(event) {
+	coevent.data.ref.parent.once("value").then(snap => {
       const post = snap.val();
       // do stuff with post here
       info.nombreUsuario = post.nombre +" "+ post.apellido;
@@ -123,67 +238,5 @@ exports.totalizarCarrito = functions.database
       info.direccionEntrega = post.direccion.direccion;
       info.comoLlegar = post.direccion.informacionAdicional;
     });
-	*/
-	
-	//info.totalPesos = totalSD;
-	
-
-	const promise = event.data.ref.set(carritoCompra)
-
-	//return ref.child("PEDIDOS").push({pedido});
-	//admin.database().ref('FACTURAS').set(pedido)
-	//return ref.child("FACTURAS").set(pedido);
-	//firebaseRef.child("events").push(data);
-	var info = getDatosPadre(event);
-	info.totalPesos = totalSD;
-	var ref = event.data.ref.root;
-  	return ref.child("PEDIDOS").push({productos:productos,info:info});
-  	//return ref.child("PEDIDOS").push(info);
-	return promise
-})
-
-function getDatosPadre(event) {
-	return event.data.ref.parent.once("value").then(snap => {
-      const post = snap.val();
-      // do stuff with post here
-      informacion ={
-				id:0,
-				nombreUsuario: " ",
-				totalPesos: 0,
-				direccionEntrega:"", 
-				telefonoContacto: "",
-				comoLlegar:""
-				};
-
-      informacion.nombreUsuario = post.nombre +" "+ post.apellido;
-      informacion.telefonoContacto = post.telefono.telefonoCelular;
-      informacion.direccionEntrega = post.direccion.direccion;
-      informacion.comoLlegar = post.direccion.informacionAdicional;
-      return informacion;
-    });
 }
-/*
-exports.productosMin = functions.database
-.ref('/PRODUCTOS')
-.onWrite(event =>{
-	
-	//var raiz = event.data.ref.root;
-
-	return event.data.ref.parent.once("value").then(snap => {
-    	const post = snap.val();
-      	// do stuff with post here
-      	var eventSnapshot = snap.data; 
-    	var itemsSnapshot = eventSnapshot.child('PRODUCTOS'); // Get items data
-      	
-      	itemsSnapshot.forEach(function(itemSnapshot) { // For each item
-        //var itemKey = itemSnapshot.key; // Get item key
-        	var itemData = itemSnapshot.val(); // Get item data
-        	console.log("id: "+ itemData.id)
-        	console.log("precio: "+ itemData.precio)
-    	});
-
-    });
-    
-})
 */
-
