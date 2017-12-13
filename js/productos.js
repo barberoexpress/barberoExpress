@@ -44,7 +44,8 @@ firebase.initializeApp(config);*/
       keyProducto = JSON.parse(localStorage.getItem("KEYPRODUCTO_BS"));
       total_registros = nombre.length - 2;
       busqueda = true;
-
+      //LIMPIAMOS EL BUSCADOR
+      localStorage.setItem("NOMBRE_BS", JSON.stringify(""));
     }else{
  // ---------------------------------- DEBERIA DE HACER ESTE QUERING SOLO 1 VEZ Y PASARLO POR LOCALSTORAGE (+ VELCIDAD )-------------------------------------------- carlos azabustre
       for(var r = 0; r < rows; r++)
