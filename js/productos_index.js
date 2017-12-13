@@ -101,7 +101,8 @@ function Imegenes_Recomendadas() {
   var No_productos = 0; // CANTIDAD DE PRODUCTOS A MOSTRAR
   var completo = false;
   var contador = 0;
-  while (j < recomendado.length && contador < 3) {
+  var tamañoRecomendado = recomendado.lenght;
+  while (j < tamañoRecomendado && contador < 3) {
     if (recomendado[j] == true) {
       imagenes_referidos += '<div class="col-sm-4 mb-xs-30 wow fadeInUp" data-wow-delay="0.' + contador + 's">'
                             + '<div class="team-item">'
@@ -158,7 +159,7 @@ function imagenesTipos(prod1, prod2){
     if(cont >= 3){
       lleno = true;
     }
-  } 
+  }
 
   while(j < noProductos){
     var ubicacion = posiciones[j];
