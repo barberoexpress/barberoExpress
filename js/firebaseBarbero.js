@@ -11,15 +11,16 @@ firebase.initializeApp(config);
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 
+//VEAMOS EN QUE HTML ESTAMOS
+var url = window.location.pathname;
+var currentLocation = url.substring(url.lastIndexOf('/')+1);
 
-// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO Y SU NOMBRE --------------------
+// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR--------------------
 var userL = localStorage.getItem("USERKEY2");
 var userN = localStorage.getItem("USERNAME2");
 if (userL != "false") {
 
 	//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
-	var url = window.location.pathname;
-	var currentLocation = url.substring(url.lastIndexOf('/')+1);
 	if(currentLocation == "index.html"){
 		var infoUsuario = "";
 		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
@@ -28,12 +29,13 @@ if (userL != "false") {
 		var infoUsuario = "";
 		infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
 	}
-
 	document.getElementById("infoUsuario").innerHTML = infoUsuario;
+
+	//MOSTRAMOS LA CANTIDAD DE PRODUCTOS EN EL CARRO DE COMPRAS
+	mostrarCantidadPedidos();
+
 }else{
 
-	var url = window.location.pathname;
-	var currentLocation = url.substring(url.lastIndexOf('/')+1);
 	if(currentLocation == "index.html"){
 		var infoUsuario = "";
 		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>BE</p>';
@@ -51,21 +53,16 @@ function CerrarSeccion(){
 	firebase.auth().signOut().then(function() {
 		window.alert("seccion cerrada correctamente");
 		localStorage.setItem("USERKEY2", "false");
-		window.location.href="../index.html";
+		if(currentLocation != "index.html"){
+			window.location.href="../index.html";
+		}else{
+			window.location.href="index.html";
+		}
 	}, function(error) {
     	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
 	});
 }
 
-function CerrarSeccionIndex(){
-	firebase.auth().signOut().then(function() {
-		window.alert("seccion cerrada correctamente");
-		localStorage.setItem("USERKEY2", "false");
-		window.location.href="index.html";
-	}, function(error) {
-    	windows.alert("Un error ha sucedido, por favor comuniquese con lancha para mas informacion");
-	});
-}
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR EN EL INDEX--------------------
 function BuscarINDEX(prod1, prod2){
@@ -168,4 +165,25 @@ function Ir_productoINDEX(prodKey){
   //window.location.href="product_details.html";
   window.open("vistas/productoSimple.html");
 
+}
+
+// -------------------- FUNCION PARA ACTUALIZAR LA CANTIDAD DE PRODUCTOS EN EL NAV-BAR--------------------
+function mostrarCantidadPedidos(){
+	var numeroPedidos = "";
+	var tamañoArregloPedidos = [];
+
+	firebaseRef.child("USUARIOS").child(userL).child("/carritoCompras/productos").on("child_added", function(snapshot) {
+		tamañoArregloPedidos.push(snapshot.val().cantidad);
+	});
+
+	console.log(tamañoArregloPedidos);
+	setTimeout(function() {
+		if(currentLocation != "index.html"){
+			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
+		}else{
+			numeroPedidos = '<a href="vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
+		}
+		document.getElementById("cantidadPedidos").innerHTML = numeroPedidos;
+	}, 1000);
+	
 }

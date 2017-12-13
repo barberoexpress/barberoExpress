@@ -42,7 +42,13 @@ function IniciarSeccion(){
       	  	return;
       	  }
 	});
-	window.alert("Bienvenido" + email + "que bueno tenerte de vuelta");
+	window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
+
+  setTimeout(function(){
+    window.location.href="login.html";
+  }, 1000);
+  
+
 }
 
 //FUNCION PARA ACTUALIZAR LA PAGINA SEGUN EL USUARIO
