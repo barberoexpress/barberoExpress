@@ -29,12 +29,19 @@ exports.totalizarCarrito = functions.database
     var itemsSnapshot = eventSnapshot.child('productos'); // Get items data
     var totalSD = 0 ;
 
+    // --- Pedido ----
+
+		var pedido ={productos:[],total:0};
+		var listaP =[];
+
     itemsSnapshot.forEach(function(itemSnapshot) { // For each item
         //var itemKey = itemSnapshot.key; // Get item key
         var itemData = itemSnapshot.val(); // Get item data
         console.log("id: "+ itemData.id)
         console.log("precio: "+ itemData.precio)
-        
+        var yave = itemData.key;
+
+        console.log("yave: " + yave)
         /* //pasar de "," a "." en float
         var values = itemData.precio.split(",")
 		var v1 = parseFloat(values[0])
@@ -42,9 +49,44 @@ exports.totalizarCarrito = functions.database
 		var value = parseFloat(itemData.precio.replace(",", "."));
 		console.log("float: "+ value)
 		*/	
-		var value = parseFloat(itemData.precio)
+		var value = parseFloat(itemData.precio);
+		
+		/*
+		var ref = event.data.ref.root;
+		console.log("/PRODUCTOS"+"/"+yave)
+  		var producto = ref.child("/PRODUCTOS"+"/"+yave)
 
-		totalSD += value
+  		//console.log("producto: "+ producto)
+  		var productoData = producto.data;
+  		var klp = productoData.val();
+  		console.log("precioReal: " + klp.precio)
+  		*/
+		
+		// ---- DATOS INSEGUROS -------
+		var cantidad = parseInt(itemData.cantidad);
+		var nombre = itemData.nombre;
+		var marca = itemData.marca;
+		
+		var producto ={
+			nombre: nombre,
+			marca: marca,
+			cantidad: cantidad,
+			precio: value
+		};
+		
+		pedido.productos.push(producto);
+
+		/*
+		pedido.child("productos").push({
+			nombre: nombre,
+			marca: marca,
+			cantidad: cantidad,
+			precio: value
+		});
+		*/
+		totalSD += (value * cantidad);
+		
+
 
 		//aqui mas adelante hacer descuento
 
@@ -54,10 +96,22 @@ exports.totalizarCarrito = functions.database
 	
 	carritoCompra.total = totalSD
 
+	//pedido.productos = listaP;
+	pedido.total = totalSD;
+
 	const promise = event.data.ref.set(carritoCompra)
+
+	//return ref.child("PEDIDOS").push({pedido});
+	//admin.database().ref('FACTURAS').set(pedido)
+	//return ref.child("FACTURAS").set(pedido);
+	//firebaseRef.child("events").push(data);
+	
+	var ref = event.data.ref.root;
+  	return ref.child("PEDIDOS").push(pedido);
+
 	return promise
 })
-
+/*
 exports.productosMin = functions.database
 .ref('/PRODUCTOS')
 .onWrite(event =>{
@@ -76,6 +130,9 @@ exports.productosMin = functions.database
         	console.log("id: "+ itemData.id)
         	console.log("precio: "+ itemData.precio)
     	});
+
     });
+    
 })
-  	
+*/
+
