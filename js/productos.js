@@ -27,6 +27,7 @@ firebase.initializeApp(config);*/
     var keyProducto = [" ", " "];
     var busqueda = false;
 
+
     //CONTROL DE CALLBACK DE FIREBASE
     var end = false;
     var time = 0;
