@@ -14,36 +14,38 @@ var firebaseAuth = firebase.auth();
 //VEAMOS EN QUE HTML ESTAMOS
 var url = window.location.pathname;
 var currentLocation = url.substring(url.lastIndexOf('/')+1);
+//NO HACEMOS ESTA OPERACION SI ESTAMOS EN LA PAGINA DEL BODEGUERO
+if (currentLocation != "bodeguero.html"){
+	// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR--------------------
+	var userL = localStorage.getItem("USERKEY2");
+	var userN = localStorage.getItem("USERNAME2");
+	if (userL != "false") {
 
-// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR--------------------
-var userL = localStorage.getItem("USERKEY2");
-var userN = localStorage.getItem("USERNAME2");
-if (userL != "false") {
+		//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
+		if(currentLocation == "index.html"){
+			var infoUsuario = "";
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
 
-	//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
-	if(currentLocation == "index.html"){
-		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+		}else{
+			var infoUsuario = "";
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+		}
+		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+
+		//MOSTRAMOS LA CANTIDAD DE PRODUCTOS EN EL CARRO DE COMPRAS
+		mostrarCantidadPedidos();
 
 	}else{
-		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
-	}
-	document.getElementById("infoUsuario").innerHTML = infoUsuario;
 
-	//MOSTRAMOS LA CANTIDAD DE PRODUCTOS EN EL CARRO DE COMPRAS
-	mostrarCantidadPedidos();
-
-}else{
-
-	if(currentLocation == "index.html"){
-		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>BE</p>';
-		document.getElementById("infoUsuario").innerHTML = infoUsuario;
-	}else{
-		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>BE</p>';
-		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+		if(currentLocation == "index.html"){
+			var infoUsuario = "";
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+			document.getElementById("infoUsuario").innerHTML = infoUsuario;
+		}else{
+			var infoUsuario = "";
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+			document.getElementById("infoUsuario").innerHTML = infoUsuario;
+		}
 	}
 }
 
