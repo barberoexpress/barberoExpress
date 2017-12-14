@@ -23,7 +23,7 @@ if (userL != "false") {
 	//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
 	if(currentLocation == "index.html"){
 		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+		infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
 
 	}else{
 		var infoUsuario = "";
@@ -38,7 +38,7 @@ if (userL != "false") {
 
 	if(currentLocation == "index.html"){
 		var infoUsuario = "";
-		infoUsuario += '<p><img align="left" src="images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+		infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>BE</p>';
 		document.getElementById("infoUsuario").innerHTML = infoUsuario;
 	}else{
 		var infoUsuario = "";
@@ -54,7 +54,7 @@ function CerrarSeccion(){
 		window.alert("seccion cerrada correctamente");
 		localStorage.setItem("USERKEY2", "false");
 		if(currentLocation != "index.html"){
-			window.location.href="../index.html";
+			window.location.href="../../index.html";
 		}else{
 			window.location.href="index.html";
 		}
@@ -151,7 +151,7 @@ function BuscarINDEX(prod1, prod2){
       localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
       localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
       localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
-      window.location.href="vistas/buscar-4columnas.html";
+      window.location.href="FrontEnd/vistas/buscar-4columnas.html";
     }, 2000);
 }
 
@@ -163,7 +163,7 @@ function Ir_productoINDEX(prodKey){
    no pierda su busqueda y pueda seguir viendo productos
   */
   //window.location.href="product_details.html";
-  window.open("vistas/productoSimple.html");
+  window.open("FrontEnd/vistas/productoSimple.html");
 
 }
 
@@ -181,7 +181,7 @@ function mostrarCantidadPedidos(){
 		if(currentLocation != "index.html"){
 			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
 		}else{
-			numeroPedidos = '<a href="vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
+			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
 		}
 		document.getElementById("cantidadPedidos").innerHTML = numeroPedidos;
 	}, 1000);
