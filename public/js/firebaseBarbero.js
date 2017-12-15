@@ -14,14 +14,16 @@ var firebaseAuth = firebase.auth();
 //VEAMOS EN QUE HTML ESTAMOS
 var url = window.location.pathname;
 var currentLocation = url.substring(url.lastIndexOf('/')+1);
+
+
 //NO HACEMOS ESTA OPERACION SI ESTAMOS EN LA PAGINA DEL BODEGUERO
 if (currentLocation != "bodeguero.html"){
-	// -------------------- REVISAMOS SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR--------------------
+	// ---- SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, CAMBIAR EL BOTON DE INICIAR/CERRAR SESION Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR -------
 	var userL = localStorage.getItem("USERKEY2");
 	var userN = localStorage.getItem("USERNAME2");
-	if (userL != "false") {
+	if (userL != "false") {	
 
-		//CHEKEAMOS SI ESTAMOS EN INDEX O EN OTRA VISTA PARA MPDIFICAR LA RUTA
+		//TEXTO NOMBRE
 		if(currentLocation == "index.html"){
 			var infoUsuario = "";
 			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
@@ -30,22 +32,39 @@ if (currentLocation != "bodeguero.html"){
 			var infoUsuario = "";
 			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
 		}
+
+
+		//BOTON DE INICIAR SESION / CERRAR SESION
+		var botonIniciarCerrar = "";
+		botonIniciarCerrar = '<a onclick="CerrarSeccion()">Cerrar sesión</a>';
+
 		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+		document.getElementById("iniciar/cerrar").innerHTML = botonIniciarCerrar;
 
 		//MOSTRAMOS LA CANTIDAD DE PRODUCTOS EN EL CARRO DE COMPRAS
 		mostrarCantidadPedidos();
 
 	}else{
 
+		//TEXTO NOMBRE
 		if(currentLocation == "index.html"){
 			var infoUsuario = "";
 			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>BE</p>';
-			document.getElementById("infoUsuario").innerHTML = infoUsuario;
 		}else{
 			var infoUsuario = "";
 			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>BE</p>';
-			document.getElementById("infoUsuario").innerHTML = infoUsuario;
 		}
+
+		//BOTON DE INICIAR SESION / CERRAR SESION
+		if(currentLocation == "index.html"){
+			var botonIniciarCerrar = "";
+			botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
+		}else{
+			var botonIniciarCerrar = "";
+			botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
+		}
+		document.getElementById("iniciar/cerrar").innerHTML = botonIniciarCerrar;
+		document.getElementById("infoUsuario").innerHTML = infoUsuario;
 	}
 }
 
@@ -178,14 +197,15 @@ function mostrarCantidadPedidos(){
 		tamañoArregloPedidos.push(snapshot.val().cantidad);
 	});
 
-	console.log(tamañoArregloPedidos);
+	
 	setTimeout(function() {
+		console.log(tamañoArregloPedidos.length);
 		if(currentLocation != "index.html"){
-			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
+			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
 		}else{
-			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length + 1) + ')</a>';
+			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
 		}
 		document.getElementById("cantidadPedidos").innerHTML = numeroPedidos;
-	}, 1000);
+	}, 2000);
 	
 }

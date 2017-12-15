@@ -15,6 +15,7 @@ var ref;
 function IniciarSeccion(){
 	var email = document.getElementById('inputEmail').value;
 	var password = document.getElementById("inputPassword").value;
+  var errores = false;
 
 
 	firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -22,30 +23,41 @@ function IniciarSeccion(){
 	  var errorMessage = error.message;
 
 	  //MANEJO DE ERRORES
-	  if (errorCode === 'auth/wrong-password') {
+	  if (errorCode === 'auth/wrong-password'){
+            errores = true;
             alert('Contraseña equivocada.');
             return;
           } else if (errorCode === 'auth/user-not-found'){
+            errores = true;
             alert('Usuario no encontrado.');
             return;
 
       	  } else if(errorCode === 'auth/invalid-email'){
+            errores = true;
       	  	alert('Email invalido.');
       	  	return;
 
       	  } else if(errorCode === 'auth/user-disabled'){
+            errores = true;
       	  	alert('Usuario bloqueado.');
       	  	return;
 
       	  }else{
+            errores = true;
       	  	alert(errorMessage);
       	  	return;
       	  }
 	});
-	window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
-
+  setTimeout(function() {
+    if(errores == false){
+      window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
+    }
+  }, 1000);
+	
   setTimeout(function(){
-    window.location.href="login.html";
+    if(errores == false){
+      window.location.href="../../index.html";
+    }
   }, 1000);
   
 
@@ -213,7 +225,3 @@ function Buscar(){
   }
 }
 
-
-function Delete_search_icon(){
-  $("#srchFld").toggleClass("move");
-}
