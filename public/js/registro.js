@@ -16,66 +16,55 @@ var firebaseAuth = firebase.auth();
 //FUNCION DE REGISTRO DE USUARIO
 function Registrarse(){
 
-
+	var name = document.getElementById('inputName').value;
 	var email = document.getElementById('input_email').value;
 	var password = document.getElementById("inputPassword1").value;
 	var password2 = document.getElementById("inputPassword2").value;
 	var errores = false;
-	if(password.toString() != password2.toString()){
-		window.alert("Las contraseñas son distintas, asegurate de escribirlas bien");
-		return;
-	}
+	//CHECKEAMOS SI LAS CONTRASEÑAS COINCIDEN
+	if(password.length > 5){
+		if(password.toString() == password2.toString()){
+			firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+				var errorCode = error.code;
+				var errorMessage = error.message;
 
-	
-	/*var nombre = document.getElementById('inputFname1').value;
-	var apellido = document.getElementById("inputLnam").value;
-	//carlos azaustre
-	var direccion = document.getElementById('address').value;
-	var direccion2 = document.getElementById("address2").value;
-	var ciudad = document.getElementById('city').value;
-	var informacionAdicional = document.getElementById('aditionalInfo').value;
-	var telefonoCelular = document.getElementById("mobile").value;
-	var telefonoFijo = document.getElementById("phone").value;
-	var errores = false;
-	if(direccion2 == null) { direccion2 = "null";}
-	if(informacionAdicional == null) { informacionAdicional = "null";}
-	if(telefonoFijo == null) { telefonoFijo = "null";}*/
-
-
-	firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-
-		if (errorCode === 'auth/wrong-password') {
-	        alert('Contraseña equivocada.');
-	        errores = true;
-	        return;
-	    } else {
-	    	errores = true;
-	        alert(errorMessage);
-	        return;
-	    }
-	});
-	console.log("funcion1 " +  email);
-	if(errores == false){
-		setTimeout(function(){ //ARREGLAR ESTO AQUI
-			console.log("funcion2" +  email);
-	        InformacionBaseDatos(email);
-	    }, 2000);
+				if (errorCode === 'auth/wrong-password') {
+			        alert('Contraseña equivocada.');
+			        errores = true;
+			        return;
+			    } else {
+			    	errores = true;
+			        alert(errorMessage);
+			        return;
+			    }
+			});
+		}else{
+			window.alert("Las contraseñas son distintas, asegurate de escribirlas bien");
+			return;
+		}	
 	}else{
-		console.log("problemas");
+		window.alert("La contraseña debe tener al menos 6 caracteres");
+			return;
 	}
+
+	setTimeout(function(){
+		if(errores == false){
+		       InformacionBaseDatos(email,name);
+		}else{
+			console.log("problemas");
+		}
+	},1000);
 
 }
 
 
 //FUNCION DE AGREGAR INFORMACION A LA DB
-function InformacionBaseDatos(correo){
+function InformacionBaseDatos(correo,nombre){
 	var ref = firebaseRef.child("USUARIOS");
 	console.log("entramos")
 	ref.push({
 		correo: correo,
-		nombre: "null",
+		nombre: nombre,
 		apellido: "null",
 		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
 		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
@@ -84,17 +73,9 @@ function InformacionBaseDatos(correo){
 		historialCompras: "null"
 	});
 	window.alert("Registro Exitoso");
-	/*ref.push({
-		correo: correo,
-		nombre: nombre,
-		apellido: apellido,
-		telefono: {telefonoCelular: telefonoCelular, telefonoFijo: telefonoFijo},
-		direccion: {direccion: direccion, direccion2: direccion2, ciudad:ciudad, informacionAdicional: informacionAdicional},
-		carritoCompras: {vaciar:"false"},
-		foto: "null",
-		historialCompras: "null"
-	});*/
-
+	setTimeout(function() {
+		window.location.href="../../index.html";
+	}, 1000);
 	//CambiarVista();
 }
 
