@@ -16,21 +16,8 @@ var time = 0;
 var barberoDB = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 
-//TABLA PEDIDOS
+//TABLAS
 var tablaPedidos = barberoDB.child("PEDIDOS");
-
-/* ATRIBUTOS DE LOS PEDIDOS*/
-// var tablaPedidos = [];     // ** tabla de pedidos
-    // Esta información es dentro de cada pedido
-
-
-//ATRIBUTOS TABLA INFO
-// var comoLlegar = [""];
-// var direccionEntrega = [];
-// var id = [];
-// var nombreUsuario = [];
-// var telefonoContacto = [];
-// var totalPesos = [];
 var tablaInfo = [];
 var tablaProductos = [];
 
@@ -136,12 +123,13 @@ function pedidos(){
                       + '<a href=""><i class="fa fa-times"></i> <span class="hidden-xs">ENVIAR</span></a>'
                       + '</td>'
                       + '</tr>'
-                      + '<tr id="informacionProductos">'
+                      + '<tr id="informacionProductos' + tablaInfo[contador].id + '" ' + 'onclick="volverRender(' + tablaInfo[contador].id + ',' + contador + ')">'
                       + '</tr>';
                       console.log(contador);
                       console.log(tablaInfo[contador]);
                       contador++;
   }
+
   tamañoArregloInfo = tablaInfo.length;
   // MOSTRAR LA CANTIDAD DE PEDIDOS EN COLA
   mostrarCantidadPedidos(contador);
@@ -149,12 +137,12 @@ function pedidos(){
   document.getElementById("tablaBodeguero").innerHTML = pedidosActuales;
 }
 
+
 function renderPedidos(idPedido,posicion){
-  console.log("Diste un click bb");
+  console.log("Diste un click para abrir una fila con información");
   var pedidosAMostrar = '';
 
-  pedidosAMostrar += '<tr id="filaCambiar' + idPedido + '" onclick="renderPedidos">'
-                  + '<!-- FOTO -->'
+  pedidosAMostrar += '<!-- FOTO -->'
                   + '<td class="hidden-xs">'
                   + '<a href=""><img src="../images/shop/previews/shop-prev-5.jpg" alt=""/></a>'
                   + '</td>'
@@ -190,11 +178,19 @@ function renderPedidos(idPedido,posicion){
                   + '<!-- ESTADO -->'
                   + '<td>'
                   + '<a href=""><i class="fa fa-times"></i> <span class="hidden-xs">ENVIAR</span></a>'
-                  + '</td>'
-                  + '</tr>';
-                  document.getElementById("informacionProductos").innerHTML = pedidosAMostrar;
+                  + '</td>';
+                  document.getElementById("informacionProductos" + idPedido).innerHTML = pedidosAMostrar;
+}
+
+function volverRender(idPedido,posicion){
+  console.log("Diste un click para cerrar una fila");
+  console.log(idPedido);
+  var pedidosAMostrar = '';
+  document.getElementById("informacionProductos" + idPedido).innerHTML = pedidosAMostrar;
 
 }
+
+
 
 // FUNCIÓN QUÉ ESPERA 2 SEGUNDOS PARA CARGAR
 function esperarCarga(){
