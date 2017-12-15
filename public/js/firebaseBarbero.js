@@ -72,7 +72,7 @@ if (currentLocation != "bodeguero.html"){
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
 function CerrarSeccion(){
 	firebase.auth().signOut().then(function() {
-		window.alert("seccion cerrada correctamente");
+		window.alert("sesion cerrada correctamente");
 		localStorage.setItem("USERKEY2", "false");
 		if(currentLocation != "index.html"){
 			window.location.href="../../index.html";
