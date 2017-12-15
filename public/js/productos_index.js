@@ -193,14 +193,14 @@ function imagenesPortafolioGeneral(){
   var imagenesPortafolio = '';
   var j = 0;
   var noProductos = 6;
-  var ubicacionImagen = ["FrontEnd/images/portAfolio/barbera.jpg","FrontEnd/images/portafolio/maquina.jpg","FrontEnd/images/portafolio/tijeras.jpg","FrontEnd/images/portafolio/brush.jpg","FrontEnd/images/portafolio/crazyGel.jpg","FrontEnd/images/portafolio/espuma.jpg"];
+  var ubicacionImagen = ["FrontEnd/images/portafolio/barbera.jpg","FrontEnd/images/portafolio/maquina.jpg","FrontEnd/images/portafolio/tijeras.jpg","FrontEnd/images/portafolio/brush.jpg","FrontEnd/images/portafolio/crazyGel.jpg","FrontEnd/images/portafolio/espuma.jpg"];
   var nombreImagen = ["BARBERAS/CUCHILLAS","MÁQUINAS","TIJERAS","SACUDIDORES/OTROS","CERAS/GEL","TÓNICOS/ESPUMAS"];
   var contador = 0;
     imagenesPortafolio += '<!-- Work Item (External Page) -->'
                         + '<li class="work-item mix general barberasCuchillas">'
                         + '<a class="work-ext-link"  onclick="BuscarINDEX('+ "'" + 'barbera' + "'" + ',' +  "'" + 'cuchilla' + "'" + ')")">'
                         + '<div class="work-img">'
-                        + '<img class="work-img" src="FrontEnd/images/portAfolio/barbera.jpg" alt="Work" />'
+                        + '<img class="work-img" src="FrontEnd/images/portafolio/barbera.jpg" alt="Work" />'
                         + '</div>'
                         + '<div class="work-intro">'
                         + '<h3 class="work-title">Barberas/Cuchillas</h3>'

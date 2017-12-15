@@ -26,11 +26,11 @@ if (currentLocation != "bodeguero.html"){
 		//TEXTO NOMBRE
 		if(currentLocation == "index.html"){
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 
 		}else{
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 		}
 
 
@@ -47,13 +47,13 @@ if (currentLocation != "bodeguero.html"){
 	}else{
 
 		//TEXTO NOMBRE
-		if(currentLocation == "index.html"){
+		/*if(currentLocation == "index.html"){
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.PNG"/>BE</p>';
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>BE</p>';
 		}else{
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.PNG"/>BE</p>';
-		}
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>BE</p>';
+		}*/
 
 		//BOTON DE INICIAR SESION / CERRAR SESION
 		if(currentLocation == "index.html"){
@@ -64,7 +64,7 @@ if (currentLocation != "bodeguero.html"){
 			botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
 		}
 		document.getElementById("iniciar/cerrar").innerHTML = botonIniciarCerrar;
-		document.getElementById("infoUsuario").innerHTML = infoUsuario;
+		//document.getElementById("infoUsuario").innerHTML = infoUsuario;
 	}
 }
 
