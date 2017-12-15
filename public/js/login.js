@@ -139,7 +139,7 @@ function AgregarAlCarrito(){
     });
     window.alert("Producto Agregado");
     //window.location.href="product_summary.html";
-    window.open("carritoCompras.html");
+    window.location.href= "carritoCompras.html";
   } else {
     window.alert("Inicia sesion primero");
   }
@@ -148,11 +148,7 @@ function AgregarAlCarrito(){
 // -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
-  /* es preferible abrir una pestaña nueva con el producto para que el ususario
-   no pierda su busqueda y pueda seguir viendo productos
-  */
-  //window.location.href="product_details.html";
-  window.open("productoSimple.html");
+  window.location.href= "productoSimple.html";
 
 }
 
