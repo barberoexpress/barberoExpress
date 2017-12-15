@@ -154,8 +154,10 @@ function renderPedidos(idPedido,posicion){
                   + '</td>'
                   + '<!-- NOMBRE -->'
                   + '<td>'
-                  + tablaInfo[posicion].nombreUsuario + ' '//'Santiago Cortés Ríos'
-                  + '</td>'
+                  for (var contador in tablaProductos[posicion]){
+                  pedidosAMostrar += '<p>' + (tablaProductos[posicion])[contador].nombre + '</p><hr>'
+                  }
+                  pedidosAMostrar += '</td>'
                   + '<!-- CELULAR -->'
                   + '<td>'
                   + tablaInfo[posicion].telefonoContacto + ' '//'3005933685'
