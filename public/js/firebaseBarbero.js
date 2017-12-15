@@ -24,13 +24,15 @@ if (currentLocation != "bodeguero.html"){
 	if (userL != "false") {	
 
 		//TEXTO NOMBRE
-		if(currentLocation == "index.html"){
+		if(currentLocation == "carritoCompras.html" || currentLocation == "buscar-4columnas.html" || currentLocation == "login.html" || currentLocation == "productoSimple.html" || currentLocation == "terminosLegales.html"){
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			//infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 
 		}else{
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			//infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 		}
 
 
@@ -56,12 +58,14 @@ if (currentLocation != "bodeguero.html"){
 		}*/
 
 		//BOTON DE INICIAR SESION / CERRAR SESION
-		if(currentLocation == "index.html"){
-			var botonIniciarCerrar = "";
-			botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
-		}else{
+		if(currentLocation == "carritoCompras.html" || currentLocation == "buscar-4columnas.html" || currentLocation == "login.html" || currentLocation == "productoSimple.html" || currentLocation == "terminosLegales.html"){
 			var botonIniciarCerrar = "";
 			botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
+			//botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
+		}else{
+			var botonIniciarCerrar = "";
+			botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
+			//botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
 		}
 		document.getElementById("iniciar/cerrar").innerHTML = botonIniciarCerrar;
 		//document.getElementById("infoUsuario").innerHTML = infoUsuario;
