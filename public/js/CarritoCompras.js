@@ -64,7 +64,7 @@ if (user) {
 		document.getElementById("telefono").innerHTML = '<strong>'+ telefono +'</strong>';
     }, 1000);*/
 } else {
-   window.alert("Inicia seccion primero");
+   window.alert("Inicia sesion primero");
    window.location.href="login.html";
 }
 });

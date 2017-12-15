@@ -141,7 +141,7 @@ function AgregarAlCarrito(){
     //window.location.href="product_summary.html";
     window.open("carritoCompras.html");
   } else {
-    window.alert("Inicia seccion primero");
+    window.alert("Inicia sesion primero");
   }
 }
 
