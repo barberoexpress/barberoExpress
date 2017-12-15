@@ -128,7 +128,9 @@ function pedidos(){
                       console.log(contador);
                       console.log(tablaInfo[contador]);
                       console.log("Esto es una prueba de Cristian");
-                      console.log((tablaProductos[contador])[contador]);
+                      for(var contador2 in (tablaProductos[contador])){
+                          console.log((tablaProductos[contador])[contador2]);
+                      }
                       // var tablaPapu = tablaProductos[contador];
                       // console.log(tablaPapu[contador]);
                       contador++;
