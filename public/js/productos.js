@@ -164,3 +164,9 @@ function cambiar_pagina(pagina_actual){
       document.getElementById("blockView").innerHTML = imagenes;
 
 }
+
+
+//FUNCION PARA VOLVER A LA PAGINA DE BUSCAR, SE ACTIVA EN EL BOTON VOLVER
+function Recargar(){
+  window.location.href="buscar-4columnas.html";
+}

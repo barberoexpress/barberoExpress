@@ -72,7 +72,7 @@ if (currentLocation != "bodeguero.html"){
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
 function CerrarSeccion(){
 	firebase.auth().signOut().then(function() {
-		window.alert("seccion cerrada correctamente");
+		window.alert("sesion cerrada correctamente");
 		localStorage.setItem("USERKEY2", "false");
 		if(currentLocation != "index.html"){
 			window.location.href="../../index.html";
@@ -183,8 +183,7 @@ function Ir_productoINDEX(prodKey){
   /* es preferible abrir una pestaña nueva con el producto para que el ususario
    no pierda su busqueda y pueda seguir viendo productos
   */
-  //window.location.href="product_details.html";
-  window.open("FrontEnd/vistas/productoSimple.html");
+  window.location.href= "FrontEnd/vistas/productoSimple.html";
 
 }
 
