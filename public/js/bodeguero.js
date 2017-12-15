@@ -41,14 +41,14 @@ tablaPedidos.orderByChild("id").on("child_added", function(snapshot){
   tablaInfo.push(snapshot.val().info);
   //tablaProductos.push(snapshot.val().productos);
 });
-var tamañoArregloPedidos = tablaPedidos.length;
+var tamañoArregloInfo;
+
 
 
 // CICLO QUE ESPERA PARA CARGAR
 esperarCarga();
 
-// MOSTRAR LA CANTIDAD DE PEDIDOS EN COLA
-mostrarCantidadPedidos();
+
 
 
 
@@ -60,8 +60,8 @@ var pedidosActuales = '';
 
 
 // FUNCIÓN ENCARGADA DE MOSTRAR LA CANTIDAD DE PEDIDOS
-function mostrarCantidadPedidos(){
-  numeroPedidos += '<a href="#"><i class="fa fa-shopping-cart"></i> Pedidos('+ tamañoArregloPedidos + ')</a>';
+function mostrarCantidadPedidos(contador){
+  numeroPedidos += '<a href="#"><i class="fa fa-shopping-cart"></i> Pedidos('+ contador + ')</a>';
   document.getElementById("cantidadPedidos").innerHTML = numeroPedidos;
 }
 
@@ -80,16 +80,16 @@ function pedidos(){
                       + 'Celular'
                     + '</th>'
                     + '<th>'
-                      + 'Precio Total'
-                    + '</th>'
-                    + '<th>'
-                      + 'Dirección de entrega'
+                      + 'Dirección entrega'
                     + '</th>'
                     + '<th>'
                       + 'Como llegar'
                     + '</th>'
                     + '<th>'
-                      + 'Identificador'
+                      + 'Precio Total'
+                    + '</th>'
+                    + '<th>'
+                      + 'ID'
                     + '</th>'
                     + '<th>'
                       + 'Estado'
@@ -97,7 +97,7 @@ function pedidos(){
                   + '</tr>';
   //for (var contador in tablaInfo){
   while(contador < 7){
-      pedidosActuales += '<tr>'
+      pedidosActuales += '<tr id="filaCambiar' + tablaInfo[contador].id  + '" onclick="renderPedidos(' + tablaInfo[contador].id + ',' + contador + ')">'
                       + '<!-- FOTO -->'
                       + '<td class="hidden-xs">'
                       + '<a href=""><img src="../images/shop/previews/shop-prev-5.jpg" alt=""/></a>'
@@ -109,10 +109,6 @@ function pedidos(){
                       + '<!-- CELULAR -->'
                       + '<td>'
                       + tablaInfo[contador].telefonoContacto + ' '//'3005933685'
-                      + '</td>'
-                      + '<!-- PRECIO TOTAL -->'
-                      + '<td>'
-                      + tablaInfo[contador].totalPesos + ' '//'$ 20.000'
                       + '</td>'
                       + '<!-- DIRECCION -->'
                       + '<td>'
@@ -127,6 +123,10 @@ function pedidos(){
                       + '<td>'
                       + tablaInfo[contador].comoLlegar + ' '//'Detrás del éxito'
                       + '</td>'
+                      + '<!-- PRECIO TOTAL -->'
+                      + '<td>'
+                      + tablaInfo[contador].totalPesos + ' '//'$ 20.000'
+                      + '</td>'
                       + '<!-- IDENTIFICADOR -->'
                       + '<td>'
                       + '<a href="#" title="">'+ tablaInfo[contador].id + '</a>'
@@ -136,14 +136,65 @@ function pedidos(){
                       + '<a href=""><i class="fa fa-times"></i> <span class="hidden-xs">ENVIAR</span></a>'
                       + '</td>'
                       + '</tr>'
-                      ;
+                      + '<tr id="informacionProductos">'
+                      + '</tr>';
                       console.log(contador);
                       console.log(tablaInfo[contador]);
                       contador++;
   }
+  tamañoArregloInfo = tablaInfo.length;
+  // MOSTRAR LA CANTIDAD DE PEDIDOS EN COLA
+  mostrarCantidadPedidos(contador);
+  console.log("El tamño de la tabla de pedidos es de " + tamañoArregloInfo);
   document.getElementById("tablaBodeguero").innerHTML = pedidosActuales;
 }
 
+function renderPedidos(idPedido,posicion){
+  console.log("Diste un click bb");
+  var pedidosAMostrar = '';
+
+  pedidosAMostrar += '<tr id="filaCambiar' + idPedido + '" onclick="renderPedidos">'
+                  + '<!-- FOTO -->'
+                  + '<td class="hidden-xs">'
+                  + '<a href=""><img src="../images/shop/previews/shop-prev-5.jpg" alt=""/></a>'
+                  + '</td>'
+                  + '<!-- NOMBRE -->'
+                  + '<td>'
+                  + tablaInfo[posicion].nombreUsuario + ' '//'Santiago Cortés Ríos'
+                  + '</td>'
+                  + '<!-- CELULAR -->'
+                  + '<td>'
+                  + tablaInfo[posicion].telefonoContacto + ' '//'3005933685'
+                  + '</td>'
+                  + '<!-- DIRECCION -->'
+                  + '<td>'
+                  + tablaInfo[posicion].direccionEntrega + ' '//'Carrera 45 1'
+                  + '</td>'
+                  + '<!-- <td>'
+                  + '<form class="form">'
+                  + '<input type="number" class="input-sm" style="width: 60px;" min="1" max="100" value="1" />'
+                  + '</form>'
+                  + '</td> -->'
+                  + '<!-- COMO LLEGAR -->'
+                  + '<td>'
+                  + tablaInfo[posicion].comoLlegar + ' '//'Detrás del éxito'
+                  + '</td>'
+                  + '<!-- PRECIO TOTAL -->'
+                  + '<td>'
+                  + tablaInfo[posicion].totalPesos + ' '//'$ 20.000'
+                  + '</td>'
+                  + '<!-- IDENTIFICADOR -->'
+                  + '<td>'
+                  + '<a href="#" title="">'+ tablaInfo[posicion].id + '</a>'
+                  + '</td>'
+                  + '<!-- ESTADO -->'
+                  + '<td>'
+                  + '<a href=""><i class="fa fa-times"></i> <span class="hidden-xs">ENVIAR</span></a>'
+                  + '</td>'
+                  + '</tr>';
+                  document.getElementById("informacionProductos").innerHTML = pedidosAMostrar;
+
+}
 
 // FUNCIÓN QUÉ ESPERA 2 SEGUNDOS PARA CARGAR
 function esperarCarga(){
