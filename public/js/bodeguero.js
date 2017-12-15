@@ -26,7 +26,7 @@ var tablaProductos = [];
 tablaPedidos.orderByChild("id").on("child_added", function(snapshot){
   // tablaPedidos.push(snapshot.key);
   tablaInfo.push(snapshot.val().info);
-  //tablaProductos.push(snapshot.val().productos);
+  tablaProductos.push(snapshot.val().productos);
 });
 var tamañoArregloInfo;
 
@@ -127,6 +127,10 @@ function pedidos(){
                       + '</tr>';
                       console.log(contador);
                       console.log(tablaInfo[contador]);
+                      console.log("Esto es una prueba de Cristian");
+                      console.log((tablaProductos[contador])[contador]);
+                      // var tablaPapu = tablaProductos[contador];
+                      // console.log(tablaPapu[contador]);
                       contador++;
   }
 
