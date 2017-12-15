@@ -41,9 +41,9 @@ SearchRef.on("value", function(snapshot) {
 
   //IMAGENES
 	document.getElementById("imagenProducto1").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image">' + '<img src="' + snapshot.val().foto + '" id="imagenProducto" alt=""/> ' + '</a>'
-	document.getElementById("imagenProducto2").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image"><img src="' + snapshot.val().foto + '" alt=""/></a>'
+	/*document.getElementById("imagenProducto2").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image"><img src="' + snapshot.val().foto + '" alt=""/></a>'
 	document.getElementById("imagenProducto3").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image"><img src="' + snapshot.val().foto + '" alt=""/></a>'
-	document.getElementById("imagenProducto4").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image"><img src="' + snapshot.val().foto + '" alt=""/></a>'
+	document.getElementById("imagenProducto4").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image"><img src="' + snapshot.val().foto + '" alt=""/></a>'*/
 
 
 
