@@ -151,11 +151,11 @@ function renderPedidos(idPedido,posicion){
   pedidosAMostrar += '<!-- FOTO -->'
                   + '<td class="hidden-xs">'
                   + '<a href=""><img src="../images/shop/previews/shop-prev-5.jpg" alt=""/></a>'
-                  + '</td>'
+                  + '</td><td></td>'
                   + '<!-- NOMBRE -->'
                   + '<td>'
                   for (var contador in tablaProductos[posicion]){
-                  pedidosAMostrar += '<p>' + (tablaProductos[posicion])[contador].nombre + '</p><hr>'
+                  pedidosAMostrar += '<ol>' + (tablaProductos[posicion])[contador].nombre + '<li>vacas</li>' + '</ol><hr>'
                   }
                   pedidosAMostrar += '</td>'
                   + '<!-- CELULAR -->'
