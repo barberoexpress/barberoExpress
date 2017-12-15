@@ -151,42 +151,32 @@ function renderPedidos(idPedido,posicion){
   pedidosAMostrar += '<!-- FOTO -->'
                   + '<td class="hidden-xs">'
                   + '<a href=""><img src="../images/shop/previews/shop-prev-5.jpg" alt=""/></a>'
-                  + '</td>'
+                  + '</td><td></td>'
                   + '<!-- NOMBRE -->'
                   + '<td>'
                   for (var contador in tablaProductos[posicion]){
-                  pedidosAMostrar += '<p>' + (tablaProductos[posicion])[contador].nombre + '</p><hr>'
+                  pedidosAMostrar += '<p>' + (tablaProductos[posicion])[contador].nombre + '</p>'
                   }
                   pedidosAMostrar += '</td>'
-                  + '<!-- CELULAR -->'
+                  + '<!-- CANTIDAD -->'
                   + '<td>'
-                  + tablaInfo[posicion].telefonoContacto + ' '//'3005933685'
-                  + '</td>'
-                  + '<!-- DIRECCION -->'
+                  for (var contador in tablaProductos[posicion]){
+                  pedidosAMostrar += '<p>Cantidad: ' + (tablaProductos[posicion])[contador].cantidad + '</p>'
+                  }
+                  pedidosAMostrar += '</td>'
+                  + '<!-- MARCA -->'
                   + '<td>'
-                  + tablaInfo[posicion].direccionEntrega + ' '//'Carrera 45 1'
-                  + '</td>'
-                  + '<!-- <td>'
-                  + '<form class="form">'
-                  + '<input type="number" class="input-sm" style="width: 60px;" min="1" max="100" value="1" />'
-                  + '</form>'
-                  + '</td> -->'
-                  + '<!-- COMO LLEGAR -->'
+                  for (var contador in tablaProductos[posicion]){
+                  pedidosAMostrar += '<p>Marca: ' + (tablaProductos[posicion])[contador].marca + '</p>'
+                  }
+                  pedidosAMostrar += '</td>'
+                  + '<!-- PRECIO -->'
                   + '<td>'
-                  + tablaInfo[posicion].comoLlegar + ' '//'Detrás del éxito'
-                  + '</td>'
-                  + '<!-- PRECIO TOTAL -->'
-                  + '<td>'
-                  + tablaInfo[posicion].totalPesos + ' '//'$ 20.000'
-                  + '</td>'
-                  + '<!-- IDENTIFICADOR -->'
-                  + '<td>'
-                  + '<a href="#" title="">'+ tablaInfo[posicion].id + '</a>'
-                  + '</td>'
-                  + '<!-- ESTADO -->'
-                  + '<td>'
-                  + '<a href=""><i class="fa fa-times"></i> <span class="hidden-xs">ENVIAR</span></a>'
-                  + '</td>';
+                  for (var contador in tablaProductos[posicion]){
+                  pedidosAMostrar += '<p>Precio: ' + (tablaProductos[posicion])[contador].precio + '</p>'
+                  }
+                  pedidosAMostrar += '</td><td></td><td></td>'
+
                   document.getElementById("informacionProductos" + idPedido).innerHTML = pedidosAMostrar;
 }
 
