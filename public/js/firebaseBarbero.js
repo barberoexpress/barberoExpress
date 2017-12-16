@@ -84,6 +84,18 @@ function CerrarSeccion(){
 	});
 }
 
+/* Ramon */
+
+// IE10+
+document.getElementsByTagName( "html" )[0].classList.remove( "loading" );
+
+// All browsers
+document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );
+
+// Or with jQuery
+$( "html" ).removeClass( "loading" );
+
+
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR EN EL INDEX--------------------
 function BuscarINDEX(prod1, prod2){
