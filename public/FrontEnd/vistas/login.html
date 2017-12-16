@@ -8,6 +8,8 @@
         <meta name="author" content="Roman Kirichik">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="google-signin-client_id" content="634083713883-822sguv0b9eop1igmerqkp8hhi12dk94.apps.googleusercontent.com">
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
@@ -135,10 +137,12 @@
 
                                             <div class="cf-left-col">
 
-                                                <!-- Inform Tip -->
-                                                <div class="form-tip pt-20">
+                                                <!-- HACER EL OLVIDASTE LA CONTRASEÑA -->
+                                               <!-- <div class="form-tip pt-20">
                                                     <a href="">¿Olvidaste la contraseña?</a>
-                                                </div>
+                                                </div> -->
+                                                 <!-- GOOGLE sign-in -->
+                                                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
                                             </div>
 
@@ -149,7 +153,10 @@
                                                     <button class="submit_btn btn btn-mod btn-medium btn-round" id="login-btn"  onclick="IniciarSeccion()">Iniciar sesión</button>
                                                 </div>
 
+                                                
+
                                             </div>
+                                            
 
                                         </div>
 
@@ -297,7 +304,7 @@
         <!--BASE DE DATOS -->
         <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 
-        <!-- FIREBASE Y FUNCIONES GENERICAS -->
+        <!-- FIREBASE, GOOGLE LOGIN Y FUNCIONES GENERICAS -->
         <script type="text/javascript" src="../../js/firebaseBarbero.js"></script>
 
         <!-- JS PERSONALIZADO -->

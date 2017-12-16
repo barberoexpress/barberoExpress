@@ -24,13 +24,15 @@ if (currentLocation != "bodeguero.html"){
 	if (userL != "false") {	
 
 		//TEXTO NOMBRE
-		if(currentLocation == "index.html"){
+		if(currentLocation == "FrontEnd/vistas/carritoCompras.html" || currentLocation == "FrontEnd/vistas/buscar-4columnas.html" || currentLocation == "FrontEnd/vistas/login.html" || currentLocation == "FrontEnd/vistas/productoSimple.html" || currentLocation == "FrontEnd/vistas/terminosLegales.html"){
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			//infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 
 		}else{
 			var infoUsuario = "";
-			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			//infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
+			infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 		}
 
 
@@ -56,12 +58,14 @@ if (currentLocation != "bodeguero.html"){
 		}*/
 
 		//BOTON DE INICIAR SESION / CERRAR SESION
-		if(currentLocation == "index.html"){
-			var botonIniciarCerrar = "";
-			botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
-		}else{
+		if(currentLocation == "FrontEnd/vistas/carritoCompras.html" || currentLocation == "FrontEnd/vistas/buscar-4columnas.html" || currentLocation == "FrontEnd/vistas/login.html" || currentLocation == "FrontEnd/vistas/productoSimple.html" || currentLocation == "FrontEnd/vistas/terminosLegales.html"){
 			var botonIniciarCerrar = "";
 			botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
+			//botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
+		}else{
+			var botonIniciarCerrar = "";
+			botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
+			//botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
 		}
 		document.getElementById("iniciar/cerrar").innerHTML = botonIniciarCerrar;
 		//document.getElementById("infoUsuario").innerHTML = infoUsuario;
@@ -72,6 +76,12 @@ if (currentLocation != "bodeguero.html"){
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
 function CerrarSeccion(){
 	firebase.auth().signOut().then(function() {
+		//CERRAMOS SESION CON GOOGLE
+		var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	    });
+
 		window.alert("sesion cerrada correctamente");
 		localStorage.setItem("USERKEY2", "false");
 		if(currentLocation != "index.html"){
