@@ -61,7 +61,7 @@ function Registrarse(){
 //FUNCION DE AGREGAR INFORMACION A LA DB
 function InformacionBaseDatos(correo,nombre){
 	var ref = firebaseRef.child("USUARIOS");
-	console.log("entramos")
+	console.log("entramos");
 	ref.push({
 		correo: correo,
 		nombre: nombre,

@@ -1,37 +1,91 @@
-/*var config = {
-    apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
-    authDomain: "barberoexpress-8c13c.firebaseapp.com",
-    databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
-    projectId: "barberoexpress-8c13c",
-    storageBucket: "barberoexpress-8c13c.appspot.com",
-    messagingSenderId: "634083713883"
-};
-firebase.initializeApp(config);*/
-
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 var ref;
+//var providerG = new firebase.auth.GoogleAuthProvider();  //instancia de google
+var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
 
 
-/* FUNCION PARA TOMAR INFORMACION CON GOOGLE */
+
+// -------------------- FUNCION PARA INICIAR SESION CON FACEBOOK --------------------
+function FbSignIn(){
+  var email;
+  var nombre;
+  firebase.auth().signInWithRedirect(provider).then(function(result) {
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+
+    email = user.email;
+    /*if(email != null && email != "" && email != "null"){
+      var errores = true;
+      for (var i = 0; i < email.length; i++){
+        if(email[i] == '@'){
+          errores = false;
+        }
+      }
+      if(errores == true){
+        throw "Porfavor inicia sesion con tu correo electronico";
+      }
+    }*/
+
+
+    nombre = user.name;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+
+  setTimeout(function() {
+    if(errores == false){
+      window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
+    }
+  }, 1000);
+  
+  setTimeout(function(){
+    if(errores == false){
+      window.location.href="../../index.html";
+    }
+  }, 1000);
+}
+
+
+
+
+
+
+
+
+
+// -------------------- FUNCION PARA INICIAR SESION CON GOOGLE --------------------
 function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  var loggearGoogle;
-  var email = profile.getEmail();
-  var password = "QWERTY123";
-  var nombre = profile.getName();
-  var errores = false;
+    var profile = googleUser.getBasicProfile();   
+    var loggearGoogle = "null";
+    var email = profile.getEmail();
+    var password = "clave1234567890";
+    var nombre = profile.getName();
 
-  /*CHEKEAMOS SI DEBEMOS LOGGEAR CON GOOGLE O CREARLE UNA CUENTA AL USUARIO CON GOOGLE */
+    var errores = false;
+    
+
+  /*chekeamos si debemos iniciar sesion con google o crearle una cuenta al usuario con google */
   var SearchRef = firebase.database().ref("USUARIOS");
   SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
-    loggearGoogle = snapshot.val().email;
+    loggearGoogle = snapshot.val().correo;
+
   });
-  console.log(loggearGoogle);
+
+  
   setTimeout(function() {
     //ESTAMOS YA REGISTRADOS
-    if(loggearGoogle.length > 5){
-
+    if(loggearGoogle != "null" && loggearGoogle != "undefined" && loggearGoogle != undefined){
+      console.log("Ya estamos registrados");
       //INICIAMOS SESION
       firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
       var errorCode = error.code;
@@ -40,7 +94,7 @@ function onSignIn(googleUser) {
       //MANEJO DE ERRORES
       if (errorCode === 'auth/wrong-password'){
               errores = true;
-              alert('Contraseña equivocada.');
+              alert('Ya tienes una cuenta creada de la forma normal.');
               return;
             } else if (errorCode === 'auth/user-not-found'){
               errores = true;
@@ -66,7 +120,7 @@ function onSignIn(googleUser) {
 
     }//NO ESTAMOS REGISTRADOS
     else{
-
+      console.log("No estamos registrados");
       //NOS REGISTRAMOS
       firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
         var errorCode = error.code;
@@ -83,19 +137,19 @@ function onSignIn(googleUser) {
           }
       });
     }
-
   }, 2000);
 
 
   setTimeout(function(){
-    if(errores == false && loggearGoogle.length < 5){
-      InformacionBaseDatos(email,nombre);
+    localStorage.setItem("USERNAME2", nombre);
+    if(errores == false && (loggearGoogle == "null" || loggearGoogle == "undefined" || loggearGoogle == undefined)){
+      InformacionBaseDatosNoRedirect(email,nombre);
+    }else{
+      window.location.href="../../index.html";
     }
-  },1000);
+  },2000);
 
-  localStorage.setItem("USERNAME2", nombre);
-  window.location.href="../../index.html";
-
+  
 
   /*console.log('ID: ' + profile.getId()); 
   console.log('Name: ' + profile.getName());
@@ -105,8 +159,14 @@ function onSignIn(googleUser) {
 }
 
 
-//FUNCION DE AGREGAR INFORMACION A LA DB
-function InformacionBaseDatos(correo,nombre){
+
+
+
+
+
+
+// -------------------- FUNCION PARA AGREGAR INFORMACION A LA DB --------------------
+function InformacionBaseDatosNoRedirect(correo,nombre){
   var ref = firebaseRef.child("USUARIOS");
   ref.push({
     correo: correo,
@@ -124,7 +184,10 @@ function InformacionBaseDatos(correo,nombre){
 
 
 
-/* FUNCION PARA INICIAR SESION SI NO ES CON GOOGLE */
+
+
+
+// -------------------- FUNCION PARA INICIAR SESION CON LA FORMA CONVENCIONAL --------------------
 function IniciarSeccion(){
 	var email = document.getElementById('inputEmail').value;
 	var password = document.getElementById("inputPassword").value;
@@ -176,7 +239,14 @@ function IniciarSeccion(){
 
 }
 
-//FUNCION PARA ACTUALIZAR LA PAGINA SEGUN EL USUARIO
+
+
+
+
+
+
+
+// -------------------- FUNCION PARA TOMAR LOS VALORES DE KEY USUARIO Y NOMBRE DE USUARIO EN LOCALSTORAGE --------------------
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
@@ -191,32 +261,19 @@ firebase.auth().onAuthStateChanged(function(user) {
 		 ref = firebase.database().ref("USUARIOS/" + key);
      localStorage.setItem("USERKEY2", key);
      localStorage.setItem("USERNAME2", snapshot.val().nombre);
-     //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAS PARA AÑADIR ESTO
-		 /*nombre = snapshot.val().nombre;
-     if(nombre.toString() == "null"){
-      nombre = "Mi cuenta";
-     }
-
-		 document.getElementById("Usuario").innerHTML = '<strong>' + nombre + '<strong>';*/
-
-    ref.child("carritoCompras").once('value', function(snapshot) {
-    var count = 0;
-    snapshot.forEach(function(childSnapshot) {
-      count++;
-    });
-      //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
-      //document.getElementById("numeroProductos").innerHTML = count;
-    });
-
 	});
 
-
-
-	//document.getElementById("numeroProductos").innerHTML = localStorage.getItem("PRODCUTOSCARRO");
   } else {
     console.log("nadie ha iniciado seccion");
   }
 });
+
+
+
+
+
+
+
 
 
 
@@ -236,8 +293,6 @@ function AgregarAlCarrito(){
     var marca = $("#marcaProducto").text();
     var descuento = "0";
     var foto = $('#imagenProducto').attr('src');
-    /*var labelProductosCarro = Number($("#numeroProductos").text()) + 1;
-    document.getElementById("numeroProductos").innerHTML = labelProductosCarro;*/ //ESTO ES PARA MODIFICAR EL LABEL DEL CARRO
     var keyP = localStorage.getItem("PROD_KEY")
 
    ref.child("carritoCompras/productos").push({
@@ -258,6 +313,13 @@ function AgregarAlCarrito(){
   }
 }
 
+
+
+
+
+
+
+
 // -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
@@ -265,7 +327,13 @@ function Ir_producto(prodKey){
 
 }
 
-//--------------------- Funcion Para sumar uno -----------//
+
+
+
+
+
+
+//--------------------- RAMON, ¿QUE ES ESTO?, REVISALO Y BORRARLO SI NO ES NECESARIO PORFA -----------//
 function sumarUno(){
   var valor = document.getElementById( "cantidad" ).value;
   var num = parseInt( valor );
@@ -275,7 +343,7 @@ function sumarUno(){
   //document.getElementById( "cantidad" ).innerHTML = num ;
   document.getElementById("cantidad").value = num ;
 }
-//---------------- Funcion Para restar sin pasarse de 0---//
+
 function restarUnoCompras(){
   var valor = document.getElementById( "cantidad" ).value;
   var num = parseInt( valor );
@@ -288,6 +356,13 @@ function restarUnoCompras(){
     console.log("valor: "+valor+" num: "+num);
     document.getElementById("cantidad").value = num ;
 }
+
+
+
+
+
+
+
 
 // -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
 function Buscar(){

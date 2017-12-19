@@ -15,16 +15,16 @@ var firebaseAuth = firebase.auth();
 var url = window.location.pathname;
 var currentLocation = url.substring(url.lastIndexOf('/')+1);
 
-
 //NO HACEMOS ESTA OPERACION SI ESTAMOS EN LA PAGINA DEL BODEGUERO
 if (currentLocation != "bodeguero.html"){
 	// ---- SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, CAMBIAR EL BOTON DE INICIAR/CERRAR SESION Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR -------
 	var userL = localStorage.getItem("USERKEY2");
 	var userN = localStorage.getItem("USERNAME2");
-	if (userL != "false") {	
+	console.log("userKey: " +  userL);
+	if (userL != "null" && userL != null) {	
 
 		//TEXTO NOMBRE
-		if(currentLocation == "FrontEnd/vistas/carritoCompras.html" || currentLocation == "FrontEnd/vistas/buscar-4columnas.html" || currentLocation == "FrontEnd/vistas/login.html" || currentLocation == "FrontEnd/vistas/productoSimple.html" || currentLocation == "FrontEnd/vistas/terminosLegales.html"){
+		if(currentLocation == "carritoCompras" || currentLocation == "buscar-4columnas" || currentLocation == "login" || currentLocation == "productoSimple" || currentLocation == "terminosLegales"){
 			var infoUsuario = "";
 			//infoUsuario += '<p><img align="left" src="FrontEnd/images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
 			infoUsuario += '<p><img align="left" src="../images/logo/logoWhiteNavBar.png"/>'+userN+'</p>';
@@ -58,7 +58,7 @@ if (currentLocation != "bodeguero.html"){
 		}*/
 
 		//BOTON DE INICIAR SESION / CERRAR SESION
-		if(currentLocation == "FrontEnd/vistas/carritoCompras.html" || currentLocation == "FrontEnd/vistas/buscar-4columnas.html" || currentLocation == "FrontEnd/vistas/login.html" || currentLocation == "FrontEnd/vistas/productoSimple.html" || currentLocation == "FrontEnd/vistas/terminosLegales.html"){
+		if(currentLocation == "carritoCompras" || currentLocation == "buscar-4columnas" || currentLocation == "login" || currentLocation == "productoSimple" || currentLocation == "terminosLegales"){
 			var botonIniciarCerrar = "";
 			botonIniciarCerrar = '<a href="login.html">iniciar sesión</a>';
 			//botonIniciarCerrar = '<a href="FrontEnd/vistas/login.html">iniciar sesión</a>';
@@ -74,17 +74,32 @@ if (currentLocation != "bodeguero.html"){
 
 // -------------------- FUNCION PARA CERRAR SECCION --------------------
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
+
+function onLoad() {
+	gapi.load('auth2', function() {
+        gapi.auth2.init();
+    });
+}
+
 function CerrarSeccion(){
-	firebase.auth().signOut().then(function() {
-		//CERRAMOS SESION CON GOOGLE
-		var auth2 = gapi.auth2.getAuthInstance();
+	var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
-	      console.log('User signed out.');
+	      document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://barberoexpress-8c13c.firebaseapp.com";
+	      alert('Te has desconectado exitosamente.');
 	    });
 
+
+	firebase.auth().signOut().then(function() {
+		//CERRAMOS SESION CON GOOGLE
+		/*var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	    });*/
+
 		window.alert("sesion cerrada correctamente");
-		localStorage.setItem("USERKEY2", "false");
-		if(currentLocation != "index.html"){
+		localStorage.setItem("USERKEY2", "null");
+		localStorage.setItem("USERNAME2", "null");
+		if(currentLocation != "index"){
 			window.location.href="../../index.html";
 		}else{
 			window.location.href="index.html";
