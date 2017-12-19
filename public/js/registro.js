@@ -65,6 +65,8 @@ function InformacionBaseDatos(correo,nombre){
 	ref.push({
 		correo: correo,
 		nombre: nombre,
+		vaciarA: true,
+		vaciarB: true,
 		apellido: "null",
 		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
 		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
