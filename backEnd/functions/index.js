@@ -117,16 +117,17 @@ exports.totalizarCarrito = functions.database
 	const usuario = event.data.val()
 	//console.log(carritoCompra.vaciar.isVerified)
 	// preguntamos por vaciar, para que no entre 2 veces
-	/*
-	if (carritoCompra.vaciar.isVerified == 'true') {
+	
+	if (usuario.vaciarA) {
 		console.log("se fue")
 		return
 	}
-	*/
+	
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
 	console.log("------- ENVIADO PEDIDO -------------")
 
+	usuario.vaciarA = true;
 
 	var eventSnapshot = event.data; // Get usuario data
     var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
@@ -215,20 +216,22 @@ exports.totalizarCarrito = functions.database
 exports.crearFactura = functions.database
 .ref('/USUARIOS/{USUARIOSID}')
 .onWrite(event =>{ 
+
+
 	// esto es para coger la infurmacion de todo el carrito de compras
 	const usuario = event.data.val()
 	//console.log(carritoCompra.vaciar.isVerified)
 	// preguntamos por vaciar, para que no entre 2 veces
-	/*
-	if (carritoCompra.vaciar.isVerified == 'true') {
-		console.log("se fue")
-		return
+	
+	if (usuario.vaciarB) {
+		console.log("se fue :v")
+		return	
 	}
-	*/
+	
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
 	console.log("------ FACTURANDO -----")
-
+	usuario.vaciarB = true;
 
 	var eventSnapshot = event.data; // Get usuario data
     var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
@@ -298,9 +301,13 @@ exports.crearFactura = functions.database
 	
 	factura.totalPesos = totalSD;
 
+	const promise = event.data.ref.set(usuario)
+	
 	factura.productos = productos
 	var ref = event.data.ref.root;
 	console.log("factura " + factura.nombreUsuario)
   	return ref.child("FACTURAS").push({factura: factura});
 	return promise
+
+
 })
