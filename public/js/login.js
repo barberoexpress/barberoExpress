@@ -18,7 +18,7 @@ var ref;
 function FbSignIn(){
   var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
   provider.addScope('public_profile');
-
+  var loggearFb = "null";
   var email;
   var nombre;
   //nos envia a la pagina de fb a loggearnos
@@ -42,9 +42,22 @@ function FbSignIn(){
     nombre = user.displayName;
     
     setTimeout(function() {
+      var SearchRef = firebase.database().ref("USUARIOS");
+      SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
+      loggearFb = snapshot.val().correo;
+      });
+    }, 1000);
+
+
+    setTimeout(function() {
       //if(errores == false){
         localStorage.setItem("USERNAME2", nombre);
         window.alert("Bienvenido " + nombre + " que bueno tenerte de vuelta");
+        if(loggearFb == "null" || loggearFb == "undefined" || loggearFb == undefined){
+          InformacionBaseDatosNoRedirect(email,nombre);
+        }else{
+          window.location.href="../../index.html";
+        }
       //}
     }, 1000);
   
