@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
 
+<html>
+<!--
+class="loading">
+-->
 <head>
   <title>Barbero &mdash; Express</title>
   <meta name="description" content="">
@@ -32,9 +35,14 @@
 
 <body class="appear-animate" onload="onLoad()">
 
-  <!-- Page Loader -->
+  <!-- Page Loader 
   <div class="page-loader">
+    -->
+  <div class="page-loader">
+
+    <!--
     <div class="loader">Cargando...</div>
+  -->
   </div>
   <!-- End Page Loader -->
 
@@ -65,6 +73,7 @@
 
             <div class="local-scroll">
               <!-- <a href="#about" class="btn btn-mod btn-border-w btn-medium btn-round hidden-xs">See More</a> -->
+
               <a href="#about" class="btn btn-mod btn-border-w btn-medium btn-round hidden-xs">Instagram</a>
               <span class="hidden-xs">&nbsp;</span>
               <!-- <a href="http://vimeo.com/50201327" class="btn btn-mod btn-border-w btn-medium btn-round lightbox mfp-iframe">Play Reel</a> -->
@@ -462,6 +471,12 @@
 
 
               <div id="result"></div>
+            </form>
+
+            <form method="POST" action="https://formspree.io/info@ramlasoftware.com">
+              <input type="email" name="email" placeholder="Your email">
+              <textarea name="message" placeholder="Your message"></textarea>
+              <button type="submit">Send</button>
             </form>
 
           </div>
