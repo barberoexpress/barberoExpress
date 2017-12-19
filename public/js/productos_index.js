@@ -24,6 +24,9 @@ var time = 0;
 ** keyProducto: string
 */
 
+
+
+
 //BASE DE datos
 var firebaseDB = firebase.database().ref();
 var refProductos = firebaseDB.child("PRODUCTOS");

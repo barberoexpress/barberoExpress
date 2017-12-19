@@ -83,10 +83,12 @@ function onLoad() {
 
 function CerrarSeccion(){
 	var auth2 = gapi.auth2.getAuthInstance();
-	    auth2.signOut().then(function () {
-	      document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://barberoexpress-8c13c.firebaseapp.com";
-	      alert('Te has desconectado exitosamente.');
-	    });
+		if(auth2 != null && auth2 != "null" && auth2 != ""){
+		    auth2.signOut().then(function () {
+		      document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://barberoexpress-8c13c.firebaseapp.com";
+		      alert('Te has desconectado exitosamente.');
+		    });
+		}
 
 
 	firebase.auth().signOut().then(function() {

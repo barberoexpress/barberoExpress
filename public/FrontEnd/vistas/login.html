@@ -29,13 +29,13 @@
     <body class="appear-animate">
 
         <!-- LOGIN CON FACEBOOK -->
-       <!-- <script>
+        <script>
           window.fbAsyncInit = function() {
             FB.init({
               appId      : '412290055871012',
               cookie     : true,
               xfbml      : true,
-              version    : '{latest-api-version}'
+              version    : 'v2.11'
             });
               
             FB.AppEvents.logPageView();   
@@ -49,7 +49,7 @@
              js.src = "https://connect.facebook.net/en_US/sdk.js";
              fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
-        </script> -->
+        </script>
 
 
         <!-- Page Loader -->
@@ -172,7 +172,7 @@
                                                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
                                                  <!--FACEBOOK SIGN IN -->
-                                                 <div onclick="FbSignIn()">Inicia sesion con FB</div>
+                                                <button class="submit_btn btn btn-mod btn-medium btn-round" onclick="FbSignIn()">FACEBOOK</button>
 
                                             </div>
 
@@ -181,10 +181,7 @@
                                                 <!-- Send Button -->
                                                 <div class="align-right pt-10">
                                                     <button class="submit_btn btn btn-mod btn-medium btn-round" id="login-btn"  onclick="IniciarSeccion()">Iniciar sesión</button>
-                                                </div>
-
-                                                
-
+                                                </div>    
                                             </div>
                                             
 

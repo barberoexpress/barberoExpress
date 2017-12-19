@@ -2,20 +2,31 @@ var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 var ref;
 //var providerG = new firebase.auth.GoogleAuthProvider();  //instancia de google
-var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
+
 
 
 
 // -------------------- FUNCION PARA INICIAR SESION CON FACEBOOK --------------------
+
+
+/*function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}*/
+
 function FbSignIn(){
+  var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
+  provider.addScope('public_profile');
+
   var email;
   var nombre;
-  firebase.auth().signInWithRedirect(provider).then(function(result) {
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+  //nos envia a la pagina de fb a loggearnos
+  //firebase.auth().signInWithRedirect(provider);
+  //chekeamos si nos loggeamos correctamente
+  firebase.auth().signInWithPopup(provider).then(function(result){
     var token = result.credential.accessToken;
-    // The signed-in user info.
     var user = result.user;
-
     email = user.email;
     /*if(email != null && email != "" && email != "null"){
       var errores = true;
@@ -28,9 +39,21 @@ function FbSignIn(){
         throw "Porfavor inicia sesion con tu correo electronico";
       }
     }*/
+    nombre = user.displayName;
+    
+    setTimeout(function() {
+      //if(errores == false){
+        localStorage.setItem("USERNAME2", nombre);
+        window.alert("Bienvenido " + nombre + " que bueno tenerte de vuelta");
+      //}
+    }, 1000);
+  
+    setTimeout(function(){
+      //if(errores == false){
+        window.location.href="../../index.html";
+      //}
+    }, 1000);
 
-
-    nombre = user.name;
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -41,18 +64,9 @@ function FbSignIn(){
     var credential = error.credential;
     // ...
   });
-
-  setTimeout(function() {
-    if(errores == false){
-      window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
-    }
-  }, 1000);
   
-  setTimeout(function(){
-    if(errores == false){
-      window.location.href="../../index.html";
-    }
-  }, 1000);
+
+  
 }
 
 
@@ -253,7 +267,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 	var SearchRef = firebase.database().ref("USUARIOS");
 
 	var correo = user.email;
-	var nombre;
+	var nombre = user.displayName;
+
   var count = 0;
 
 	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
@@ -262,7 +277,7 @@ firebase.auth().onAuthStateChanged(function(user) {
      localStorage.setItem("USERKEY2", key);
      localStorage.setItem("USERNAME2", snapshot.val().nombre);
 	});
-
+    console.log("HEY ESTAMOS LOGGEADOS Y ESTAMOS TOMANDO INFORMACION DESDE LOGIN.JS")
   } else {
     console.log("nadie ha iniciado seccion");
   }
