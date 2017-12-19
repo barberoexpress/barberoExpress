@@ -203,7 +203,9 @@ function InformacionBaseDatosNoRedirect(correo,nombre){
     direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
     carritoCompras: {vaciar:"false",keyUsuario:"null"},
     foto: "null",
-    historialCompras: "null"
+    historialCompras: "null",
+    vaciarA: true,
+    vaciarB: true
   });
 }
 
