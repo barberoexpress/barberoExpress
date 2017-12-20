@@ -1,21 +1,9 @@
-/*var config = {
-    apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
-    authDomain: "barberoexpress-8c13c.firebaseapp.com",
-    databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
-    projectId: "barberoexpress-8c13c",
-    storageBucket: "barberoexpress-8c13c.appspot.com",
-    messagingSenderId: "634083713883"
-};
-firebase.initializeApp(config);*/
-
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 var userkey = localStorage.getItem("USERKEY2");
 var user = firebase.auth().currentUser;
 var actualizar = true;
 var refCarro;
-//firebase.database().ref("USUARIOS/" + key);
-//while(actualizar){ActualizarDatos();}
 var table = '<tr>' + '<th>Foto</th>' + '<th>Producto</th>' + '<th>Cantidad</th>' + '<th>Precio</th>' + '<th> </th>';
 var tabla_total;
 var rows = 1;
@@ -30,11 +18,17 @@ var total = 0;
 var id_producto = [" ", " "];
 var keyArreglo = [" ", " "];
 var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional;
-
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
-
 var refUsuario;
-// -------------------- CODIGO PARA ACTUALIZAR EL CARRITO DE COMPRAS DEL USUARIO --------------------//
+
+
+
+
+
+
+
+
+// ---------------------------------- CODIGO PARA ACTUALIZAR EL CARRITO DE COMPRAS DEL USUARIO ---------------------------------
 firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
@@ -51,18 +45,9 @@ if (user) {
     	apellido = snapshot.val().apellido;
     	telefono = snapshot.val().telefono.telefonoCelular;
       informacion_adicional = snapshot.val().direccion.informacionAdicional;
+      ActualizarCarrito();
     });
 
-
-	ActualizarCarrito();
-	/*setTimeout(function(){
-    //esto pone error
-		document.getElementById("ciudad").innerHTML = '<strong>'+ ciudad +'</strong>';
-		document.getElementById("direccion").innerHTML = '<strong>'+ direccion +'</strong>';
-		document.getElementById("direccion2").innerHTML = '<strong>'+ direccion2 +'</strong>';
-		document.getElementById("info_adicional").innerHTML = '<strong>'+ info_adicional +'</strong>';
-		document.getElementById("telefono").innerHTML = '<strong>'+ telefono +'</strong>';
-    }, 1000);*/
 } else {
    window.alert("Inicia sesion primero");
    window.location.href="login.html";
@@ -74,92 +59,77 @@ function EliminarArticulo(id){
 	refCarro.orderByChild("id").equalTo(id).on("child_added", function(snapshot) {
 		id = snapshot.key;
 		refCarro.child(id).remove();
+    ActualizarCarrito();
 	});
-  setTimeout(function(){
-	 ActualizarCarrito();
-  }, 1000);
 }
 
-function BuscarEnCarrito(id){
-  console.log("entro");
-  var Encontrado = false;
-  console.log("id: " + id);
-  refCarro.orderByChild("id").equalTo(id).on("child_added",function(snapshot){
-    console.log("encontro");
-    Encontrado = true;
-    console.log("Encontrado = "+Encontrado);
-    return Encontrado;
-  });
-  console.log("Encontrado = "+Encontrado);
-  return Encontrado;
-  /*
-  setTimeout(function () {
 
-    if(Encontrado==true){
-      respuesta = true;
-      return respuesta;
-    }else{
-      respuesta = false;
-      return respuesta;
-    }
 
-    console.log("Encontrado = "+Encontrado);
-    return Encontrado;
-  }, 3000);
-  */
-}
 
-function CambiarAPorIr(uno,dos) {
-//lo de los intentos deberia de estar cada vez que se conecte a Firebase, con valores por defecto
+// function BuscarEnCarrito(id){
+//   console.log("entro");
+//   var Encontrado = false;
+//   console.log("id: " + id);
+//   refCarro.orderByChild("id").equalTo(id).on("child_added",function(snapshot){
+//     console.log("encontro");
+//     Encontrado = true;
+//     console.log("Encontrado = "+Encontrado);
+//     return Encontrado;
+//   });
+//   console.log("Encontrado = "+Encontrado);
+//   return Encontrado;
+// }
 
-var noMasIntentos = false;
-var intentos = 4;
-var respuesta;
-  var valor = document.getElementById( "id_Producto" ).innerText;
-  console.log(valor);
+// function CambiarAPorIr(uno,dos) {
+// //lo de los intentos deberia de estar cada vez que se conecte a Firebase, con valores por defecto
 
-  var esta = BuscarEnCarrito(parseInt(valor));
+// var noMasIntentos = false;
+// var intentos = 4;
+// var respuesta;
+//   var valor = document.getElementById( "id_Producto" ).innerText;
+//   console.log(valor);
 
-  console.log(esta);
+//   var esta = BuscarEnCarrito(parseInt(valor));
 
-  if (esta == true) {
-    noMasIntentos = true;
-    switchDivS(dos,uno);
-  }else {
-    switchDivS(uno,dos);
-  }
+//   console.log(esta);
 
-}
+//   if (esta == true) {
+//     noMasIntentos = true;
+//     switchDivS(dos,uno);
+//   }else {
+//     switchDivS(uno,dos);
+//   }
 
-function switchDivS(id1, id2) {
-//este solo mustra el primero y oculta el segundo
-//facta organizar la posicion, quizas superponer uno ensima de otro
+// }
 
-  console.log(id1);
-  console.log(id2);
+// function switchDivS(id1, id2) {
+// //este solo mustra el primero y oculta el segundo
+// //facta organizar la posicion, quizas superponer uno ensima de otro
 
-  document.getElementById(id1).style.opacity ="1";
-  document.getElementById(id2).style.opacity ="0";
+//   console.log(id1);
+//   console.log(id2);
 
-}
+//   document.getElementById(id1).style.opacity ="1";
+//   document.getElementById(id2).style.opacity ="0";
 
-function MostrarUno() {
-  document.getElementById("Uno").style.opacity ="1";
-}
+// }
 
-function OcultarUno() {
-  document.getElementById("Uno").style.opacity ="0";
-}
+// function MostrarUno() {
+//   document.getElementById("Uno").style.opacity ="1";
+// }
+
+// function OcultarUno() {
+//   document.getElementById("Uno").style.opacity ="0";
+// }
+
+// function BotonSwitch(idA,idB) {
+//   return botonOCultar = ' <input type="submit"  value="Uno" onclick="switchDivS( '+idA+' , '+idB+' );">';
+// }
 
 
 function BotonCantidad(id,cantidad){
-	//return botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="'+cantidad+'" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" id="'+id+'" onclick="EliminarArticulo('+id+')"><i class="icon-remove icon-white"></button></div>';
   return botonCantidad = '<input type="text" id="'+id+'" value='+cantidad+'> <input type="button" value="+" onClick="sumarUnoCarrito('+id+');"> <input type="button" value="-" onClick="restarUnoCarrito('+id+');"> ';
   // FALTA POR HACER: que se actualize la tabla cada vez que se cambia una cantidad y
-}
-
-function BotonSwitch(idA,idB) {
-  return botonOCultar = ' <input type="submit"  value="Uno" onclick="switchDivS( '+idA+' , '+idB+' );">';
 }
 
 function sumarUnoCarrito(id){
@@ -201,34 +171,23 @@ function ActualizarCarrito(){
 
       refCarro.orderByChild("id").on("child_added", function(snapshot){
   			//producto.push(snapshot.val().foto);
-  			nombre.push(snapshot.val().nombre);
-  			precio.push(snapshot.val().precio);
-        keyArreglo.push(snapshot.key);
-  			marca.push(snapshot.val().marca);
-  			descuento.push(snapshot.val().descuento);
-  			foto_URL.push(snapshot.val().foto);
-  			id_producto.push(snapshot.val().id);
-        cantidad.push(snapshot.val().cantidad);
+        if(snapshot.val().nombre != "FINAL"){
+    			nombre.push(snapshot.val().nombre);
+    			precio.push(snapshot.val().precio);
+          keyArreglo.push(snapshot.key);
+    			marca.push(snapshot.val().marca);
+    			descuento.push(snapshot.val().descuento);
+    			foto_URL.push(snapshot.val().foto);
+    			id_producto.push(snapshot.val().id);
+          cantidad.push(snapshot.val().cantidad);
+        }else{
+          Actualizar_HTML_carrito();
+        }
+
 		  });
-
-
-  setTimeout(function(){
-   while (end == false && time < 500000){
-      if(nombre[2] != null){
-        end = true;
-      }
-      time +=0.1;
-      if (time >= 500000){
-        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
-        time = 500001;
-      }
-
     }
-    Actualizar_HTML_carrito();
-  }, 700);
-}
 
-function actualizarCantidad() {
+function actualizarCantidad() { 
 
     var i=2;
     var j = 0;
@@ -351,11 +310,11 @@ function Actualizar_HTML_carrito(){
   }
 
   function llenarDatosPedido(){
-    if(ciudad != "null"){document.getElementById("ciudadPedido").options[0].innerHTML = ciudad;}
-    if(direccion != "null"){document.getElementById("direccionPedido").value = direccion;}
-    if(nombre_pedido != "null"){document.getElementById("nombrePedido").value = nombre_pedido;}
-    if(apellido != "null"){document.getElementById("apellidoPedido").value = apellido;}
-    if(telefono != "null"){document.getElementById("telefonoPedido").value = telefono;}
+    if(ciudad != "null"){document.getElementById("ciudadPedido").options[0].innerHTML = ciudad;} else{ document.getElementById("ciudadPedido").options[0].innerHTML = "ciudad";}
+    if(direccion != "null"){document.getElementById("direccionPedido").value = direccion;} else{ document.getElementById("direccionPedido").value = "direccion";}
+    if(nombre_pedido != "null"){document.getElementById("nombrePedido").value = nombre_pedido;} else{ document.getElementById("nombrePedido").value = "nombre";}
+    if(apellido != "null"){document.getElementById("apellidoPedido").value = apellido;} else{ document.getElementById("apellidoPedido").value = "apellido";}
+    if(telefono != "null"){document.getElementById("telefonoPedido").value = telefono;} else{ document.getElementById("telefonoPedido").value = "telefono";}
   }
 
   function comprar(){

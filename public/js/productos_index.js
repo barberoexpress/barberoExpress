@@ -10,43 +10,32 @@ var tipos = [" ", " "];
 
 
 
-//CONTROL DE CALLBACK DE FIREBASE
-var end = false;
-var time = 0;
-
-/* SE INGRESA A LA BASE DE DATOS
-** Y SE TRAEN TODOS LOS PRODUCTOS
-** foto: string
-** nombre: string
-** precio: string
-+* descripcion: string
-** recomendado: boolean
-** keyProducto: string
-*/
 
 
-
-
-//BASE DE datos
+// -------------------- FUNCION PARA TOMAR LOS PRODUCTOS DE LA BASE DE DATOS --------------------
 var firebaseDB = firebase.database().ref();
 var refProductos = firebaseDB.child("PRODUCTOS");
 var refTelefonos = firebaseDB.child("TELEFONOS");
 
-// ORDENAR PRODUCTOS
 refProductos.orderByChild("id").on("child_added", function(snapshot) {
-  foto_Url.push(snapshot.val().foto);
-  nombre.push(snapshot.val().nombre);
-  precio.push(snapshot.val().precio);
-  descripcion.push(snapshot.val().descripcion);
-  recomendado.push(snapshot.val().recomendado);
-  tipos.push(snapshot.val().tipo);
-  keyProducto.push(snapshot.key);
+  if(snapshot.val().nombre != "FINAL"){
+    foto_Url.push(snapshot.val().foto);
+    nombre.push(snapshot.val().nombre);
+    precio.push(snapshot.val().precio);
+    descripcion.push(snapshot.val().descripcion);
+    recomendado.push(snapshot.val().recomendado);
+    tipos.push(snapshot.val().tipo);
+    keyProducto.push(snapshot.key);
+  }else{
+    Imegenes_Recomendadas();
+  }
 });
 
 
 //
 
-// CICLO QUE ESPERA PARA CARGAR
+/*var end = false;
+var time = 0;
 if (navigator.userAgent.indexOf("Chrome") != -1) {
   setTimeout(function() {
     while (end == false && time < 500000) {
@@ -82,9 +71,9 @@ if (navigator.userAgent.indexOf("Chrome") != -1) {
     Imegenes_Recomendadas();
   }, 1000);
 
-}
+}*/
 
-
+// ------------------------------- FUNCION MANDAR A LA BASE DE DATOS EL TELEFONO DEL USUARIO ------------------------------------
 function ingresarTelefono(){
   var telefonoIngresado = document.getElementById("telefonoUsuario").value;
   refTelefonos.push({
@@ -96,9 +85,11 @@ function ingresarTelefono(){
 
 
 
+
+
+
+// ------------------------------- FUNCION ACTUALIZAR EL HTML CON LAS "IMAGENES RECOMENDADAS", LAS PRIMERAS DEL "INICIO" ------------------------------------
 function Imegenes_Recomendadas() {
-  //setTimeout(function(){
-  // var imagenes_referidos = '<div class="item active">' + '<ul class="thumbnails">';
   var imagenes_referidos = '';
   var j = 2;
   var No_productos = 0; // CANTIDAD DE PRODUCTOS A MOSTRAR
@@ -136,11 +127,17 @@ function Imegenes_Recomendadas() {
     j++;
   }
   document.getElementById("imagenes_recomendados").innerHTML = imagenes_referidos;
-  //}, 3000);
 }
 
 
-// CARGA IMAGENES POR TIPOS (PORTAFOLIO)
+
+
+
+
+
+
+
+// ------------------------------- FUNCION ACTUALIZAR EL HTML CON IMAGENES DE CADA TIPO DE PRODUCTO AL DAR CLICK EN ESTE  EN LA PESTAÑA "TIPOS"------------------------------------
 function imagenesTipos(prod1, prod2){
   var imagenesTipo = '';
   if (prod2 == '*'){prod2 = "";}
@@ -191,7 +188,14 @@ function imagenesTipos(prod1, prod2){
 }
 
 
-//CARGAR IMAGENES PORTAFOLIO RESUMEN
+
+
+
+
+
+
+
+// ------------------------------- FUNCION PARA ACTUALIZAR EL HTML CON LAS IMAGENES INICIALMENTE MOSTRADAS EN LA PESTAÑA "TIPOS" ------------------------------------
 function imagenesPortafolioGeneral(){
   var imagenesPortafolio = '';
   var j = 0;

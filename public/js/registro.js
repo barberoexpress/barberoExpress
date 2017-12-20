@@ -70,7 +70,7 @@ function InformacionBaseDatos(correo,nombre){
 		apellido: "null",
 		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
 		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
-		carritoCompras: {vaciar:"false",keyUsuario:"null"},
+		carritoCompras: {vaciar:"false",keyUsuario:"null", productos: {id:9999999999, nombre: "FINAL"}},
 		foto: "null",
 		historialCompras: "null"
 	});
