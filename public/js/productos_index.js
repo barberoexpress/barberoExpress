@@ -12,6 +12,7 @@ var tipos = [" ", " "];
 
 
 
+
 // -------------------- FUNCION PARA TOMAR LOS PRODUCTOS DE LA BASE DE DATOS --------------------
 var firebaseDB = firebase.database().ref();
 var refProductos = firebaseDB.child("PRODUCTOS");
@@ -32,46 +33,11 @@ refProductos.orderByChild("id").on("child_added", function(snapshot) {
 });
 
 
-//
-
-/*var end = false;
-var time = 0;
-if (navigator.userAgent.indexOf("Chrome") != -1) {
-  setTimeout(function() {
-    while (end == false && time < 500000) {
-      if (nombre[24] != null) {
-        end = true;
-      }
-      time += 0.1;
-      if (time >= 500000) {
-        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
-        time = 500001;
-      }
-
-    }
-    //Fotos_Index();
-    Imegenes_Recomendadas();
-  }, 2000);
 
 
-} else {
-  setTimeout(function() {
-    while (end == false && time < 500000) {
-      if (nombre[24] != null) {
-        end = true;
-      }
-      time += 0.1;
-      if (time >= 500000) {
-        alert("Mala conexión a Internet, intenta cargar la pagina de nuevo");
-        time = 500001;
-      }
 
-    }
-    //Fotos_Index();
-    Imegenes_Recomendadas();
-  }, 1000);
 
-}*/
+
 
 // ------------------------------- FUNCION MANDAR A LA BASE DE DATOS EL TELEFONO DEL USUARIO ------------------------------------
 function ingresarTelefono(){

@@ -156,7 +156,7 @@ function ActualizarCarrito(){
     var time = 0;
     
     //LIMPIAR EL ARREGLO
-    nombre = [" ", " "];
+    nombre = [" ", " "];  
     marca = [" ", " "];
     precio = [" ", " "];
     foto_URL = [" ", " "];

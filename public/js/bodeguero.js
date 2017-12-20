@@ -24,16 +24,19 @@ var tablaProductos = [];
 
 //GUARDAMOS TODOS LOS PEDIDOS EN UN ARREGLO
 tablaPedidos.orderByChild("id").on("child_added", function(snapshot){
-  // tablaPedidos.push(snapshot.key);
-  tablaInfo.push(snapshot.val().info);
-  tablaProductos.push(snapshot.val().productos);
+  if(snapshot.key != "FINAL"){
+    tablaInfo.push(snapshot.val().info);
+    tablaProductos.push(snapshot.val().productos);
+  }else{
+    pedidos();
+  }
 });
 var tamañoArregloInfo;
 
 
 
 // CICLO QUE ESPERA PARA CARGAR
-esperarCarga();
+//esperarCarga();
 
 
 
