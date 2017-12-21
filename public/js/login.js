@@ -16,6 +16,7 @@ var ref;
 }*/
 
 function FbSignIn(){
+  FB.logout(function(response) {});
   var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
   provider.addScope('public_profile');
   var loggearFb = "null";
@@ -78,7 +79,7 @@ function FbSignIn(){
     // ...
   });
   
-
+  localStorage.setItem("PROVEEDOR","FACEBOOK");
   
 }
 
@@ -92,96 +93,85 @@ function FbSignIn(){
 
 // -------------------- FUNCION PARA INICIAR SESION CON GOOGLE --------------------
 function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();   
-    var loggearGoogle = "null";
-    var email = profile.getEmail();
-    var password = "clave1234567890";
-    var nombre = profile.getName();
+  //if(localStorage.getItem("PROVEEDOR") == "GOOGLE"){
+      var profile = googleUser.getBasicProfile();   
+      var loggearGoogle = "null";
+      var email = profile.getEmail();
+      var password = "clave1234567890";
+      var nombre = profile.getName();
 
-    var errores = false;
+      var errores = false;
+      console.log("YA ESAMOS LOGGEADOS CON GOOGLE: " + nombre + ", CON EMAIL: " +  email);
+
+    /*chekeamos si debemos iniciar sesion con google o crearle una cuenta al usuario con google */
+    var SearchRef = firebase.database().ref("USUARIOS");
+    SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
+      loggearGoogle = snapshot.val().correo;
+
+    });
+
     
-
-  /*chekeamos si debemos iniciar sesion con google o crearle una cuenta al usuario con google */
-  var SearchRef = firebase.database().ref("USUARIOS");
-  SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
-    loggearGoogle = snapshot.val().correo;
-
-  });
-
-  
-  setTimeout(function() {
-    //ESTAMOS YA REGISTRADOS
-    if(loggearGoogle != "null" && loggearGoogle != "undefined" && loggearGoogle != undefined){
-      console.log("Ya estamos registrados");
-      //INICIAMOS SESION
-      firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-
-      //MANEJO DE ERRORES
-      if (errorCode === 'auth/wrong-password'){
-              errores = true;
-              alert('Ya tienes una cuenta creada de la forma normal.');
-              return;
-            } else if (errorCode === 'auth/user-not-found'){
-              errores = true;
-              alert('Usuario no encontrado.');
-              return;
-
-            } else if(errorCode === 'auth/invalid-email'){
-              errores = true;
-              alert('Email invalido.');
-              return;
-
-            } else if(errorCode === 'auth/user-disabled'){
-              errores = true;
-              alert('Usuario bloqueado.');
-              return;
-
-            }else{
-              errores = true;
-              alert(errorMessage);
-              return;
-            }
-      });
-
-    }//NO ESTAMOS REGISTRADOS
-    else{
-      console.log("No estamos registrados");
-      //NOS REGISTRAMOS
-      firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+    setTimeout(function() {
+      //ESTAMOS YA REGISTRADOS
+      if(loggearGoogle != "null" && loggearGoogle != "undefined" && loggearGoogle != undefined){
+        console.log("Ya estamos registrados, somos: " +  loggearGoogle);
+        localStorage.setItem("USERNAME2", nombre);
+        firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
 
-        if (errorCode === 'auth/wrong-password') {
-              alert('Contraseña equivocada.');
+        //MANEJO DE ERRORES
+        if (errorCode === 'auth/wrong-password'){
+                errores = true;
+                alert('Ya tienes una cuenta creada de la forma normal.');
+                return;
+              } else if (errorCode === 'auth/user-not-found'){
+                errores = true;
+                alert('Usuario no encontrado.');
+                return;
+
+              } else if(errorCode === 'auth/invalid-email'){
+                errores = true;
+                alert('Email invalido.');
+                return;
+
+              } else if(errorCode === 'auth/user-disabled'){
+                errores = true;
+                alert('Usuario bloqueado.');
+                return;
+
+              }else{
+                errores = true;
+                alert(errorMessage);
+                return;
+              }
+        });
+
+      }//NO ESTAMOS REGISTRADOS
+      else{
+        console.log("No estamos registrados");
+        //NOS REGISTRAMOS
+        firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+
+          if (errorCode === 'auth/wrong-password') {
+                alert('Contraseña equivocada.');
+                errores = true;
+                return;
+            } else {
               errores = true;
-              return;
-          } else {
-            errores = true;
-              alert(errorMessage);
-              return;
-          }
-      });
-    }
-  }, 2000);
+                alert(errorMessage);
+                return;
+            }
+        });
+        InformacionBaseDatosNoRedirect(email,nombre);
+      }
+    }, 2000);
 
 
-  setTimeout(function(){
-    localStorage.setItem("USERNAME2", nombre);
-    if(errores == false && (loggearGoogle == "null" || loggearGoogle == "undefined" || loggearGoogle == undefined)){
-      InformacionBaseDatosNoRedirect(email,nombre);
-    }else{
-      window.location.href="../../index.html";
-    }
-  },2000);
-
-  
-
-  /*console.log('ID: ' + profile.getId()); 
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());*/
+    localStorage.setItem("PROVEEDOR","GOOGLE");
+  //}
   
 }
 
@@ -253,19 +243,15 @@ function IniciarSeccion(){
       	  	return;
       	  }
 	});
+
   setTimeout(function() {
     if(errores == false){
       window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
-    }
-  }, 1000);
-	
-  setTimeout(function(){
-    if(errores == false){
+      localStorage.setItem("PROVEEDOR","LOCAL");
       window.location.href="../../index.html";
     }
   }, 1000);
   
-
 }
 
 

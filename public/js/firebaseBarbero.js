@@ -14,7 +14,7 @@ var firebaseAuth = firebase.auth();
 //VEAMOS EN QUE HTML ESTAMOS
 var url = window.location.pathname;
 var currentLocation = url.substring(url.lastIndexOf('/')+1);
-
+console.log("locacion actual: " + currentLocation +  " = " + "buscar-4columnas");
 //NO HACEMOS ESTA OPERACION SI ESTAMOS EN LA PAGINA DEL BODEGUERO
 if (currentLocation != "bodeguero.html"){
 	// ---- SI EL USUARIO ESTA LOGGEADO PARA PONER SU FOTO, SU NOMBRE, CAMBIAR EL BOTON DE INICIAR/CERRAR SESION Y ACTUALIZAR LOS PRODUCTOS DEL CARRO DE COMPRAS EN EL NAV BAR -------
@@ -76,19 +76,19 @@ if (currentLocation != "bodeguero.html"){
 //DEBEMOS DE ESPERAR A TENER EL NAV BAR CON EL CARRITO DE COMPRAR PARA AÑADIR ESTO
 
 function onLoad() {
-	gapi.load('auth2', function() {
+	/*gapi.load('auth2', function() {
         gapi.auth2.init();
-    });
+    });*/
 }
 
 function CerrarSeccion(){
-	var auth2 = gapi.auth2.getAuthInstance();
+	/*var auth2 = gapi.auth2.getAuthInstance();
 		if(auth2 != null && auth2 != "null" && auth2 != ""){
 		    auth2.signOut().then(function () {
 		      document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://barberoexpress-8c13c.firebaseapp.com";
 		      alert('Te has desconectado exitosamente.');
 		    });
-		}
+		}*/
 
 
 	firebase.auth().signOut().then(function() {
