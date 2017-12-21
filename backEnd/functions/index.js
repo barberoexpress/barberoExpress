@@ -311,3 +311,39 @@ exports.crearFactura = functions.database
 
 
 })
+
+exports.borrarCarrito = functions.database
+.ref('/USUARIOS/{USUARIOSID}')
+.onWrite(event =>{ 
+
+	const usuario = event.data.val()
+
+	if (usuario.vaciarA) {
+		console.log("vaciarA listo")
+		if (usuario.vaciarB) {
+			console.log("vaciarB listo")
+
+			var eventSnapshot = event.data; // Get  data
+    		var itemsSnapshot = eventSnapshot.child('carritoCompras'); // Get items data
+
+    		var carritoDeCompras = itemsSnapshot.val();
+    		var vaciar = itemsSnapshot.val().vaciar;
+
+			if (vaciar) {
+				console.log("vaciar carrito listo")
+				var finalon = {id:9999999999, nombre:"FINAL"};
+				var productosN ={FINAL:" "};
+				productosN.FINAL = finalon;
+
+				carritoDeCompras.productos = productosN;
+				carritoDeCompras.vaciar = false;
+
+				usuario.carritoCompras = carritoDeCompras;
+				const promise = event.data.ref.set(usuario)
+				return promise
+			}	
+		}	
+	}
+
+	
+})
