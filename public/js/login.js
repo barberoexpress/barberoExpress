@@ -244,10 +244,10 @@ function IniciarSeccion(){
       	  }
 	});
 
+   window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
+   localStorage.setItem("PROVEEDOR","LOCAL");
   setTimeout(function() {
     if(errores == false){
-      window.alert("Bienvenido " + email + " que bueno tenerte de vuelta");
-      localStorage.setItem("PROVEEDOR","LOCAL");
       window.location.href="../../index.html";
     }
   }, 1000);
