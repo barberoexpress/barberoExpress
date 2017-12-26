@@ -13,6 +13,7 @@ var firebaseAuth = firebase.auth();
 var id = 0;
 var vacio = ".";
 var selectedFile;
+var tipo = "null";
 
 
 
@@ -89,7 +90,7 @@ document.getElementById('file').onchange = function() {
 function CargarFoto(){
 	var fileName = selectedFile.name;
 	var NombreProducto = id;
-	var storageRef = firebase.storage().ref('/Productos/'+  id + '/' + fileName);
+	var storageRef = firebase.storage().ref('/Productos/'+  tipo + '/' + fileName);
 	var uploadTask = storageRef.put(selectedFile);
 	var key_Producto;
 
