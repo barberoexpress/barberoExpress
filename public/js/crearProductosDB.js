@@ -95,8 +95,6 @@ document.getElementById('file').addEventListener('change',prepareUpload,false);
 function prepareUpload(event)
 {
   selectedFile = event.target.files[0];
-  //fileName = files[0].name;
-  //alert(fileName);
 }
 
 function CargarFoto(){
@@ -213,13 +211,25 @@ function Buscar(){
 
 // -------------------- FUNCION ACTUALIZAR 1 PRODUCTO--------------------
 
-document.getElementById('file2').onchange = function() {
-	selectedFile = event.target.files[0];
-	PreviewPhoto(this, 2);
+
+
+document.getElementById('file2').addEventListener('change',prepareUpload2,false);
+function prepareUpload2(event)
+{
+  selectedFile = event.target.files[0];
+  PreviewPhoto(this, 2);
 }
+
 function Actualizar(){
 
 	var queryText = document.getElementById("ID_producto").value;
 	id = parseInt(queryText);
-	CargarFoto();
+	firebaseRef.child("PRODUCTOS").orderByChild('id').equalTo(id).on("child_added", function(snapshot) {
+		tipo = snapshot.val().tipo
+		
+	});
+	setTimeout(function() {
+		CargarFoto();
+	}, 3000);
+	
 }
