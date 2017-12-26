@@ -247,3 +247,60 @@ function mostrarCantidadPedidos(){
 	}, 2000);
 	
 }
+
+
+
+// -------------------- FUNCION PARA USAR EL BUSCADOR --------------------
+function Buscar(){
+  var queryText = document.getElementById("srchFld").value;
+  var foto_Url = [" ", " "];
+  var nombre = [" ", " "];
+  var precio = [" ", " "];
+  var descripcion = [" ", " "];
+  var keyProducto = [" ", " "];
+
+  if(queryText.length >= 2){
+  	
+    firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+        foto_Url.push(snapshot.val().foto);
+        nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        keyProducto.push(snapshot.key);
+    });
+
+    firebaseRef.child("PRODUCTOS").orderByChild('marca').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+        foto_Url.push(snapshot.val().foto);
+        nombre.push(snapshot.val().nombre);
+        precio.push(snapshot.val().precio);
+        descripcion.push(snapshot.val().descripcion);
+        keyProducto.push(snapshot.key);
+    });
+
+    firebaseRef.child("PRODUCTOS").orderByChild('tipo').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+          foto_Url.push(snapshot.val().foto);
+          nombre.push(snapshot.val().nombre);
+          precio.push(snapshot.val().precio);
+          descripcion.push(snapshot.val().descripcion);
+          keyProducto.push(snapshot.key);
+    });
+
+    setTimeout(function(){
+      localStorage.setItem("FOTO_URL_BS", JSON.stringify(foto_Url));
+      localStorage.setItem("NOMBRE_BS", JSON.stringify(nombre));
+      localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
+      localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
+      localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
+      window.location.href="buscar-4columnas.html";
+    }, 3000);
+
+  }else{
+    localStorage.setItem("FOTO_URL_BS", JSON.stringify(foto_Url));
+    localStorage.setItem("NOMBRE_BS", JSON.stringify(nombre));
+    localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
+    localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
+    localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
+    window.location.href="buscar-4columnas.html";
+  }
+}
+

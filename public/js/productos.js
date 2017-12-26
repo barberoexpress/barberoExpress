@@ -27,12 +27,13 @@
       foto_Url = JSON.parse(localStorage.getItem("FOTO_URL_BS"));
       nombre = JSON.parse(localStorage.getItem("NOMBRE_BS"));
       precio = JSON.parse(localStorage.getItem("PRECIO_BS"));
-      descripcione = JSON.parse(localStorage.getItem("DESCRIPCION_BS"));
+      descripcion = JSON.parse(localStorage.getItem("DESCRIPCION_BS"));
       keyProducto = JSON.parse(localStorage.getItem("KEYPRODUCTO_BS"));
       total_registros = nombre.length - 2;
       busqueda = true;
       //limpiamos el buscador
       localStorage.setItem("NOMBRE_BS", JSON.stringify(""));
+      ActualizarBuscador();
     }else{
       for(var r = 0; r < rows; r++)
     	{
