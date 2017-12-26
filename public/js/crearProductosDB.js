@@ -21,8 +21,9 @@ var tipo = "null";
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS --------------------
 function Añadir(){
 
-	firebaseRef.child("PRODUCTOS").on("child_added", function(snapshot) {
-		id = snapshot.val().id;
+	firebaseRef.child("PRODUCTOS/FINAL").once("value", function(snapshot) {
+		id = snapshot.val().totalProductos;
+		id + 1;
 	});
 
 	setTimeout(function(){
@@ -30,7 +31,7 @@ function Añadir(){
 		var nombre = document.getElementById('nombre').value;
 		var precio = document.getElementById("precio").value;
 		var marca = document.getElementById("marca").value;
-		var tipo = document.getElementById("tipo").value;
+		tipo = document.getElementById("tipo").value;
 
 		firebaseRef.child("PRODUCTOS").push({
 			nombre: nombre,
@@ -46,6 +47,9 @@ function Añadir(){
 			recomendado: false
 		});
 
+		firebaseRef.child("PRODUCTOS/FINAL").update({
+			totalProductos: id
+		})
 		document.getElementById("nombre").innerHTML = vacio;
 		document.getElementById("precio").innerHTML = vacio;
 		setTimeout(function(){
@@ -83,8 +87,16 @@ function Agregar(){
 
 
 // -------------------- FUNCION PARA CARGAR FOTOS --------------------
-document.getElementById('file').onchange = function() {
+/*document.getElementById('file').onchange = function() {
 	selectedFile = event.target.files[0];
+}*/
+
+document.getElementById('file').addEventListener('change',prepareUpload,false);
+function prepareUpload(event)
+{
+  selectedFile = event.target.files[0];
+  //fileName = files[0].name;
+  //alert(fileName);
 }
 
 function CargarFoto(){
