@@ -37,7 +37,7 @@ SearchRef.on("value", function(snapshot) {
 	document.getElementById("precioProducto").innerHTML = "$" + snapshot.val().precio;
   document.getElementById("id_Producto").innerHTML = snapshot.val().id;
   prod_id = snapshot.val().id;
-
+  console.log("ID DEL PRODUCTO: " + prod_id)
 
   //IMAGENES
 	document.getElementById("imagenProducto1").innerHTML = '<a href="'+snapshot.val().foto+'" class="lightbox-gallery-3 mfp-image">' + '<img src="' + snapshot.val().foto + '" id="imagenProducto" alt=""/> ' + '</a>'
