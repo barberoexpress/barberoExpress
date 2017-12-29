@@ -39,12 +39,14 @@
     	{
     		refProductos.orderByChild("id").on("child_added", function(snapshot){
           if(snapshot.val().nombre != "FINAL"){
-      			foto_Url.push(snapshot.val().foto);
-      			nombre.push(snapshot.val().nombre);
-            precio.push(snapshot.val().precio);
-            descripcion.push(snapshot.val().descripcion);
-            keyProducto.push(snapshot.key);
-            total_registros++;
+            if(snapshot.val().disponibles >= 1){
+        			foto_Url.push(snapshot.val().foto);
+        			nombre.push(snapshot.val().nombre);
+              precio.push(snapshot.val().precio);
+              descripcion.push(snapshot.val().descripcion);
+              keyProducto.push(snapshot.key);
+              total_registros++;
+            }
           }else{
             ActualizarBuscador();
           }

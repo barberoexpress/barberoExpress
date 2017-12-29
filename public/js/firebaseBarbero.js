@@ -134,7 +134,7 @@ function BuscarINDEX(prod1, prod2){
   var precio = [" ", " "];
   var descripcion = [" ", " "];
   var keyProducto = [" ", " "];
-
+  //aca debemos de agregar un if que mire si hay disponibilidad del producto
   //BUSCAMOS COINCIDENCIAS CON EL PRIMER PRODUCTO
     if(queryText.length >= 2){
 	    firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
