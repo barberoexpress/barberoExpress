@@ -1,6 +1,8 @@
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
 var ref;
+var sesion_google = false;
+var auth2;
 //var providerG = new firebase.auth.GoogleAuthProvider();  //instancia de google
 
 
@@ -11,73 +13,92 @@ var ref;
 
 /*function checkLoginState() {
   FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
+    //statusChangeCallback(response);
+    if (response.status === 'not_authorized') {
+
+    }
   });
 }*/
 
 function FbSignIn(){
-  FB.logout(function(response) {});
-  var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
-  provider.addScope('public_profile');
-  var loggearFb = "null";
-  var email;
-  var nombre;
-  //nos envia a la pagina de fb a loggearnos
-  //firebase.auth().signInWithRedirect(provider);
-  //chekeamos si nos loggeamos correctamente
-  firebase.auth().signInWithPopup(provider).then(function(result){
-    var token = result.credential.accessToken;
-    var user = result.user;
-    email = user.email;
-    /*if(email != null && email != "" && email != "null"){
-      var errores = true;
-      for (var i = 0; i < email.length; i++){
-        if(email[i] == '@'){
-          errores = false;
-        }
-      }
-      if(errores == true){
-        throw "Porfavor inicia sesion con tu correo electronico";
-      }
-    }*/
-    nombre = user.displayName;
-    
+   FB.getLoginStatus(function(response) {
+    //statusChangeCallback(response);
+    if (response.status === 'not_authorized') {
+      console.log("sesion iniciada en facebook pero no en la aplicacion, " + response.status);
+      FB.logout(function(response) {console.log("loging out ...")});
+    }else if (response.status === 'unknown'){
+      console.log("no sabemos el estado de la cuenta, " + response.status);
+      FB.logout(function(response) {console.log("loging out ...")});
+    }else if (response.status === 'connected') {
+      console.log("estamos conectados a fb, " + response.status);  
+      FB.logout(function(response) {console.log("loging out ...")});
+    }
+
     setTimeout(function() {
-      var SearchRef = firebase.database().ref("USUARIOS");
-      SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
-      loggearFb = snapshot.val().correo;
+      var provider = new firebase.auth.FacebookAuthProvider(); //instancia de facebook
+      provider.addScope('public_profile');
+      var loggearFb = "null";
+      var email;
+      var nombre;
+      //nos envia a la pagina de fb a loggearnos
+      //firebase.auth().signInWithRedirect(provider);
+      //chekeamos si nos loggeamos correctamente
+      firebase.auth().signInWithPopup(provider).then(function(result){
+        var token = result.credential.accessToken;
+        var user = result.user;
+        email = user.email;
+        /*if(email != null && email != "" && email != "null"){
+          var errores = true;
+          for (var i = 0; i < email.length; i++){
+            if(email[i] == '@'){
+              errores = false;
+            }
+          }
+          if(errores == true){
+            throw "Porfavor inicia sesion con tu correo electronico";
+          }
+        }*/
+        nombre = user.displayName;
+        
+        setTimeout(function() {
+          var SearchRef = firebase.database().ref("USUARIOS");
+          SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
+          loggearFb = snapshot.val().correo;
+          });
+        }, 1000);
+
+
+        setTimeout(function() {
+          //if(errores == false){
+            localStorage.setItem("USERNAME2", nombre);
+            window.alert("Bienvenido " + nombre + " que bueno tenerte de vuelta");
+            if(loggearFb == "null" || loggearFb == "undefined" || loggearFb == undefined){
+              InformacionBaseDatosNoRedirect(email,nombre);
+            }else{
+              window.location.href="../../index.html";
+            }
+          //}
+        }, 1000);
+      
+        setTimeout(function(){
+          //if(errores == false){
+            window.location.href="../../index.html";
+          //}
+        }, 1000);
+
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
       });
-    }, 1000);
-
-
-    setTimeout(function() {
-      //if(errores == false){
-        localStorage.setItem("USERNAME2", nombre);
-        window.alert("Bienvenido " + nombre + " que bueno tenerte de vuelta");
-        if(loggearFb == "null" || loggearFb == "undefined" || loggearFb == undefined){
-          InformacionBaseDatosNoRedirect(email,nombre);
-        }else{
-          window.location.href="../../index.html";
-        }
-      //}
-    }, 1000);
-  
-    setTimeout(function(){
-      //if(errores == false){
-        window.location.href="../../index.html";
-      //}
-    }, 1000);
-
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
+    }, 2000);
   });
+  
   
   localStorage.setItem("PROVEEDOR","FACEBOOK");
   
@@ -92,8 +113,61 @@ function FbSignIn(){
 
 
 // -------------------- FUNCION PARA INICIAR SESION CON GOOGLE --------------------
+gapi.load('auth2', function() {
+  gapi.auth2.init();
+  console.log("AUTH 2 COMPLETO");
+  auth2 = gapi.auth2.getAuthInstance();
+    if (auth2.isSignedIn.get()){
+      sesion_google = true;
+    }
+});
+
 function onSignIn(googleUser) {
   //if(localStorage.getItem("PROVEEDOR") == "GOOGLE"){
+    setTimeout(function() {
+      auth2 = gapi.auth2.getAuthInstance();
+    if (sesion_google == true){
+      console.log("YA ESTAS LOGGEADO CON GOOGLE POR FUERA")
+      var profile = auth2.currentUser.get().getBasicProfile();
+      var email = profile.getEmail();
+      var password = "clave1234567890";
+      var nombre = profile.getName();
+
+      localStorage.setItem("USERNAME2", nombre);  
+      console.log("YA ESAMOS LOGGEADOS CON GOOGLE: " + nombre + ", CON EMAIL: " +  email);
+      firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        //MANEJO DE ERRORES
+        if (errorCode === 'auth/wrong-password'){
+                errores = true;
+                alert('Ya tienes una cuenta creada de la forma normal.');
+                return;
+              } else if (errorCode === 'auth/user-not-found'){
+                errores = true;
+                alert('Usuario no encontrado.');
+                return;
+
+              } else if(errorCode === 'auth/invalid-email'){
+                errores = true;
+                alert('Email invalido.');
+                return;
+
+              } else if(errorCode === 'auth/user-disabled'){
+                errores = true;
+                alert('Usuario bloqueado.');
+                return;
+
+              }else{
+                errores = true;
+                alert(errorMessage);
+                return;
+              }
+        });
+
+
+    }else{
       var profile = googleUser.getBasicProfile();   
       var loggearGoogle = "null";
       var email = profile.getEmail();
@@ -112,6 +186,7 @@ function onSignIn(googleUser) {
 
     
     setTimeout(function() {
+      console.log("vacio?: " + loggearGoogle);
       //ESTAMOS YA REGISTRADOS
       if(loggearGoogle != "null" && loggearGoogle != "undefined" && loggearGoogle != undefined){
         console.log("Ya estamos registrados, somos: " +  loggearGoogle);
@@ -171,9 +246,15 @@ function onSignIn(googleUser) {
 
 
     localStorage.setItem("PROVEEDOR","GOOGLE");
-  //}
-  
+  }
+
+  setTimeout(function() {
+     window.location.href="../../index.html";
+  }, 1000);
+    }, 8000);
+    
 }
+
 
 
 
@@ -273,17 +354,26 @@ firebase.auth().onAuthStateChanged(function(user) {
 	var SearchRef = firebase.database().ref("USUARIOS");
 
 	var correo = user.email;
+  console.log("buscamos a " +  correo);
 	var nombre = user.displayName;
-
+  var nombreFIREBASE;
+  var key;
   var count = 0;
 
 	SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
+     
+     nombreFIREBASE = snapshot.val().nombre;
 		 key = snapshot.key;
 		 ref = firebase.database().ref("USUARIOS/" + key);
      localStorage.setItem("USERKEY2", key);
      localStorage.setItem("USERNAME2", snapshot.val().nombre);
+     console.log("tu nombre es: " + snapshot.val().nombre);
 	});
-    console.log("HEY ESTAMOS LOGGEADOS Y ESTAMOS TOMANDO INFORMACION DESDE LOGIN.JS")
+
+  setTimeout(function() {
+    console.log("HEY ESTAMOS LOGGEADOS Y ESTAMOS TOMANDO INFORMACION DESDE LOGIN.JS, " +  nombreFIREBASE)
+  }, 1000);
+    
   } else {
     console.log("nadie ha iniciado seccion");
   }
