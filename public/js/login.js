@@ -113,149 +113,55 @@ function FbSignIn(){
 
 
 // -------------------- FUNCION PARA INICIAR SESION CON GOOGLE --------------------
-gapi.load('auth2', function() {
-  gapi.auth2.init();
-  console.log("AUTH 2 COMPLETO");
-  auth2 = gapi.auth2.getAuthInstance();
-    if (auth2.isSignedIn.get()){
-      sesion_google = true;
-    }
-});
-
-function onSignIn(googleUser) {
-  //if(localStorage.getItem("PROVEEDOR") == "GOOGLE"){
-    setTimeout(function() {
-      auth2 = gapi.auth2.getAuthInstance();
-    if (sesion_google == true){
-      console.log("YA ESTAS LOGGEADO CON GOOGLE POR FUERA")
-      var profile = auth2.currentUser.get().getBasicProfile();
-      var email = profile.getEmail();
-      var password = "clave1234567890";
-      var nombre = profile.getName();
-
-      localStorage.setItem("USERNAME2", nombre);  
-      console.log("YA ESAMOS LOGGEADOS CON GOOGLE: " + nombre + ", CON EMAIL: " +  email);
-      firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        //MANEJO DE ERRORES
-        if (errorCode === 'auth/wrong-password'){
-                errores = true;
-                alert('Ya tienes una cuenta creada de la forma normal.');
-                return;
-              } else if (errorCode === 'auth/user-not-found'){
-                errores = true;
-                alert('Usuario no encontrado.');
-                return;
-
-              } else if(errorCode === 'auth/invalid-email'){
-                errores = true;
-                alert('Email invalido.');
-                return;
-
-              } else if(errorCode === 'auth/user-disabled'){
-                errores = true;
-                alert('Usuario bloqueado.');
-                return;
-
-              }else{
-                errores = true;
-                alert(errorMessage);
-                return;
-              }
-        });
 
 
-    }else{
-      var profile = googleUser.getBasicProfile();   
-      var loggearGoogle = "null";
-      var email = profile.getEmail();
-      var password = "clave1234567890";
-      var nombre = profile.getName();
+function loginGoogle(){
 
-      var errores = false;
-      console.log("YA ESAMOS LOGGEADOS CON GOOGLE: " + nombre + ", CON EMAIL: " +  email);
+  var SearchRef = firebase.database().ref("USUARIOS");
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
 
-    /*chekeamos si debemos iniciar sesion con google o crearle una cuenta al usuario con google */
-    var SearchRef = firebase.database().ref("USUARIOS");
-    SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
-      loggearGoogle = snapshot.val().correo;
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    var token = result.credential.accessToken;
+    var user = result.user;
+    var correo = user.email;
+    var encontrado = false;
+    var nombre = "vacio";
+    nombre = user.displayName;
+    /*var nombreFIREBASE;
+    var key;
+    var count = 0;*/
 
+    SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
+       
+       /*nombreFIREBASE = snapshot.val().nombre;
+       key = snapshot.key;
+       ref = firebase.database().ref("USUARIOS/" + key);
+       localStorage.setItem("USERKEY2", key);*/
+       localStorage.setItem("USERNAME2", snapshot.val().nombre);
+       encontrado = true;
     });
 
-    
     setTimeout(function() {
-      console.log("vacio?: " + loggearGoogle);
-      //ESTAMOS YA REGISTRADOS
-      if(loggearGoogle != "null" && loggearGoogle != "undefined" && loggearGoogle != undefined){
-        console.log("Ya estamos registrados, somos: " +  loggearGoogle);
-        localStorage.setItem("USERNAME2", nombre);
-        firebaseAuth.signInWithEmailAndPassword(email, password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        //MANEJO DE ERRORES
-        if (errorCode === 'auth/wrong-password'){
-                errores = true;
-                alert('Ya tienes una cuenta creada de la forma normal.');
-                return;
-              } else if (errorCode === 'auth/user-not-found'){
-                errores = true;
-                alert('Usuario no encontrado.');
-                return;
-
-              } else if(errorCode === 'auth/invalid-email'){
-                errores = true;
-                alert('Email invalido.');
-                return;
-
-              } else if(errorCode === 'auth/user-disabled'){
-                errores = true;
-                alert('Usuario bloqueado.');
-                return;
-
-              }else{
-                errores = true;
-                alert(errorMessage);
-                return;
-              }
-        });
-
-      }//NO ESTAMOS REGISTRADOS
-      else{
-        console.log("No estamos registrados");
-        //NOS REGISTRAMOS
-        firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-
-          if (errorCode === 'auth/wrong-password') {
-                alert('Contraseña equivocada.');
-                errores = true;
-                return;
-            } else {
-              errores = true;
-                alert(errorMessage);
-                return;
-            }
-        });
-        InformacionBaseDatosNoRedirect(email,nombre);
+      if(encontrado == false){
+        InformacionBaseDatosNoRedirect(correo, nombre);
       }
     }, 2000);
 
+  }).catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    var email = error.email;
+    var credential = error.credential;
+  });
 
-    localStorage.setItem("PROVEEDOR","GOOGLE");
-  }
-
-  setTimeout(function() {
-     window.location.href="../../index.html";
-  }, 1000);
-    }, 8000);
-    
+ /* var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  provider.addScope('profile');
+  provider.addScope('email');
+  firebase.auth().signInWithRedirect(provider);*/
 }
-
-
 
 
 
