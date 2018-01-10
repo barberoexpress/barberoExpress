@@ -122,7 +122,7 @@ exports.totalizarCarrito = functions.database
 		console.log("se fue")
 		return
 	}
-	
+
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
 	console.log("------- ENVIADO PEDIDO -------------")

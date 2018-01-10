@@ -80,11 +80,7 @@ function FbSignIn(){
           //}
         }, 1000);
       
-        setTimeout(function(){
-          //if(errores == false){
-            window.location.href="../../index.html";
-          //}
-        }, 1000);
+        
 
       }).catch(function(error) {
         // Handle Errors here.
@@ -99,9 +95,7 @@ function FbSignIn(){
     }, 2000);
   });
   
-  
   localStorage.setItem("PROVEEDOR","FACEBOOK");
-  
 }
 
 
@@ -155,6 +149,7 @@ function loginGoogle(){
     var email = error.email;
     var credential = error.credential;
   });
+
 
  /* var provider = new firebase.auth.GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -278,76 +273,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   setTimeout(function() {
     console.log("HEY ESTAMOS LOGGEADOS Y ESTAMOS TOMANDO INFORMACION DESDE LOGIN.JS, " +  nombreFIREBASE)
+    window.location.href="../../index.html";
   }, 1000);
     
   } else {
     console.log("nadie ha iniciado seccion");
   }
 });
-
-
-
-
-
-
-
-
-
-
-// -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
-
-function AgregarAlCarrito(){
-
-  var user = firebase.auth().currentUser;
-
-  if (user) {
-    var nombre = $("#nombreProducto").text();
-    var precioHTML = $("#precioProducto").text();
-    var precio = precioHTML.substring(1);
-    var id = parseInt($("#id_Producto").text());
-    var cantidad = document.getElementById( "cantidad" ).value;
-
-    var marca = $("#marcaProducto").text();
-    var descuento = "0";
-    var foto = $('#imagenProducto').attr('src');
-    var keyP = localStorage.getItem("PROD_KEY")
-
-   ref.child("carritoCompras/productos").push({
-      nombre: nombre,
-      precio: precio,
-      cantidad: cantidad,
-      id: id,
-      key: keyP,
-      marca: marca,
-      descuento: descuento,
-      foto: foto
-    });
-    window.alert("Producto Agregado");
-    //window.location.href="product_summary.html";
-    window.location.href= "carritoCompras.html";
-  } else {
-    window.alert("Inicia sesion primero");
-  }
-}
-
-
-
-
-
-
-
-
-// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
-function Ir_producto(prodKey){
-  localStorage.setItem("PROD_KEY", prodKey);
-  window.location.href= "productoSimple.html";
-
-}
-
-
-
-
-
 
 
 //--------------------- RAMON, ¿QUE ES ESTO?, REVISALO Y BORRARLO SI NO ES NECESARIO PORFA -----------//

@@ -238,7 +238,7 @@ function mostrarCantidadPedidos(){
 	
 	setTimeout(function() {
 		console.log(tamañoArregloPedidos.length);
-		if(currentLocation != "index.html"){
+		if(currentLocation == "carritoCompras" || currentLocation == "buscar-4columnas" || currentLocation == "login" || currentLocation == "productoSimple" || currentLocation == "terminosLegales"){
 			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
 		}else{
 			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
@@ -304,3 +304,54 @@ function Buscar(){
   }
 }
 
+
+
+// -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
+
+function AgregarAlCarrito(){
+
+  var user = firebase.auth().currentUser;
+
+  if (user) {
+    var nombre = $("#nombreProducto").text();
+    var precioHTML = $("#precioProducto").text();
+    var precio = precioHTML.substring(1);
+    var id = parseInt($("#id_Producto").text());
+    var cantidad = document.getElementById( "cantidad" ).value;
+
+    var marca = $("#marcaProducto").text();
+    var descuento = "0";
+    var foto = $('#imagenProducto').attr('src');
+    var keyP = localStorage.getItem("PROD_KEY")
+
+   ref.child("carritoCompras/productos").push({
+      nombre: nombre,
+      precio: precio,
+      cantidad: cantidad,
+      id: id,
+      key: keyP,
+      marca: marca,
+      descuento: descuento,
+      foto: foto
+    });
+    window.alert("Producto Agregado");
+    //window.location.href="product_summary.html";
+    window.location.href= "carritoCompras.html";
+  } else {
+    window.alert("Inicia sesion primero");
+  }
+}
+
+
+
+
+
+
+
+
+// -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
+function Ir_producto(prodKey){
+  localStorage.setItem("PROD_KEY", prodKey);
+  window.location.href= "productoSimple.html";
+
+}
