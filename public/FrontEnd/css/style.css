@@ -2975,6 +2975,8 @@ a.logo:hover{
 .team-item-image{
     position: relative;
     overflow: hidden;
+    width: 300px;
+    height: 300px;
 }
 .team-item-image img{
     width: 100%;
