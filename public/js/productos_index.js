@@ -131,7 +131,7 @@ function imagenesTipos(prod1, prod2){
     imagenesTipo +='<li class="work-item mix general">'
                     + '<a class="work-ext-link" onclick="Ir_productoINDEX('+ "'" + keyProducto[ubicacion] + "'"+ ')">'
                       + '<div class="work-img">'
-                        + '<img class="work-img" src="'+ foto_Url[ubicacion] + '" alt="Work" />'
+                        + '<img class="work-img imgIndex" src="'+ foto_Url[ubicacion] + '" alt="Work" />'
                       + '</div>'
                       + '<div class="work-intro">'
                         + '<h3 class="work-title">' + nombre[ubicacion] + '</h3>'

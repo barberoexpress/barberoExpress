@@ -236,7 +236,7 @@ function Actualizar_HTML_carrito(){
                       + '<div onClick="EliminarArticulo(' + "'" + id_producto[j] + "'" + ')"><i class="fa fa-times"></i> <span class="hidden-xs">Eliminar</span><div>'
                   + '</td>'
               + '</tr>';
-        Precio_total += parseInt(precio[j]);
+        Precio_total += parseInt(precio[j] * cantidad[j]);
         j++;
       }else{
          table += '<tr>'
@@ -256,7 +256,7 @@ function Actualizar_HTML_carrito(){
                   + '<div onClick="EliminarArticulo(' + "'" + id_producto[j] + "'" + ')"><i class="fa fa-times"></i> <span class="hidden-xs">Eliminar</span><div>'
                   + '</td>'
                   + '</tr>';
-        Precio_total += parseInt(precio[j]);
+        Precio_total += parseInt(precio[j] * cantidad[j]);
         j++;
       }
     }

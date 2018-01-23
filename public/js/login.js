@@ -41,9 +41,10 @@ function FbSignIn(){
       var email;
       var nombre;
       //nos envia a la pagina de fb a loggearnos
-      //firebase.auth().signInWithRedirect(provider);
+      firebase.auth().signInWithRedirect(provider);
       //chekeamos si nos loggeamos correctamente
-      firebase.auth().signInWithPopup(provider).then(function(result){
+      //firebase.auth().signInWithPopup(provider).then(function(result){
+        firebase.auth().getRedirectResult().then(function(result) {
         var token = result.credential.accessToken;
         var user = result.user;
         email = user.email;

@@ -239,9 +239,9 @@ function mostrarCantidadPedidos(){
 	setTimeout(function() {
 		console.log(tamañoArregloPedidos.length);
 		if(currentLocation == "carritoCompras" || currentLocation == "buscar-4columnas" || currentLocation == "login" || currentLocation == "productoSimple" || currentLocation == "terminosLegales"){
-			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
+			numeroPedidos = '<a href="carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length -1) + ')</a>';
 		}else{
-			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ tamañoArregloPedidos.length + ')</a>';
+			numeroPedidos = '<a href="FrontEnd/vistas/carritoCompras.html" style="height: 75px; line-height: 75px;"><i class="fa fa-shopping-cart"></i> Carrito('+ (tamañoArregloPedidos.length -1) + ')</a>';
 		}
 		document.getElementById("cantidadPedidos").innerHTML = numeroPedidos;
 	}, 2000);
@@ -309,7 +309,8 @@ function Buscar(){
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
 
 function AgregarAlCarrito(){
-
+  var ref = firebase.database().ref('USUARIOS/' + userL + '/');
+  console.log(ref);
   var user = firebase.auth().currentUser;
 
   if (user) {
