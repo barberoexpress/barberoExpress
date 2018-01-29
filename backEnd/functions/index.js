@@ -122,7 +122,7 @@ exports.totalizarCarrito = functions.database
 		console.log("se fue")
 		return
 	}
-
+	
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
 	console.log("------- ENVIADO PEDIDO -------------")
@@ -203,7 +203,7 @@ exports.totalizarCarrito = functions.database
 	
 	const promise = event.data.ref.set(usuario)
 
-	var ref = event.data.ref.root;
+	var ref = event.data.ref.roots;
   	return ref.child("PEDIDOS").push({productos:productos,info:info});
   	//return ref.child("PEDIDOS").push(info);
 	return promise
@@ -330,7 +330,7 @@ exports.borrarCarrito = functions.database
     		var vaciar = itemsSnapshot.val().vaciar;
 
 			if (vaciar) {
-				console.log("vaciar carrito listo")
+				console.log("vaciar carrito")
 				var finalon = {id:9999999999, nombre:"FINAL"};
 				var productosN ={FINAL:" "};
 				productosN.FINAL = finalon;
