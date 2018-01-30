@@ -298,7 +298,7 @@ function Actualizar_HTML_carrito(){
                   +       'Total pedido: <strong>$'+ Precio_total +'</strong>'
                   +     '</div>'
 
-                  +     '<div class="btn btn-mod btn-round btn-large" onclick="comprar()">'
+                  +     '<div class="btn btn-mod btn-round btn-large" onclick="HacerPedido()">'
                   +       'Comprar'
                   +     '</div>'
                   + '</div>';
@@ -316,7 +316,7 @@ function Actualizar_HTML_carrito(){
     if(apellido != "null"){document.getElementById("apellidoPedido").value = apellido;} else{ document.getElementById("apellidoPedido").value = "apellido";}
     if(telefono != "null"){document.getElementById("telefonoPedido").value = telefono;} else{ document.getElementById("telefonoPedido").value = "telefono";}
   }
-
+  // inutilizada por ahora
   function comprar(){
     var datosCompletos = true;
     _ciudad = document.getElementById("ciudadPedido");

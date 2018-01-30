@@ -305,6 +305,60 @@ function Buscar(){
 }
 
 
+// ----- FUNCION PARA HACER PEDIDO ---- //
+
+function HacerPedido(){
+	var ref = firebase.database().ref('USUARIOS/' + userL + '/');
+  	console.log(ref);
+  	var user = firebase.auth().currentUser;
+
+  	if (user) {
+  		
+  		var ciudadP = document.getElementById("ciudadPedido").value;
+  		
+  		var direccionP = document.getElementById("direccionPedido").value;
+
+  		var nombreUsuario = document.getElementById("nombrePedido").value;
+
+  		var apellindoUsuario = document.getElementById("apellidoPedido").value;
+
+  		var  telefonoUsuario = document.getElementById("telefonoPedido").value;
+  		
+  		var  infoPedido = document.getElementById("informacionAdicionalPedido").value;
+  		var info = " " ;
+  		
+  		if (ciudadP.length<3) {
+  			info += "ingrese la ciudad de entrega : "+ciudadP+"\n";
+  			info += `Ingrese la ciudad de entrega: ${ciudadP} \n`
+  			console.log(ciudadP)
+  			//window.alert("ingrese la ciudad de entrega");
+  		}
+  		if (direccionP.length<3) {
+  			info += "ingrese la direccion de entrega : "+direccionP+"\n";
+  			//window.alert("ingrese la direccion de entrega");
+  			console.log(direccionP)
+  		}
+  		if (nombreUsuario.length<3) {
+  			info += "ingrese el nombre del que recibe entrega"+nombreUsuario+"\n";
+  			//window.alert("ingrese el nombre del que recibe entrega");
+  			console.log(nombreUsuario)
+  		}
+  		if (apellindoUsuario.length<3) {
+  			info += "ingrese el nombre y apellido del que recibe entrega : "+apellindoUsuario+"\n";
+  			//window.alert("ingrese el nombre y apellido del que recibe entrega");
+  			console.log(apellindoUsuario)
+  		}
+		if (telefonoUsuario.length<7 && !isNaN(telefonoUsuario)) {
+  			info += "ingrese un numero telefonico valido : " +telefonoUsuario+"\n";
+  			//window.alert("ingrese un numero valido");
+  			console.log(telefonoUsuario)
+  		}
+  		window.alert( info );
+
+  	} else {
+    window.alert("Inicia sesion primero");
+  }
+}
 
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
 
