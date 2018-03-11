@@ -115,98 +115,106 @@ exports.totalizarCarrito = functions.database
 .onWrite(event =>{ 
 	// esto es para coger la infurmacion de todo el carrito de compras
 	const usuario = event.data.val()
+	var eventSnapshot = event.data; // Get usuario data
 	//console.log(carritoCompra.vaciar.isVerified)
 	// preguntamos por vaciar, para que no entre 2 veces
 	
-	if (usuario.vaciarA) {
+	/*if (usuario.vaciarA) {
 		console.log("se fue")
 		return
-	}
+	}*/
 
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
-	console.log("------- ENVIADO PEDIDO -------------")
+	if(eventSnapshot.val().comprando == true){
+		console.log("------- ENVIADO PEDIDO -------------")
 
-	usuario.vaciarA = true;
+		
 
-	var eventSnapshot = event.data; // Get usuario data
-    var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
-    var totalSD = 0 ;
-    var adressSnapshot = eventSnapshot.child('direccion');
-    var phoneSnapshot = eventSnapshot.child('telefono');
-    var shoppingCar = eventSnapshot.child('carritoCompras'); // Get items data
+		
+	    var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
+	    var totalSD = 0 ;
+	    var adressSnapshot = eventSnapshot.child('direccion');
+	    var phoneSnapshot = eventSnapshot.child('telefono');
+	    var shoppingCar = eventSnapshot.child('carritoCompras'); // Get items data
 
-    // --- Pedido ----
+	    // --- Pedido ----
 
-		//var pedido ={productos:[],total:0};
-		//var listaP =[];
-		var productos =[];
-		var info ={
+			//var pedido ={productos:[],total:0};
+			//var listaP =[];
+			var productos =[];
+			var info ={
+					id:0,
+					nombreUsuario: "",
+					totalPesos: 0,
+					direccionEntrega: adressSnapshot.val().direccion, 
+					telefonoContacto: phoneSnapshot.val().telefonoCelular,
+					comoLlegar: adressSnapshot.val().informacionAdicional
+					};
+				info.nombreUsuario = usuario.nombre + " " + usuario.apellido;
+			var factura ={
 				id:0,
 				nombreUsuario: "",
 				totalPesos: 0,
-				direccionEntrega: adressSnapshot.val().direccion, 
-				telefonoContacto: phoneSnapshot.val().telefonoCelular,
-				comoLlegar: adressSnapshot.val().informacionAdicional
+				productos: productos
+			}
+			factura.nombreUsuario = usuario.nombre + " " + usuario.apellido;
+	    itemsSnapshot.forEach(function(itemSnapshot) { // For each item
+	    	
+	        //var itemKey = itemSnapshot.key; // Get item key
+	        var itemData = itemSnapshot.val(); // Get item data
+	        if(itemData.nombre != "FINAL"){
+
+		        var yave = itemData.key;
+
+				var value = parseFloat(itemData.precio);
+				
+				
+				// ---- DATOS INSEGUROS -------
+				var cantidad = parseInt(itemData.cantidad);
+				var nombre = itemData.nombre;
+				var marca = itemData.marca;
+				
+				var producto ={
+					nombre: nombre,
+					marca: marca,
+					cantidad: cantidad,
+					precio: value
 				};
-			info.nombreUsuario = usuario.nombre + " " + usuario.apellido;
-		var factura ={
-			id:0,
-			nombreUsuario: "",
-			totalPesos: 0,
-			productos: productos
-		}
-		factura.nombreUsuario = usuario.nombre + " " + usuario.apellido;
-    itemsSnapshot.forEach(function(itemSnapshot) { // For each item
-        //var itemKey = itemSnapshot.key; // Get item key
-        var itemData = itemSnapshot.val(); // Get item data
+				
+				productos.push(producto);
 
-        var yave = itemData.key;
+				/*
+				pedido.child("productos").push({
+					nombre: nombre,
+					marca: marca,
+					cantidad: cantidad,
+					precio: value
+				});
+				*/
+				totalSD += (value * cantidad);
+				
 
-		var value = parseFloat(itemData.precio);
+
+				//aqui mas adelante hacer descuento
+			}
+
+	    });
+		// cambiamos la informacion del DataBase por el nuevo carritoCompras
 		
+		shoppingCar.total = totalSD;
+
+		info.totalPesos = totalSD;
 		
-		// ---- DATOS INSEGUROS -------
-		var cantidad = parseInt(itemData.cantidad);
-		var nombre = itemData.nombre;
-		var marca = itemData.marca;
-		
-		var producto ={
-			nombre: nombre,
-			marca: marca,
-			cantidad: cantidad,
-			precio: value
-		};
-		
-		productos.push(producto);
+		const promise = event.data.adminRef.set(usuario)
 
-		/*
-		pedido.child("productos").push({
-			nombre: nombre,
-			marca: marca,
-			cantidad: cantidad,
-			precio: value
-		});
-		*/
-		totalSD += (value * cantidad);
-		
-
-
-		//aqui mas adelante hacer descuento
-
-    });
-	// cambiamos la informacion del DataBase por el nuevo carritoCompras
-	
-	shoppingCar.total = totalSD;
-
-	info.totalPesos = totalSD;
-	
-	const promise = event.data.ref.set(usuario)
-
-	var ref = event.data.ref.root;
-  	return ref.child("PEDIDOS").push({productos:productos,info:info});
-  	//return ref.child("PEDIDOS").push(info);
-	return promise
+		var ref = event.data.adminRef.root;
+		eventSnapshot.val().comprando = false;
+		usuario.vaciarA = true;
+	  	return ref.child("PEDIDOS").push({productos:productos,info:info});
+	  	//return ref.child("PEDIDOS").push(info);
+		return promise
+	}
 })
 
 
@@ -220,95 +228,103 @@ exports.crearFactura = functions.database
 
 	// esto es para coger la infurmacion de todo el carrito de compras
 	const usuario = event.data.val()
+	var eventSnapshot = event.data; // Get usuario data
 	//console.log(carritoCompra.vaciar.isVerified)
 	// preguntamos por vaciar, para que no entre 2 veces
 	
-	if (usuario.vaciarB) {
+	/*if (usuario.vaciarB) {
 		console.log("se fue :v")
 		return	
-	}
+	}*/
 	
 	// aqui modificamos el valor vaciar
 	//carritoCompra.vaciar.isVerified = true
-	console.log("------ FACTURANDO -----")
-	usuario.vaciarB = true;
-
-	var eventSnapshot = event.data; // Get usuario data
-    var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
-    var totalSD = 0 ;
-    var adressSnapshot = eventSnapshot.child('direccion');
-    var phoneSnapshot = eventSnapshot.child('telefono');
-    var shoppingCar = eventSnapshot.child('carritoCompras'); // Get items data
-
-    // --- Pedido ----
-
-		var productos =[];
-		var factura ={
-			id:0,
-			nombreUsuario: "",
-			totalPesos: 0,
-			productos: productos
-		}
-
-		factura.nombreUsuario = usuario.nombre + " " + usuario.apellido;
-    	itemsSnapshot.forEach(function(itemSnapshot) { // For each item
-        //var itemKey = itemSnapshot.key; // Get item key
-        var itemData = itemSnapshot.val(); // Get item data
-        var yave = itemData.key;
-		var value = parseFloat(itemData.precio);
-		
-		/*
-		var ref = event.data.ref.root;
-		console.log("/PRODUCTOS"+"/"+yave)
-  		var producto = ref.child("/PRODUCTOS"+"/"+yave)
-
-  		//console.log("producto: "+ producto)
-  		var productoData = producto.data;
-  		var klp = productoData.val();
-  		console.log("precioReal: " + klp.precio)
-  		*/
-		
-		// ---- DATOS INSEGUROS -------
-		var cantidad = parseInt(itemData.cantidad);
-		var nombre = itemData.nombre;
-		var marca = itemData.marca;
-		
-		var producto ={
-			nombre: nombre,
-			marca: marca,
-			cantidad: cantidad,
-			precio: value
-		};
-		
-		productos.push(producto);
-
-		/*
-		pedido.child("productos").push({
-			nombre: nombre,
-			marca: marca,
-			cantidad: cantidad,
-			precio: value
-		});
-		*/
-		totalSD += (value * cantidad);
+	if(eventSnapshot.val().comprando == true){
+		console.log("------ FACTURANDO -----")
 		
 
+		var eventSnapshot = event.data; // Get usuario data
+	    var itemsSnapshot = eventSnapshot.child('carritoCompras/productos'); // Get items data
+	    var totalSD = 0 ;
+	    var adressSnapshot = eventSnapshot.child('direccion');
+	    var phoneSnapshot = eventSnapshot.child('telefono');
+	    var shoppingCar = eventSnapshot.child('carritoCompras'); // Get items data
 
-		//aqui mas adelante hacer descuento
+	    // --- Pedido ----
 
-    });
-	// cambiamos la informacion del DataBase por el nuevo carritoCompras
-	
-	factura.totalPesos = totalSD;
+			var productos =[];
+			var factura ={
+				id:0,
+				nombreUsuario: "",
+				totalPesos: 0,
+				productos: productos
+			}
 
-	const promise = event.data.ref.set(usuario)
-	
-	factura.productos = productos
-	var ref = event.data.ref.root;
-	console.log("factura " + factura.nombreUsuario)
-  	return ref.child("FACTURAS").push({factura: factura});
-	return promise
+			factura.nombreUsuario = usuario.nombre + " " + usuario.apellido;
 
+
+	    	itemsSnapshot.forEach(function(itemSnapshot) { // For each item
+		        //var itemKey = itemSnapshot.key; // Get item key
+		        var itemData = itemSnapshot.val(); // Get item data
+		        if(itemData.nombre != "FINAL"){
+			        var yave = itemData.key;
+					var value = parseFloat(itemData.precio);
+					
+					/*
+					var ref = event.data.ref.root;
+					console.log("/PRODUCTOS"+"/"+yave)
+			  		var producto = ref.child("/PRODUCTOS"+"/"+yave)
+
+			  		//console.log("producto: "+ producto)
+			  		var productoData = producto.data;
+			  		var klp = productoData.val();
+			  		console.log("precioReal: " + klp.precio)
+			  		*/
+					
+					// ---- DATOS INSEGUROS -------
+					var cantidad = parseInt(itemData.cantidad);
+					var nombre = itemData.nombre;
+					var marca = itemData.marca;
+					
+					var producto ={
+						nombre: nombre,
+						marca: marca,
+						cantidad: cantidad,
+						precio: value
+					};
+					
+					productos.push(producto);
+
+					/*
+					pedido.child("productos").push({
+						nombre: nombre,
+						marca: marca,
+						cantidad: cantidad,
+						precio: value
+					});
+					*/
+					totalSD += (value * cantidad);
+					
+
+
+					//aqui mas adelante hacer descuento
+				}
+
+	    	});
+		// cambiamos la informacion del DataBase por el nuevo carritoCompras
+		
+		factura.totalPesos = totalSD;
+		shoppingCar.vaciar = true;
+		const promise = event.data.adminRef.set(usuario)
+		
+		factura.productos = productos
+		var ref = event.data.adminRef.root;
+		console.log("factura " + factura.nombreUsuario)
+		eventSnapshot.val().comprando = false;
+		usuario.vaciarB = true;
+	  	return ref.child("FACTURAS").push({factura: factura});
+		return promise
+	}
 
 })
 
@@ -318,10 +334,10 @@ exports.borrarCarrito = functions.database
 
 	const usuario = event.data.val()
 
-	if (usuario.vaciarA) {
+	/*if (usuario.vaciarA) {
 		console.log("vaciarA listo")
 		if (usuario.vaciarB) {
-			console.log("vaciarB listo")
+			console.log("vaciarB listo")*/
 
 			var eventSnapshot = event.data; // Get  data
     		var itemsSnapshot = eventSnapshot.child('carritoCompras'); // Get items data
@@ -329,21 +345,28 @@ exports.borrarCarrito = functions.database
     		var carritoDeCompras = itemsSnapshot.val();
     		var vaciar = itemsSnapshot.val().vaciar;
 
-			if (vaciar) {
-				console.log("vaciar carrito listo")
-				var finalon = {id:9999999999, nombre:"FINAL"};
-				var productosN ={FINAL:" "};
-				productosN.FINAL = finalon;
+			if (eventSnapshot.val().comprando == true) {
+				setTimeout(function() {
+					console.log("vaciar carrito listo")
+					var finalon = {id:9999999999, nombre:"FINAL"};
+					var productosN ={FINAL:" "};
+					productosN.FINAL = finalon;
+					usuario.comprando = false;
+					carritoDeCompras.productos = productosN;
+					carritoDeCompras.vaciar = false;
 
-				carritoDeCompras.productos = productosN;
-				carritoDeCompras.vaciar = false;
-
-				usuario.carritoCompras = carritoDeCompras;
-				const promise = event.data.ref.set(usuario)
-				return promise
+					usuario.carritoCompras = carritoDeCompras;
+					const promise = event.data.ref.set(usuario)
+					
+					usuario.vaciarA = false;
+					usuario.vaciarB = false;
+					return promise
+				}, 6000);
+				
 			}	
-		}	
-	}
+		/*}	
+	}*/
 
 	
 })
+

@@ -20,6 +20,7 @@ var keyArreglo = [" ", " "];
 var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional;
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 var refUsuario;
+var totalID_productos = [];
 
 
 
@@ -237,6 +238,7 @@ function Actualizar_HTML_carrito(){
                   + '</td>'
               + '</tr>';
         Precio_total += parseInt(precio[j] * cantidad[j]);
+        totalID_productos.push(id_producto[j]);
         j++;
       }else{
          table += '<tr>'
@@ -257,6 +259,7 @@ function Actualizar_HTML_carrito(){
                   + '</td>'
                   + '</tr>';
         Precio_total += parseInt(precio[j] * cantidad[j]);
+        totalID_productos.push(id_producto[j]);
         j++;
       }
     }
@@ -307,7 +310,7 @@ function Actualizar_HTML_carrito(){
     document.getElementById("tablaCarritoCompras").innerHTML = table;
     document.getElementById("tabla_total").innerHTML = tabla_total;
     llenarDatosPedido();
-  }
+}
 
   function llenarDatosPedido(){
     if(ciudad != "null"){document.getElementById("ciudadPedido").options[0].innerHTML = ciudad;} else{ document.getElementById("ciudadPedido").options[0].innerHTML = "ciudad";}
@@ -378,6 +381,14 @@ function Actualizar_HTML_carrito(){
         keyUsuario: localStorage.getItem("USERKEY2")
       });
       /*FALTA BODEGERO*/
-     window.alert("Compra exitosa") ;
+
+
+
+     //CREAMOS UN NUEVO PEDIDO
+     refUsuario.update({
+      comprando: true
+     });
+
+     window.alert("Compra exitosa");
     }
   }

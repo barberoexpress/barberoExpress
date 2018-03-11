@@ -67,6 +67,7 @@ function InformacionBaseDatos(correo,nombre){
 		nombre: nombre,
 		vaciarA: true,
 		vaciarB: true,
+		comprando: false,
 		apellido: "null",
 		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
 		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},

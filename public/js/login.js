@@ -60,7 +60,7 @@ function FbSignIn(){
           }
         }*/
         nombre = user.displayName;
-        
+          
         setTimeout(function() {
           var SearchRef = firebase.database().ref("USUARIOS");
           SearchRef.orderByChild('correo').equalTo(email).on("child_added", function(snapshot) {
@@ -172,6 +172,7 @@ function InformacionBaseDatosNoRedirect(correo,nombre){
     correo: correo,
     nombre: nombre,
     apellido: "null",
+    comprando: false,
     telefono: {telefonoCelular: "null", telefonoFijo: "null"},
     direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
     carritoCompras: {vaciar:"false",keyUsuario:"null", productos: {id:9999999999, nombre: "FINAL"}},
