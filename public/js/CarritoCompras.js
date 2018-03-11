@@ -382,8 +382,6 @@ function Actualizar_HTML_carrito(){
       });
       /*FALTA BODEGERO*/
 
-
-
      //CREAMOS UN NUEVO PEDIDO
      refUsuario.update({
       comprando: true

@@ -86,7 +86,7 @@ function pedidos(){
                     + '</th>'
                   + '</tr>';
   //for (var contador in tablaInfo){
-  while(contador < 7){
+  while(contador < 7 || contador >= tablaInfo.length - 1){
       pedidosActuales += '<tr id="filaCambiar' + tablaInfo[contador].id  + '" onclick="renderPedidos(' + tablaInfo[contador].id + ',' + contador + ')">'
                       + '<!-- FOTO -->'
                       + '<td class="hidden-xs">'
