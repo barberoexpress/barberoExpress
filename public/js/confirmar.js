@@ -263,9 +263,9 @@ function Actualizar_HTML_carrito(){
         });
  
       //CREAMOS UN NUEVO PEDIDO
-       /*refUsuario.update({
+       refUsuario.update({
         comprando: true
-       });*/
+       });
 
        window.alert("Compra exitosa, su pedido estara en su puerta lo antes posible, si tienes alguna duda puedes contactarnos al +57 321 603 3639");
       }else{
@@ -273,9 +273,9 @@ function Actualizar_HTML_carrito(){
       }
     }else{
      //CREAMOS UN NUEVO PEDIDO
-     /*refUsuario.update({
+     refUsuario.update({
       comprando: true
-     });*/
+     });
      window.alert("Compra exitosa, su pedido estara en su puerta lo antes posible, si tienes alguna duda puedes contactarnos al +57 321 603 3639");
     }
   }
