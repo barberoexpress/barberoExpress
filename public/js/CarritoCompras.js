@@ -17,7 +17,7 @@ var cantidad = [" ", " "];
 var total = 0;
 var id_producto = [" ", " "];
 var keyArreglo = [" ", " "];
-var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional;
+var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional, metodoPago;
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 var refUsuario;
 var totalID_productos = [];
@@ -297,12 +297,20 @@ function Actualizar_HTML_carrito(){
                   + '</div>'
       /*PARTE DE COSTO TOTAL*/   
                   + '<div class="col-sm-6 text align-right pt-10">'
-                  +     '<div>'
+                  +     '<div>' 
                   +       'Total pedido: <strong>$'+ Precio_total +'</strong>'
                   +     '</div>'
 
                   +     '<div class="btn btn-mod btn-round btn-large" onclick="comprar()">'
                   +       'Comprar'
+                  +     '</div>'
+
+                  +     '<div class="mb-10">'
+                  +       '<select class="input-md form-control" id="metodoPago">'
+                  +         '<option>Metodo de pago </option>'
+                  +          '<option>Pago en tu casa $8.500 </option>'
+                  +          '<option>Pago electronico $3.500</option>'
+                  +        '</select>'
                   +     '</div>'
                   + '</div>';
 
@@ -322,10 +330,19 @@ function Actualizar_HTML_carrito(){
 
   function comprar(){
     var datosCompletos = true;
+
     _ciudad = document.getElementById("ciudadPedido");
     ciudad = _ciudad.options[_ciudad.selectedIndex].value;
     if (ciudad != "medellin"){
       ciudad = "medellin";
+    }
+
+    _metodo_pago = document.getElementById("metodoPago");
+    metodoPago = _metodo_pago.options[_metodo_pago.selectedIndex].value;
+    if(metodoPago == "Pago electronico $3.500"){
+      localStorage.setItem("METODOPAGO", "pagoElectronico");
+    }else{
+      localStorage.setItem("METODOPAGO", "contrarembolso");
     }
 
     direccion = document.getElementById("direccionPedido").value;
@@ -380,13 +397,15 @@ function Actualizar_HTML_carrito(){
       refUsuario.child("carritoCompras").update({
         keyUsuario: localStorage.getItem("USERKEY2")
       });
+
+      window.location.href="confirmar.html";
       /*FALTA BODEGERO*/
 
      //CREAMOS UN NUEVO PEDIDO
-     refUsuario.update({
+     /*refUsuario.update({
       comprando: true
-     });
+     });*/
 
-     window.alert("Compra exitosa");
+    // window.alert("Compra exitosa");
     }
   }

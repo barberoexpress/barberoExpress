@@ -128,12 +128,9 @@ function pedidos(){
                       + '</tr>'
                       + '<tr id="informacionProductos' + tablaInfo[contador].id + '" ' + 'onclick="volverRender(' + tablaInfo[contador].id + ',' + contador + ')">'
                       + '</tr>';
-                      console.log(contador);
+                      console.log("vamos en el numero: " + contador);
                       console.log(tablaInfo[contador]);
-                      console.log("Esto es una prueba de Cristian");
-                      for(var contador2 in (tablaProductos[contador])){
-                          console.log((tablaProductos[contador])[contador2]);
-                      }
+                      console.log("el tamaño del arreglo es de: " +  tablaInfo.length);
                       // var tablaPapu = tablaProductos[contador];
                       // console.log(tablaPapu[contador]);
                       contador++;
