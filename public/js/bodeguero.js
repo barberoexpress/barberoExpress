@@ -188,6 +188,14 @@ function volverRender(idPedido,posicion){
 
 }
 
+function Cod_pagoElectronico(){
+  var refCod = firebase.database().ref("CODIGOS");
+  var codigo = document.getElementById("cod").value;
+  refCod.push({
+    codigo: codigo
+  });
+}
+
 
 
 // FUNCIÓN QUÉ ESPERA 2 SEGUNDOS PARA CARGAR

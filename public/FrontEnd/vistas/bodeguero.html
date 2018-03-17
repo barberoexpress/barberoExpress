@@ -134,11 +134,18 @@
 
 
             <!-- Section -->
-            <section class="page-section">
-                <div class="container">
 
+
+            <section class="page-section">
+
+                <div class="container">
+                    
                     <div class="row">
+
                         <div class="col-md-8 col-md-offset-2">
+
+                            <input placeholder="Codigo pago electronico, 6 DIGITOS" id = "cod" class="input-sm mb-xs-10" style="width: 250px;" type="text" pattern=".{3,100}" required />
+                            <button class="btn btn-mod btn-gray btn-round btn-small" onclick="Cod_pagoElectronico()">Crear codigo de pago electronico </button>
 
                             <table class="table table-striped shopping-cart-table" id="tablaBodeguero">
                                 <tr>

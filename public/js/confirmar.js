@@ -243,16 +243,31 @@ function Actualizar_HTML_carrito(){
 
 
   function comprar(){
-
+    var codigoCompleto = false;
     if(Metodo_pago == "pagoElectronico"){
-      var codigoUsuario = getElementById("codigoPago");
-      if(codigoUsuario == ){
-        
-        
+      var refCod = firebase.database().ref("CODIGOS");
+      var codigoUsuario = document.getElementById("codigoPago").value;
+
+      for(var i= 2; i <= codigos.length; i++){
+        if(codigoUsuario == codigos[i]){
+          codigoCompleto = true;
+        }
+
+      }
+      console.log("codigo: " +  codigoUsuario + " estatus: " +  codigoCompleto);
+      if(codigoCompleto == true){
+
+        refCod.orderByChild("codigo").equalTo(codigoUsuario).on("child_added", function(snapshot) {
+          var id = snapshot.key;
+          refCod.child(id).remove();
+        });
+ 
       //CREAMOS UN NUEVO PEDIDO
        /*refUsuario.update({
         comprando: true
        });*/
+
+       window.alert("Compra exitosa, su pedido estara en su puerta lo antes posible, si tienes alguna duda puedes contactarnos al +57 321 603 3639");
       }else{
          window.alert("Codigo invalido, si tienes alguna duda puedes contactarnos al +57 321 603 3639");
       }
