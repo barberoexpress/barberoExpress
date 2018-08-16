@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "barberoexpress-8c13c"
+    "default": "barberoexpress-8c13c",
+    "barberoExpress": "barbero-express"
   }
 }

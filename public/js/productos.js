@@ -33,6 +33,7 @@
       busqueda = true;
       //limpiamos el buscador
       localStorage.setItem("NOMBRE_BS", JSON.stringify(""));
+      console.log("ESTAMOS ACTUALIZANDO EL BUSCADOR");
       ActualizarBuscador();
     }else{
       for(var r = 0; r < rows; r++)
@@ -48,7 +49,11 @@
               total_registros++;
             }
           }else{
-            ActualizarBuscador();
+            
+            setTimeout(function() {
+              ActualizarBuscador();
+            }, 100);
+            
           }
     		});
     	}
@@ -65,6 +70,7 @@
   	  var j = 2;
       var no_imagenes = 12;
       if (busqueda){if(total_registros < 12){no_imagenes = total_registros + 2}}
+        console.log(nombre[3]);
   		while(j < no_imagenes){
         imagenes += '<div class="col-md-3 col-lg-3 mb-60 mb-xs-40">';
     		imagenes += '<div class="post-prev-img">';

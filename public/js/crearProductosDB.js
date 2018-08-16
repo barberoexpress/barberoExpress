@@ -47,7 +47,7 @@ function Añadir(){
 			recomendado: false
 		});
 
-		firebaseRef.child("PRODUCTOS/FINAL").update({
+		firebaseRef.child("PRODUCTOS/ZZZZZZZ").update({
 			totalProductos: id
 		})
 		document.getElementById("nombre").innerHTML = vacio;
@@ -100,7 +100,7 @@ function prepareUpload(event)
 function CargarFoto(){
 	var fileName = selectedFile.name;
 	var NombreProducto = id;
-	var storageRef = firebase.storage().ref('/Productos/'+  tipo + '/' + fileName);
+	var storageRef = firebase.storage().ref('/Productos/' + fileName);
 	var uploadTask = storageRef.put(selectedFile);
 	var key_Producto;
 

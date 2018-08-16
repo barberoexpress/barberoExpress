@@ -37,7 +37,7 @@ refProductos.orderByChild("id").on("child_added", function(snapshot) {
 
 
 
-
+console.log("estamos con " +  nombre);
 
 // ------------------------------- FUNCION MANDAR A LA BASE DE DATOS EL TELEFONO DEL USUARIO ------------------------------------
 function ingresarTelefono(){
@@ -56,6 +56,7 @@ function ingresarTelefono(){
 
 // ------------------------------- FUNCION ACTUALIZAR EL HTML CON LAS "IMAGENES RECOMENDADAS", LAS PRIMERAS DEL "INICIO" ------------------------------------
 function Imegenes_Recomendadas() {
+  console.log("tenemos " + nombre);
   var imagenes_referidos = '';
   var j = 2;
   var No_productos = 0; // CANTIDAD DE PRODUCTOS A MOSTRAR

@@ -1,10 +1,10 @@
 var config = {
-    apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
-    authDomain: "barberoexpress-8c13c.firebaseapp.com",
-    databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
-    projectId: "barberoexpress-8c13c",
-    storageBucket: "barberoexpress-8c13c.appspot.com",
-    messagingSenderId: "634083713883"
+    apiKey: "AIzaSyAVCcHaDu7iETTruTao-QsbiDC6aow4b9s",
+    authDomain: "barbero-express.firebaseapp.com",
+    databaseURL: "https://barbero-express.firebaseio.com",
+    projectId: "barbero-express",
+    storageBucket: "barbero-express.appspot.com",
+    messagingSenderId: "1021518127997"
 };
 firebase.initializeApp(config);
 
@@ -120,7 +120,7 @@ document.getElementsByTagName( "html" )[0].classList.remove( "loading" );
 document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );
 
 // Or with jQuery
-$( "html" ).removeClass( "loading" );
+//$( "html" ).removeClass( "loading" );
 
 
 
