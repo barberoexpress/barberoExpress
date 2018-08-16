@@ -100,7 +100,8 @@ function prepareUpload(event)
 function CargarFoto(){
 	var fileName = selectedFile.name;
 	var NombreProducto = id;
-	var storageRef = firebase.storage().ref('productos');
+	var storageRef = firebase.storage().ref();
+	storageRef = storageRef.child("productos/" +  fileName);
 	var uploadTask = storageRef.put(selectedFile);
 	var key_Producto;
 
