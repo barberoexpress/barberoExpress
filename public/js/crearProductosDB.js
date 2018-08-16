@@ -1,10 +1,10 @@
 var config = {
-    apiKey: "AIzaSyD1UUijWvL3lVdaCNUBRVwS_tntGpBPCxM",
-    authDomain: "barberoexpress-8c13c.firebaseapp.com",
-    databaseURL: "https://barberoexpress-8c13c.firebaseio.com",
-    projectId: "barberoexpress-8c13c",
-    storageBucket: "barberoexpress-8c13c.appspot.com",
-    messagingSenderId: "634083713883"
+    apiKey: "AIzaSyAVCcHaDu7iETTruTao-QsbiDC6aow4b9s",
+    authDomain: "barbero-express.firebaseapp.com",
+    databaseURL: "https://barbero-express.firebaseio.com",
+    projectId: "barbero-express",
+    storageBucket: "barbero-express.appspot.com",
+    messagingSenderId: "1021518127997"
 };
 firebase.initializeApp(config);
 
@@ -21,7 +21,7 @@ var tipo = "null";
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS --------------------
 function Añadir(){
 
-	firebaseRef.child("PRODUCTOS/FINAL").once("value", function(snapshot) {
+	firebaseRef.child("PRODUCTOS/ZZZZZZZ").once("value", function(snapshot) {
 		id = snapshot.val().totalProductos;
 		id + 1;
 	});
@@ -100,7 +100,7 @@ function prepareUpload(event)
 function CargarFoto(){
 	var fileName = selectedFile.name;
 	var NombreProducto = id;
-	var storageRef = firebase.storage().ref('/Productos/' + fileName);
+	var storageRef = firebase.storage().ref('productos');
 	var uploadTask = storageRef.put(selectedFile);
 	var key_Producto;
 
