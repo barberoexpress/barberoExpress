@@ -129,11 +129,7 @@ function loginGoogle(){
     var count = 0;*/
 
     SearchRef.orderByChild('correo').equalTo(correo).on("child_added", function(snapshot) {
-       
-       /*nombreFIREBASE = snapshot.val().nombre;
-       key = snapshot.key;
-       ref = firebase.database().ref("USUARIOS/" + key);
-       localStorage.setItem("USERKEY2", key);*/
+
        localStorage.setItem("USERNAME2", snapshot.val().nombre);
        encontrado = true;
     });

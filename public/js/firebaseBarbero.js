@@ -1,12 +1,13 @@
-var config = {
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyAVCcHaDu7iETTruTao-QsbiDC6aow4b9s",
     authDomain: "barbero-express.firebaseapp.com",
     databaseURL: "https://barbero-express.firebaseio.com",
     projectId: "barbero-express",
     storageBucket: "barbero-express.appspot.com",
     messagingSenderId: "1021518127997"
-};
-firebase.initializeApp(config);
+  };
+  firebase.initializeApp(config);
 
 var firebaseRef = firebase.database().ref();
 var firebaseAuth = firebase.auth();
@@ -231,8 +232,10 @@ function mostrarCantidadPedidos(){
 	var numeroPedidos = "";
 	var tamañoArregloPedidos = [];
 
-	firebaseRef.child("USUARIOS").child(userL).child("/carritoCompras/productos").on("child_added", function(snapshot) {
+	firebaseRef.child("USUARIOS").child(userL).child("CARRITO").on("child_added", function(snapshot) {
+		//contar aca la cantidad de pedidos
 		tamañoArregloPedidos.push(snapshot.val().cantidad);
+		//contar aca la cantidad de pedidos
 	});
 
 	
@@ -291,7 +294,8 @@ function Buscar(){
       localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
       localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
       localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
-      window.location.href="buscar-4columnas.html";
+      //window.location.href="buscar-4columnas.html"; COMENTADO POR NUEVO INDEX
+      window.location.href="index.html";
     }, 3000);
 
   }else{
@@ -300,13 +304,14 @@ function Buscar(){
     localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
     localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
     localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
-    window.location.href="buscar-4columnas.html";
+   // window.location.href="buscar-4columnas.html";   COMENTADO POR NUEVO INDEX
+   window.location.href="index.html";
   }
 }
 
 
 // ----- FUNCION PARA HACER PEDIDO ---- //
-
+//conectar esto aqui
 function HacerPedido(){
 	var ref = firebase.database().ref('USUARIOS/' + userL + '/');
   	console.log(ref);
@@ -361,7 +366,7 @@ function HacerPedido(){
 }
 
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
-
+//conectar esto aqui
 function AgregarAlCarrito(){
   var ref = firebase.database().ref('USUARIOS/' + userL + '/');
   console.log(ref);
@@ -407,6 +412,7 @@ function AgregarAlCarrito(){
 // -------------------- FUNCION PARA IR A LA VENTANA DE CADA PRODUCTO -------------------- RESPLICADOOOOOO, BORRAR, YA ESTA EN FIREBASEBARBERO
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
-  window.location.href= "productoSimple.html";
+  //window.location.href= "productoSimple.html"; COMENTADO POR NUEVO INDEX
+  window.location.href= "FrontEnd/vistas/productoSimple.html";
 
 }

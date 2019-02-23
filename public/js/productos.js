@@ -164,5 +164,6 @@ function cambiar_pagina(pagina_actual){
 
 // ---------------------------------- BOTON VOLVER --------------------------------------------
 function Recargar(){
-  window.location.href="buscar-4columnas.html";
+  //window.location.href="buscar-4columnas.html";
+  window.location.href="index.html";
 }
