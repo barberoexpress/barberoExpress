@@ -10,6 +10,7 @@
   firebase.initializeApp(config);
 
 var firebaseRef = firebase.database().ref();
+var buscadorRef = firebase.database().ref("PRODUCTOS")
 var firebaseAuth = firebase.auth();
 
 //VEAMOS EN QUE HTML ESTAMOS
@@ -264,7 +265,7 @@ function Buscar(){
 
   if(queryText.length >= 2){
   	
-    firebaseRef.child("PRODUCTOS").orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+    buscadorRef.orderByChild('nombre').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
         foto_Url.push(snapshot.val().foto);
         nombre.push(snapshot.val().nombre);
         precio.push(snapshot.val().precio);
@@ -272,7 +273,7 @@ function Buscar(){
         keyProducto.push(snapshot.key);
     });
 
-    firebaseRef.child("PRODUCTOS").orderByChild('marca').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+    buscadorRef.orderByChild('marca').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
         foto_Url.push(snapshot.val().foto);
         nombre.push(snapshot.val().nombre);
         precio.push(snapshot.val().precio);
@@ -280,7 +281,7 @@ function Buscar(){
         keyProducto.push(snapshot.key);
     });
 
-    firebaseRef.child("PRODUCTOS").orderByChild('tipo').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
+    buscadorRef.orderByChild('tipo').startAt(queryText).endAt(queryText+"\uf8ff").on('child_added', function(snapshot) {
           foto_Url.push(snapshot.val().foto);
           nombre.push(snapshot.val().nombre);
           precio.push(snapshot.val().precio);
@@ -294,7 +295,7 @@ function Buscar(){
       localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
       localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
       localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
-      //window.location.href="buscar-4columnas.html"; COMENTADO POR NUEVO INDEX
+      //window.location.href="index.html"; COMENTADO POR NUEVO INDEX
       window.location.href="index.html";
     }, 3000);
 
@@ -304,7 +305,7 @@ function Buscar(){
     localStorage.setItem("PRECIO_BS", JSON.stringify(precio));
     localStorage.setItem("DESCRIPCION_BS", JSON.stringify(descripcion));
     localStorage.setItem("KEYPRODUCTO_BS", JSON.stringify(keyProducto));
-   // window.location.href="buscar-4columnas.html";   COMENTADO POR NUEVO INDEX
+   // window.location.href="index.html";   COMENTADO POR NUEVO INDEX
    window.location.href="index.html";
   }
 }
@@ -313,7 +314,8 @@ function Buscar(){
 // ----- FUNCION PARA HACER PEDIDO ---- //
 //conectar esto aqui
 function HacerPedido(){
-	var ref = firebase.database().ref('USUARIOS/' + userL + '/');
+	var municipio, barrio;
+	var ref = firebase.database().ref('USUARIOS/' + userL);
   	console.log(ref);
   	var user = firebase.auth().currentUser;
 
@@ -325,7 +327,9 @@ function HacerPedido(){
 
   		var nombreUsuario = document.getElementById("nombrePedido").value;
 
-  		var apellindoUsuario = document.getElementById("apellidoPedido").value;
+			var municipio = document.getElementById("apellidoPedido").value;
+			
+			var barrio = document.getElementById("apellidoPedido").value;
 
   		var  telefonoUsuario = document.getElementById("telefonoPedido").value;
   		
@@ -348,11 +352,20 @@ function HacerPedido(){
   			//window.alert("ingrese el nombre del que recibe entrega");
   			console.log(nombreUsuario)
   		}
-  		if (apellindoUsuario.length<3) {
+  		if (municipio.length<3) {
   			info += "ingrese el nombre y apellido del que recibe entrega : "+apellindoUsuario+"\n";
   			//window.alert("ingrese el nombre y apellido del que recibe entrega");
   			console.log(apellindoUsuario)
-  		}
+			}
+			if (barrio.length<3) {
+  			info += "ingrese el barrio correcto : "+barrio+"\n";
+  			//window.alert("ingrese el nombre y apellido del que recibe entrega");
+  			console.log(barrio)
+			}
+
+			if(telefonoUsuario.length == 7){
+				telefonoUsuario = '034' + telefonoUsuario;
+			}
 		if (telefonoUsuario.length<7 && !isNaN(telefonoUsuario)) {
   			info += "ingrese un numero telefonico valido : " +telefonoUsuario+"\n";
   			//window.alert("ingrese un numero valido");
@@ -368,13 +381,14 @@ function HacerPedido(){
 // -------------------- FUNCION PARA AGREGAR PRODUCTOS AL CARRO DE COMPRAS --------------------
 //conectar esto aqui
 function AgregarAlCarrito(){
-  var ref = firebase.database().ref('USUARIOS/' + userL + '/');
+  var ref = firebase.database().ref('USUARIOS/' + userL);
   console.log(ref);
   var user = firebase.auth().currentUser;
 
   if (user) {
     var nombre = $("#nombreProducto").text();
-    var precioHTML = $("#precioProducto").text();
+		var precioHTML = $("#precioProducto").text();
+	//	var tipo = $("#tipoProducto").text();
     var precio = precioHTML.substring(1);
     var id = parseInt($("#id_Producto").text());
     var cantidad = document.getElementById( "cantidad" ).value;
@@ -383,8 +397,8 @@ function AgregarAlCarrito(){
     var descuento = "0";
     var foto = $('#imagenProducto').attr('src');
     var keyP = localStorage.getItem("PROD_KEY")
-
-   ref.child("carritoCompras/productos").push({
+		
+   ref.child("CARRITO").push({
       nombre: nombre,
       precio: precio,
       cantidad: cantidad,
@@ -392,13 +406,14 @@ function AgregarAlCarrito(){
       key: keyP,
       marca: marca,
       descuento: descuento,
-      foto: foto
+			foto: foto
+			//tipo: tipo
     });
     window.alert("Producto Agregado");
     //window.location.href="product_summary.html";
-    window.location.href= "carritoCompras.html";
   } else {
-    window.alert("Inicia sesion primero");
+		window.alert("Inicia sesion primero");
+		window.location.href="login.html";
   }
 }
 
@@ -413,6 +428,6 @@ function AgregarAlCarrito(){
 function Ir_producto(prodKey){
   localStorage.setItem("PROD_KEY", prodKey);
   //window.location.href= "productoSimple.html"; COMENTADO POR NUEVO INDEX
-  window.location.href= "FrontEnd/vistas/productoSimple.html";
+  window.location.href= "productoSimple.html";
 
 }

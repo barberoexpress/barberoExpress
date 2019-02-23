@@ -13,7 +13,7 @@ var firebaseAuth = firebase.auth();
 var prodKey = localStorage.getItem("PROD_KEY");
 var SearchRef = firebase.database().ref("PRODUCTOS/" + prodKey);
 var userkey = localStorage.getItem("USERKEY2");
-var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras");
+var refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "CARRITO");
 var prod_id;
 
 
@@ -36,6 +36,7 @@ SearchRef.on("value", function(snapshot) {
   //nota: añadir separadores para el precio (1 000.000)
 	document.getElementById("precioProducto").innerHTML = "$" + snapshot.val().precio;
   document.getElementById("id_Producto").innerHTML = snapshot.val().id;
+ // document.getElementById("tipoProducto").innerHTML = snapshot.val().tipo;
   prod_id = snapshot.val().id;
   console.log("ID DEL PRODUCTO: " + prod_id)
 

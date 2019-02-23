@@ -19,11 +19,11 @@ function Registrarse(){
 	var name = document.getElementById('inputName').value;
 	var email = document.getElementById('input_email').value;
 	var password = document.getElementById("inputPassword1").value;
-	var password2 = document.getElementById("inputPassword2").value;
+	//var password2 = document.getElementById("inputPassword2").value;
 	var errores = false;
 	//CHECKEAMOS SI LAS CONTRASEÑAS COINCIDEN
-	if(password.length > 5){
-		if(password.toString() == password2.toString()){
+	if(password.length > 3){
+		//if(password.toString() == password2.toString()){
 			firebaseAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
 				var errorCode = error.code;
 				var errorMessage = error.message;
@@ -38,12 +38,12 @@ function Registrarse(){
 			        return;
 			    }
 			});
-		}else{
+	/*	}else{
 			window.alert("Las contraseñas son distintas, asegurate de escribirlas bien");
 			return;
-		}	
+		}	*/
 	}else{
-		window.alert("La contraseña debe tener al menos 6 caracteres");
+		window.alert("La contraseña debe tener al menos 3 caracteres");
 			return;
 	}
 
@@ -65,19 +65,21 @@ function InformacionBaseDatos(correo,nombre){
 	ref.push({
 		correo: correo,
 		nombre: nombre,
-		vaciarA: true,
+		/*vaciarA: true,
 		vaciarB: true,
-		comprando: false,
-		apellido: "null",
-		telefono: {telefonoCelular: "null", telefonoFijo: "null"},
-		direccion: {direccion: "null", direccion2: "null", ciudad:"null", informacionAdicional: "null"},
-		carritoCompras: {vaciar:"false",keyUsuario:"null", productos: {id:9999999999, nombre: "FINAL"}},
+		comprando: false,*/
+		barrio: "null",
+		municipio: "null",
+		telefono: "null",
+		direccion: "null",
+		informacionAdicional: "null",
+		CARRITO: {keyUsuario:"null", FINAL: {id:9999999999999, nombre: "FINAL"}},
 		foto: "null",
 		historialCompras: "null"
 	});
 	window.alert("Registro Exitoso");
 	setTimeout(function() {
-		window.location.href="../../index.html";
+		window.location.href="index.html";
 	}, 1000);
 	//CambiarVista();
 }

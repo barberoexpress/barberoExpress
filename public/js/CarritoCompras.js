@@ -17,7 +17,7 @@ var cantidad = [" ", " "];
 var total = 0;
 var id_producto = [" ", " "];
 var keyArreglo = [" ", " "];
-var ciudad, direccion, nombre_pedido, apellido, telefono, informacion_adicional, metodoPago;
+var ciudad, direccion, nombre_pedido, barrio, telefono, informacion_adicional, municipio;
 var botonCantidad = '<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button" onclick="EliminarArticulo()"><i class="icon-remove icon-white"></button></div>';
 var refUsuario;
 var totalID_productos = [];
@@ -34,18 +34,20 @@ firebase.auth().onAuthStateChanged(function(user) {
 if (user) {
 	actualizar = false;
 
-	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "carritoCompras" + "/" + "productos");
-	refUsuario = firebase.database().ref("USUARIOS/" + userkey);
+	refCarro = firebase.database().ref("USUARIOS/" + userkey + "/" + "CARRITO");
+  refUsuario = firebase.database().ref("USUARIOS/" + userkey);
+  console.log("key" + userkey)
+  console.log(refUsuario);
 	//DATOS DE ENVIO
 	
 
     refUsuario.once("value", function(snapshot){
-    	ciudad = snapshot.val().direccion.ciudad;
+    	municipio = snapshot.val().direccion.municipio;
     	direccion = snapshot.val().direccion.direccion;
     	nombre_pedido = snapshot.val().nombre;
-    	apellido = snapshot.val().apellido;
-    	telefono = snapshot.val().telefono.telefonoCelular;
-      informacion_adicional = snapshot.val().direccion.informacionAdicional;
+    	departamento = snapshot.val().departamento;
+    	telefono = snapshot.val().telefono;
+      informacion_adicional = snapshot.val().informacionAdicional;
       ActualizarCarrito();
     });
 
@@ -267,12 +269,7 @@ function Actualizar_HTML_carrito(){
       tabla_total = '<div class="col-sm-6">'
                   +   '<h3 class="small-title font-alt">Calcular pedido</h3>'
                   +   '<form action="#" class="form">'
-                  +     '<div class="mb-10">'
-                  +       '<select class="input-md form-control" id="ciudadPedido">'
-                  +         '<option>Selecciona ciudad</option>'
-                  +          '<option>medellin</option>'
-                  +        '</select>'
-                  +     '</div>'
+                  +    
                   +     '<div class="mb-10">'
                   +       '<input placeholder="Direccion" class="input-md form-control" type="text" pattern=".{3,100}" id="direccionPedido"/>'
                   +     '</div>'
@@ -282,7 +279,11 @@ function Actualizar_HTML_carrito(){
                   +     '</div>'
 
                   +     '<div class="mb-10">'
-                  +       '<input placeholder="Apellido" class="input-md form-control" type="text" pattern=".{3,100}" id="apellidoPedido"/>'
+                  +       '<input placeholder="Departamento" class="input-md form-control" type="text" pattern=".{3,100}" id="departamentoPedido"/>'
+                  +     '</div>'
+
+                  +     '<div class="mb-10">'
+                  +       '<input placeholder="Municipio" class="input-md form-control" type="text" pattern=".{3,100}" id="municipioPedido"/>'
                   +     '</div>'
 
                   +     '<div class="mb-10">'
@@ -305,12 +306,10 @@ function Actualizar_HTML_carrito(){
                   +       'Comprar'
                   +     '</div>'
 
-                  +     '<div class="mb-10">'
-                  +       '<select class="input-md form-control" id="metodoPago">'
-                  +         '<option>Metodo de pago </option>'
-                  +          '<option>Pago en tu casa $8.500 </option>'
-                  +          '<option>Pago electronico $3.500</option>'
-                  +        '</select>'
+                  +     '<div>' 
+                  +       'Domicilio medellin: <strong>$'+ ' + 4,500' +'</strong>'
+                  +       'Domicilio antioquia: <strong>$'+ '+ 6,500' +'</strong>'
+                  +       'Domicilio todo colombia: <strong>$'+ '+ 7,500' +'</strong>'
                   +     '</div>'
                   + '</div>';
 
@@ -324,25 +323,24 @@ function Actualizar_HTML_carrito(){
     if(ciudad != "null"){document.getElementById("ciudadPedido").options[0].innerHTML = ciudad;} else{ document.getElementById("ciudadPedido").options[0].innerHTML = "ciudad";}
     if(direccion != "null"){document.getElementById("direccionPedido").value = direccion;} else{ document.getElementById("direccionPedido").value = "direccion";}
     if(nombre_pedido != "null"){document.getElementById("nombrePedido").value = nombre_pedido;} else{ document.getElementById("nombrePedido").value = "nombre";}
-    if(apellido != "null"){document.getElementById("apellidoPedido").value = apellido;} else{ document.getElementById("apellidoPedido").value = "apellido";}
+    if(departamento != "null"){document.getElementById("departamentoPedido").value = departamento;} else{ document.getElementById("departamentoPedido").value = "departamento";}
+    if(municipio != "null"){document.getElementById("municipioPedido").value = apellido;} else{ document.getElementById("municipioPedido").value = "municipio";}
     if(telefono != "null"){document.getElementById("telefonoPedido").value = telefono;} else{ document.getElementById("telefonoPedido").value = "telefono";}
   }
 
   function comprar(){
     var datosCompletos = true;
 
-    _ciudad = document.getElementById("ciudadPedido");
-    ciudad = _ciudad.options[_ciudad.selectedIndex].value;
-    if (ciudad != "medellin"){
-      ciudad = "medellin";
-    }
-
-    _metodo_pago = document.getElementById("metodoPago");
-    metodoPago = _metodo_pago.options[_metodo_pago.selectedIndex].value;
-    if(metodoPago == "Pago electronico $3.500"){
-      localStorage.setItem("METODOPAGO", "pagoElectronico");
+    var _municipio = document.getElementById("municipioPedido").toLowerCase();
+    var _departamento = document.getElementById("departamentoPedido").toLowerCase();
+    if (_departamento == "antioquia" || _departamento == "medellin" || _departamento == "a" || _departamento == "med"){
+      if (_municipio == "medellin" || _municipioiud == "med" || _municipio == "medallo" || _municipio == "m"){
+        Precio_total += 4.500;
+      }else{
+        Precio_total += 6.500;
+      }
     }else{
-      localStorage.setItem("METODOPAGO", "contrarembolso");
+      Precio_total += 7.500;
     }
 
     direccion = document.getElementById("direccionPedido").value;
@@ -355,11 +353,14 @@ function Actualizar_HTML_carrito(){
       window.alert("Porfavor llena el nombre");
       datosCompletos = false;
     }
-    apellido = document.getElementById("apellidoPedido").value;
-     if (apellido == ""){
-      window.alert("Porfavor llena el apellido");
+     if (_municipio == ""){
+      window.alert("Porfavor llena el municipio");
       datosCompletos = false;
     }
+    if (_departamento == ""){
+     window.alert("Porfavor llena el departamento");
+     datosCompletos = false;
+   }
     telefono = document.getElementById("telefonoPedido").value;
      if (telefono == ""){
       window.alert("Porfavor llena el telefono");
@@ -372,31 +373,24 @@ function Actualizar_HTML_carrito(){
 
     //enviar valores nuevos al bodegero y a la base de datos
     if(datosCompletos == true){
-      //direccion
-      refUsuario.child("direccion").update({
-        ciudad: ciudad,
-        direccion: direccion,
-        informacion_adicional: informacion_adicional
-      });
-
-      /*FALTA BODEGERO*/
-
+  
       //datos basicos
       refUsuario.update({
         nombre: nombre_pedido,
-        apellido: apellido
+        apellido: apellido,
+        departamento: departamento,
+        direccion: direccion,
+        informacionAdicional: informacion_adicional,
+        municipio: municipio,
+        
       });
 
       /*FALTA BODEGERO*/
 
-      //telefono
-      refUsuario.child("telefono").update({
-        telefonoCelular: telefono
-      });
 
-      refUsuario.child("carritoCompras").update({
+      /*refUsuario.child("CARRITO").update({
         keyUsuario: localStorage.getItem("USERKEY2")
-      });
+      });*/
 
       window.location.href="confirmar.html";
       /*FALTA BODEGERO*/
